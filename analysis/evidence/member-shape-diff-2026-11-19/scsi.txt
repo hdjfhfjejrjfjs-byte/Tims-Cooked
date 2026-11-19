@@ -1,0 +1,5 @@
+com.apple.iokit.IOSCSIArchitectureModelFamily 24A446->24B119: funcs A=734 B=734, drift-blocks=0, real-edits=4
+  SHAPE A@0xfffffe000a2996fc sz 0xf4 -> B@0xfffffe000a2e796c sz 0xf0
+  COUNT DELETE A=1 B=0  A@0xfffffe000a2998b4 sz 0x98  B@0xfffffe000a2e7b20 sz 0x10
+  SHAPE A@0xfffffe000a2a3f38 sz 0x8c -> B@0xfffffe000a2f210c sz 0x88
+  COUNT REPLACE A=3 B=4  A@0xfffffe000a2a4034 sz 0xd0  B@0xfffffe000a2f2204 sz 0xe0

@@ -1,0 +1,3 @@
+24A446 com.apple.iokit.IOStorageFamily: target 0xfffffe000a31f3c4 fileoff 0x331b3c4; 1 low32 slots
+   [  0] 0xfffffe0008375fa8 -> 0xfffffe000a31f3c4 FUNC  <=== TARGET
+   table start 0xfffffe0008375fa8  target index 0

@@ -1,0 +1,10 @@
+com.apple.iokit.IOPCIFamily 24A446->24B119: funcs A=723 B=723, drift-blocks=0, real-edits=17
+  SHAPE A@0xfffffe000a258e74 sz 0x270 -> B@0xfffffe000a2a7064 sz 0x298
+  SHAPE A@0xfffffe000a28890c sz 0xf0 -> B@0xfffffe000a2d6b24 sz 0xf4
+  SHAPE A@0xfffffe000a2889fc sz 0xfc -> B@0xfffffe000a2d6c18 sz 0x100
+  SHAPE A@0xfffffe000a288af8 sz 0xfc -> B@0xfffffe000a2d6d18 sz 0x100
+  SHAPE A@0xfffffe000a288bf4 sz 0xf4 -> B@0xfffffe000a2d6e18 sz 0xf8
+  SHAPE A@0xfffffe000a288ce8 sz 0xb0 -> B@0xfffffe000a2d6f10 sz 0xb4
+  SHAPE A@0xfffffe000a288d98 sz 0xb0 -> B@0xfffffe000a2d6fc4 sz 0xb4
+  SHAPE A@0xfffffe000a288e48 sz 0xa4 -> B@0xfffffe000a2d7078 sz 0xa8
+  SHAPE A@0xfffffe000a288eec sz 0xa4 -> B@0xfffffe000a2d7120 sz 0xa8

@@ -1,0 +1,8 @@
+24A446 com.apple.filesystems.apfs: 9 sites
+  fn 0xfffffe000a95e778  sites=1  refs=['Unknown err', '_arv_disabled', 'apfs_pfk_init', 'apshot']
+  fn 0xfffffe000a9a28f0  sites=1  refs=['%lld is enqueued for upgrade of data protection " "class but its state object is missing\\n" @%s:%d', 'NE reference when being moved to the recent list!\\n" @%s:%d', '_CLASS_UPGRADE_ROLLIP)', '_chclass_file_locked']
+  fn 0xfffffe000a9c0860  sites=1  refs=['!xf_get(&ino->extf, INO_EXT_TYPE_UNRAW_SIZE, NULL, &size, sizeof(size))', '*cdstream)', ', (&(brange_t) { .start = (127), .len = (6), }), fs_bsize) == (fs_bsize * (11))', '= sizeof(*finfo)']
+  fn 0xfffffe000a9cd5a4  sites=1  refs=['kbnh_keybag_lock_notification', 'kbnh_keybag_unlock_notification']
+  fn 0xfffffe000aa02390  sites=1  refs=['com.apple.FinderInfo', 'com.apple.ResourceFork', 'com.apple.decmpfs', 'com.apple.system.Security']
+  fn 0xfffffe000aa768fc  sites=1  refs=['apfs_setxattr_internal', 'should_embed_xattr']
+  fn 0xfffffe000aa77aac  sites=3  refs=[]

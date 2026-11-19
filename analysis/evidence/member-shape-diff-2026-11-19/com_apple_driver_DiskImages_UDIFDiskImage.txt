@@ -1,0 +1,12 @@
+com.apple.driver.DiskImages.UDIFDiskImage 24A446->24B119: funcs A=191 B=191, drift-blocks=0, real-edits=11
+  SHAPE A@0xfffffe000a09e80c sz 0x574 -> B@0xfffffe000a0ed7cc sz 0x574
+  SHAPE A@0xfffffe000a09fb48 sz 0x908 -> B@0xfffffe000a0eeb08 sz 0x99c
+  SHAPE A@0xfffffe000a0a1a4c sz 0x1f4 -> B@0xfffffe000a0f0aa0 sz 0x240
+  SHAPE A@0xfffffe000a0a1efc sz 0x38 -> B@0xfffffe000a0f0f9c sz 0x40
+  SHAPE A@0xfffffe000a0a1f34 sz 0x38 -> B@0xfffffe000a0f0fdc sz 0x40
+  SHAPE A@0xfffffe000a0a254c sz 0x1e4 -> B@0xfffffe000a0f15fc sz 0x1e0
+  SHAPE A@0xfffffe000a0a28f4 sz 0xd74 -> B@0xfffffe000a0f19a0 sz 0xdb8
+  SHAPE A@0xfffffe000a0a3668 sz 0x20c -> B@0xfffffe000a0f2758 sz 0x208
+  SHAPE A@0xfffffe000a0a3a98 sz 0x1540 -> B@0xfffffe000a0f2b84 sz 0x154c
+  SHAPE A@0xfffffe000a0a4fd8 sz 0x5fc -> B@0xfffffe000a0f40d0 sz 0x564
+  SHAPE A@0xfffffe000a0a5978 sz 0x2fc -> B@0xfffffe000a0f49d8 sz 0x30c

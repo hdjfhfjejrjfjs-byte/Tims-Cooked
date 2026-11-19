@@ -1,0 +1,5 @@
+# slot 0xfffffe0008375fa8 -> thunk 0xfffffe000a31f3c4
+# table start 0xfffffe0008375fa8 (walked back 0 entries)
+idx | entry VM | thunk VA | scalarIn | structIn | scalarOut | structOut | async | entitlement
+  0 | 0xfffffe0008375fa8 | 0xfffffe000a31f3c4 | 69615980 | 0x80114a6a | 53485848 | 0x8011edc5 | 70115944 | 0x42de08880115c68
+# stop: entry 1 does not decode

@@ -1,0 +1,129 @@
+# 24B119 com.apple.iokit.IOStorageFamily: sites of `and ...,#0xfffffffffffffeff`
+
+; site 0xfffffe000a36da34  fn 0xfffffe000a36da00 sz 0xfffffe000a36daec
+  0xfffffe000a36da24  ldp       x10, x22, [x0]
+  0xfffffe000a36da28  ldp       w9, w8, [x0, #0x10]
+  0xfffffe000a36da2c  ldr       x23, [x0, #0x18]
+  0xfffffe000a36da30  ldr       x11, [x23, #8]
+  0xfffffe000a36da34  and       x11, x11, #0xfffffffffffffeff  <== AND
+  0xfffffe000a36da38  str       x11, [x23, #8]
+
+; site 0xfffffe000a36db20  fn 0xfffffe000a36daec sz 0xfffffe000a36dbd8
+  0xfffffe000a36db10  ldp       x10, x22, [x0]
+  0xfffffe000a36db14  ldp       w9, w8, [x0, #0x10]
+  0xfffffe000a36db18  ldr       x23, [x0, #0x18]
+  0xfffffe000a36db1c  ldr       x11, [x23, #8]
+  0xfffffe000a36db20  and       x11, x11, #0xfffffffffffffeff  <== AND
+  0xfffffe000a36db24  str       x11, [x23, #8]
+
+; site 0xfffffe000a36dbf8  fn 0xfffffe000a36dbd8 sz 0xfffffe000a36dc6c
+  0xfffffe000a36dbe8  ldp       x14, x12, [x9]
+  0xfffffe000a36dbec  ldp       w13, w11, [x9, #0x10]
+  0xfffffe000a36dbf0  ldr       x10, [x9, #0x18]
+  0xfffffe000a36dbf4  ldr       x9, [x10, #8]
+  0xfffffe000a36dbf8  and       x9, x9, #0xfffffffffffffeff  <== AND
+  0xfffffe000a36dbfc  str       x9, [x10, #8]
+
+; site 0xfffffe000a36dc8c  fn 0xfffffe000a36dc6c sz 0xfffffe000a36dcf8
+  0xfffffe000a36dc7c  ldp       x14, x12, [x9]
+  0xfffffe000a36dc80  ldp       w13, w11, [x9, #0x10]
+  0xfffffe000a36dc84  ldr       x10, [x9, #0x18]
+  0xfffffe000a36dc88  ldr       x9, [x10, #8]
+  0xfffffe000a36dc8c  and       x9, x9, #0xfffffffffffffeff  <== AND
+  0xfffffe000a36dc90  str       x9, [x10, #8]
+
+; site 0xfffffe000a36dd28  fn 0xfffffe000a36dcf8 sz 0xfffffe000a36dd98
+  0xfffffe000a36dd18  ldp       x11, x19, [x8]
+  0xfffffe000a36dd1c  ldp       w10, w9, [x8, #0x10]
+  0xfffffe000a36dd20  ldr       x8, [x8, #0x18]
+  0xfffffe000a36dd24  ldr       x12, [x8, #8]
+  0xfffffe000a36dd28  and       x12, x12, #0xfffffffffffffeff  <== AND
+  0xfffffe000a36dd2c  str       x12, [x8, #8]
+
+; site 0xfffffe000a36f0a8  fn 0xfffffe000a36f078 sz 0xfffffe000a36f120
+  0xfffffe000a36f098  ldp       x11, x19, [x8]
+  0xfffffe000a36f09c  ldp       w10, w9, [x8, #0x10]
+  0xfffffe000a36f0a0  ldr       x8, [x8, #0x18]
+  0xfffffe000a36f0a4  ldr       x12, [x8, #8]
+  0xfffffe000a36f0a8  and       x12, x12, #0xfffffffffffffeff  <== AND
+  0xfffffe000a36f0ac  str       x12, [x8, #8]
+
+; site 0xfffffe000a36f150  fn 0xfffffe000a36f120 sz 0xfffffe000a36f1d0
+  0xfffffe000a36f140  ldp       x13, x19, [x9]
+  0xfffffe000a36f144  ldp       w12, w11, [x9, #0x10]
+  0xfffffe000a36f148  ldr       x10, [x9, #0x18]
+  0xfffffe000a36f14c  ldr       x9, [x10, #8]
+  0xfffffe000a36f150  and       x9, x9, #0xfffffffffffffeff  <== AND
+  0xfffffe000a36f154  str       x9, [x10, #8]
+
+; site 0xfffffe000a36f200  fn 0xfffffe000a36f1d0 sz 0xfffffe000a36f290
+  0xfffffe000a36f1f0  ldp       x13, x19, [x10]
+  0xfffffe000a36f1f4  ldp       w12, w11, [x10, #0x10]
+  0xfffffe000a36f1f8  ldr       x10, [x10, #0x18]
+  0xfffffe000a36f1fc  ldr       x14, [x10, #8]
+  0xfffffe000a36f200  and       x14, x14, #0xfffffffffffffeff  <== AND
+  0xfffffe000a36f204  str       x14, [x10, #8]
+
+; site 0xfffffe000a36f2c0  fn 0xfffffe000a36f290 sz 0xfffffe000a36f338
+  0xfffffe000a36f2b0  ldp       x12, x19, [x9]
+  0xfffffe000a36f2b4  ldp       w11, w10, [x9, #0x10]
+  0xfffffe000a36f2b8  ldr       x9, [x9, #0x18]
+  0xfffffe000a36f2bc  ldr       x13, [x9, #8]
+  0xfffffe000a36f2c0  and       x13, x13, #0xfffffffffffffeff  <== AND
+  0xfffffe000a36f2c4  str       x13, [x9, #8]
+
+; site 0xfffffe000a36f368  fn 0xfffffe000a36f338 sz 0xfffffe000a36f3e0
+  0xfffffe000a36f358  ldp       x12, x19, [x9]
+  0xfffffe000a36f35c  ldp       w11, w10, [x9, #0x10]
+  0xfffffe000a36f360  ldr       x9, [x9, #0x18]
+  0xfffffe000a36f364  ldr       x13, [x9, #8]
+  0xfffffe000a36f368  and       x13, x13, #0xfffffffffffffeff  <== AND
+  0xfffffe000a36f36c  str       x13, [x9, #8]
+
+; site 0xfffffe000a36f410  fn 0xfffffe000a36f3e0 sz 0xfffffe000a36f488
+  0xfffffe000a36f400  ldp       x12, x19, [x9]
+  0xfffffe000a36f404  ldp       w11, w10, [x9, #0x10]
+  0xfffffe000a36f408  ldr       x9, [x9, #0x18]
+  0xfffffe000a36f40c  ldr       x13, [x9, #8]
+  0xfffffe000a36f410  and       x13, x13, #0xfffffffffffffeff  <== AND
+  0xfffffe000a36f414  str       x13, [x9, #8]
+
+; site 0xfffffe000a36f4b8  fn 0xfffffe000a36f488 sz 0xfffffe000a36f530
+  0xfffffe000a36f4a8  ldp       x12, x19, [x9]
+  0xfffffe000a36f4ac  ldp       w11, w10, [x9, #0x10]
+  0xfffffe000a36f4b0  ldr       x9, [x9, #0x18]
+  0xfffffe000a36f4b4  ldr       x13, [x9, #8]
+  0xfffffe000a36f4b8  and       x13, x13, #0xfffffffffffffeff  <== AND
+  0xfffffe000a36f4bc  str       x13, [x9, #8]
+
+; site 0xfffffe000a36f560  fn 0xfffffe000a36f530 sz 0xfffffe000a36f5d8
+  0xfffffe000a36f550  ldp       x12, x19, [x9]
+  0xfffffe000a36f554  ldp       w11, w10, [x9, #0x10]
+  0xfffffe000a36f558  ldr       x9, [x9, #0x18]
+  0xfffffe000a36f55c  ldr       x13, [x9, #8]
+  0xfffffe000a36f560  and       x13, x13, #0xfffffffffffffeff  <== AND
+  0xfffffe000a36f564  str       x13, [x9, #8]
+
+; site 0xfffffe000a36f608  fn 0xfffffe000a36f5d8 sz 0xfffffe000a36f680
+  0xfffffe000a36f5f8  ldp       x12, x19, [x9]
+  0xfffffe000a36f5fc  ldp       w11, w10, [x9, #0x10]
+  0xfffffe000a36f600  ldr       x9, [x9, #0x18]
+  0xfffffe000a36f604  ldr       x13, [x9, #8]
+  0xfffffe000a36f608  and       x13, x13, #0xfffffffffffffeff  <== AND
+  0xfffffe000a36f60c  str       x13, [x9, #8]
+
+; site 0xfffffe000a36f6b0  fn 0xfffffe000a36f680 sz 0xfffffe000a36f728
+  0xfffffe000a36f6a0  ldp       x12, x19, [x9]
+  0xfffffe000a36f6a4  ldp       w11, w10, [x9, #0x10]
+  0xfffffe000a36f6a8  ldr       x9, [x9, #0x18]
+  0xfffffe000a36f6ac  ldr       x13, [x9, #8]
+  0xfffffe000a36f6b0  and       x13, x13, #0xfffffffffffffeff  <== AND
+  0xfffffe000a36f6b4  str       x13, [x9, #8]
+
+; site 0xfffffe000a36f758  fn 0xfffffe000a36f728 sz 0xfffffe000a36f7d0
+  0xfffffe000a36f748  ldp       x12, x19, [x9]
+  0xfffffe000a36f74c  ldp       w11, w10, [x9, #0x10]
+  0xfffffe000a36f750  ldr       x9, [x9, #0x18]
+  0xfffffe000a36f754  ldr       x13, [x9, #8]
+  0xfffffe000a36f758  and       x13, x13, #0xfffffffffffffeff  <== AND
+  0xfffffe000a36f75c  str       x13, [x9, #8]

@@ -1,0 +1,44 @@
+; region A 0xfffffe000a31f66c sz 0xe8 (58 insns)  B 0xfffffe000a36da00 sz 0xec (59 insns)
+
+[REPLACE] A 9..12 (3) B 9..17 (8)
+  A 0xfffffe000a31f690  ldr      x8, [x0]
+  A 0xfffffe000a31f694  ldr      w8, [x8, #0x20]
+  A 0xfffffe000a31f698  cmp      w8, #2
+  B 0xfffffe000a36da24  ldp      x10, x22, [x0]
+  B 0xfffffe000a36da28  ldp      w9, w8, [x0, #0x10]
+  B 0xfffffe000a36da2c  ldr      x23, [x0, #0x18]
+  B 0xfffffe000a36da30  ldr      x11, [x23, #8]
+  B 0xfffffe000a36da34  and      x11, x11, #IMM
+  B 0xfffffe000a36da38  str      x11, [x23, #8]
+  B 0xfffffe000a36da3c  ldr      w10, [x10, #0x20]
+  B 0xfffffe000a36da40  cmp      w10, #2
+
+[REPLACE] A 13..16 (3) B 18..20 (2)
+  A 0xfffffe000a31f6a0  ldr      x23, [x0, #0x18]
+  A 0xfffffe000a31f6a4  ldr      x8, [x23, #0x10]
+  A 0xfffffe000a31f6a8  cmp      x8, #2
+  B 0xfffffe000a36da48  ldr      x10, [x23, #0x10]
+  B 0xfffffe000a36da4c  cmp      x10, #2
+
+[REPLACE] A 17..19 (2) B 21..22 (1)
+  A 0xfffffe000a31f6b0  ldr      w8, [x0, #0x10]
+  A 0xfffffe000a31f6b4  cmp      w8, #0x8c
+  B 0xfffffe000a36da54  cmp      w9, #0x8c
+
+[DELETE] A 20..21 (1) B 23..23 (0)
+  A 0xfffffe000a31f6bc  ldr      w8, [x0, #0x14]
+
+[DELETE] A 25..26 (1) B 27..27 (0)
+  A 0xfffffe000a31f6d0  ldr      x22, [x0, #8]
+
+[REPLACE] A 28..29 (1) B 29..30 (1)
+  A 0xfffffe000a31f6dc  ldr      x8, [x8, #0xa38]
+  B 0xfffffe000a36da74  ldr      x8, [x8, #0x2e8]
+
+[REPLACE] A 40..41 (1) B 41..42 (1)
+  A 0xfffffe000a31f70c  ldr      q0, [x8, #0xdd0]
+  B 0xfffffe000a36daa4  ldr      q0, [x8, #0x3c0]
+
+[REPLACE] A 45..46 (1) B 46..47 (1)
+  A 0xfffffe000a31f720  ldr      d0, [x8, #0xfb0]
+  B 0xfffffe000a36dab8  ldr      d0, [x8, #0x5a0]

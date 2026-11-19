@@ -1,0 +1,57 @@
+; region A 0xfffffe0009f93d00 sz 0xe8 (58 insns)  B 0xfffffe0009fe2ac0 sz 0xd8 (54 insns)
+
+[REPLACE] A 9..16 (7) B 9..10 (1)
+  A 0xfffffe0009f93d24  ldr      x8, [x8, #0x190]
+  A 0xfffffe0009f93d28  adrp     x9, #KVA
+  A 0xfffffe0009f93d2c  ldr      x9, [x9, #0x120]
+  A 0xfffffe0009f93d30  cmp      x8, #0
+  A 0xfffffe0009f93d34  csel     x1, x9, x8, eq
+  A 0xfffffe0009f93d38  adrp     x8, #KVA
+  A 0xfffffe0009f93d3c  add      x8, x8, #0x73
+  B 0xfffffe0009fe2ae4  add      x8, x8, #0x153
+
+[REPLACE] A 18..19 (1) B 12..15 (3)
+  A 0xfffffe0009f93d48  add      x0, x0, #0x750
+  B 0xfffffe0009fe2af0  add      x0, x0, #0x7e0
+  B 0xfffffe0009fe2af4  adrp     x1, #KVA
+  B 0xfffffe0009fe2af8  ldr      x1, [x1, #0x9a0]
+
+[REPLACE] A 20..21 (1) B 16..17 (1)
+  A 0xfffffe0009f93d50  add      x3, x3, #0xe18
+  B 0xfffffe0009fe2b00  add      x3, x3, #0xef8
+
+[REPLACE] A 34..35 (1) B 30..31 (1)
+  A 0xfffffe0009f93d88  mov      w8, #0x2d
+  B 0xfffffe0009fe2b38  mov      w8, #0x2c
+
+[REPLACE] A 36..37 (1) B 32..33 (1)
+  A 0xfffffe0009f93d90  add      x9, x9, #0xe6
+  B 0xfffffe0009fe2b40  add      x9, x9, #0x1cb
+
+[REPLACE] A 39..40 (1) B 35..36 (1)
+  A 0xfffffe0009f93d9c  add      x8, x8, #0xe5
+  B 0xfffffe0009fe2b4c  add      x8, x8, #0x1ca
+
+[REPLACE] A 41..42 (1) B 37..38 (1)
+  A 0xfffffe0009f93da4  add      x10, x10, #0xdc
+  B 0xfffffe0009fe2b54  add      x10, x10, #0x1c1
+
+[REPLACE] A 43..44 (1) B 39..40 (1)
+  A 0xfffffe0009f93dac  mov      w8, #0x30
+  B 0xfffffe0009fe2b5c  mov      w8, #0x2f
+
+[REPLACE] A 45..46 (1) B 41..42 (1)
+  A 0xfffffe0009f93db4  add      x9, x9, #0xe6
+  B 0xfffffe0009fe2b64  add      x9, x9, #0x1cb
+
+[REPLACE] A 48..49 (1) B 44..45 (1)
+  A 0xfffffe0009f93dc0  add      x8, x8, #0xe5
+  B 0xfffffe0009fe2b70  add      x8, x8, #0x1ca
+
+[REPLACE] A 50..51 (1) B 46..47 (1)
+  A 0xfffffe0009f93dc8  add      x10, x10, #0x100
+  B 0xfffffe0009fe2b78  add      x10, x10, #0x1e5
+
+[REPLACE] A 54..55 (1) B 50..51 (1)
+  A 0xfffffe0009f93dd8  add      x0, x0, #0x83
+  B 0xfffffe0009fe2b88  add      x0, x0, #0x163
