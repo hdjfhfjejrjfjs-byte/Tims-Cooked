@@ -118,7 +118,36 @@ build's struct definition was not available and no public header names the
 DriverKit server-side block. The identical offset pair and dispatcher shape are
 the evidence, not a header.
 
-## 3. Reachability: a DriverKit entitlement gate
+## 3. The shared `IOUserClient::Dispatch` base implementation changed the same way
+
+The per-class story above is only half of it. The **base** dispatcher that every
+`IOUserClient` descendant inherits also gained the clear:
+
+| | 24A446 | 24B119 |
+|---|---|---|
+| slot-12 thunk | `0xfffffe000b2c8024` (sz `0x2c`) | `0xfffffe000b31e208` (sz `0x2c`) |
+| dispatcher | `0xfffffe000b2c8050` (sz `0x298`) | `0xfffffe000b31e234` (sz `0x2ac`) |
+| branch-C callee | `0xfffffe000b2c82e8` | `0xfffffe000b31e4e0` |
+
+`kz_fn_sem_diff.py com.apple.kernel 0xb2c8050 0xb31e234 0x298 0x2ac` (raw:
+`base_dispatch_sem_diff.txt`) shows exactly four inserted statements, all the
+same idiom, all on `[x21,#8]` where `x21 = [arg+0x18]`:
+
+* `0xfffffe000b31e310`, `0xfffffe000b31e3c0`, `0xfffffe000b31e408` — one per
+  cookie branch in the dispatcher;
+* `0xfffffe000b31e518` — inside the branch-C callee.
+
+Everything else in the diff is register re-allocation, an ADRP page change, and
+the resulting instruction shifts. Predicates (`[obj+0x20] == 1/2`,
+`[obj+0x10] == 1/2`, size thresholds `0x26c` / `0x104`) are unchanged.
+
+Consequence for reading the cluster: Apple patched **both** the shared base
+implementation *and* each per-class override (HID, Skywalk, USB host,
+IOStorageFamily, ...). Since ~254 of 260 `IOUserClient` descendants inherit the
+base thunk unchanged (earlier census), the base change reaches every classic
+user client too — this is **not** a DriverKit-only change.
+
+## 4. Reachability: a dext entitlement gate on the IOStorageFamily half
 
 `IOUserBlockStorageDevice`'s lifecycle path sets a dext entitlement requirement on
 its own service. 24A446 function `0xfffffe000a30600c` (references the literal
@@ -163,7 +192,7 @@ kernel-core reference to the property name is a boot-time constant registration
 unlocated; treat "gated" as a strong inference from the property's documented
 meaning plus the family-wide correlation, not as a measured denial.
 
-## 4. Verdict
+## 5. Verdict
 
 * The IOStorageFamily half of the bit-8 cluster is **attributed**:
   `IOUserBlockStorageDevice` (DriverKit block-storage dext base, size `0x118`),
@@ -179,13 +208,20 @@ meaning plus the family-wide correlation, not as a measured denial.
 **Bounded reconnaissance, closed for app-carried work unless a device shows this
 class published without the entitlement.** No vulnerability claim.
 
-Consequence for the standing cluster reading: the 27.2 mask insertion looks like
-one deliberate hardening change to **DriverKit RPC dispatch paths** (private
-`flags` bit 8 cleared before per-selector validation), applied across the dext
-families — not a per-kext fix. That reframes the cluster from "many candidate
-fix sites" to "one change idiom in entitlement-gated dext dispatchers".
+Consequence for the standing cluster reading: the 27.2 mask insertion is **one
+change idiom applied at two levels** — the shared `IOUserClient::Dispatch` base
+implementation (reaches every classic user client, DriverKit or not) *and* each
+per-class override in the dext families. It is not a set of independent per-kext
+fixes. For the IOStorageFamily half specifically the ingress is a DriverKit dext
+user-client connection gated by
+`com.apple.developer.driverkit.family.block-storage-device`; whether the same
+gate covers the other members' overrides was not re-checked in this run.
 
-## 5. Next steps
+Amendment (same day): an earlier draft of this section said the change was
+"DriverKit-only". That was wrong — §3 shows the base implementation changed too,
+so the base-clear reaches non-Dext user clients as well.
+
+## 6. Next steps
 
 1. If a device appears, do **not** probe this class directly. Instead re-check
    whether any `com.apple.developer.driverkit.*`-gated service is openable by the
@@ -211,5 +247,7 @@ python tools/kz-static-diff/kz_raw.py 24A446 com.apple.iokit.IOStorageFamily \
 python tools/kz-static-diff/kz_raw.py 24B119 com.apple.iokit.IOStorageFamily \
         0xfffffe000a36da00 0xf0          # the inserted bit-8 clear
 python tools/kz-static-diff/kz_adrp_ref_np.py 24A446 0xfffffe0008375f48   # vptr store sites
+python tools/kz-static-diff/kz_fn_sem_diff.py com.apple.kernel \
+        0xfffffe000b2c8050 0xfffffe000b31e234 0x298 0x2ac   # base Dispatch: 4 inserted clears
 python tools/kz-static-diff/kz_member_strings.py 24A446 <member> driverkit
 ```

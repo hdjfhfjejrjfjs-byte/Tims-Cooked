@@ -1,0 +1,98 @@
+; region A 0xfffffe000b2c8050 sz 0x298 (166 insns)  B 0xfffffe000b31e234 sz 0x2ac (171 insns)
+
+[REPLACE] A 29..30 (1) B 29..30 (1)
+  A 0xfffffe000b2c80c4  add      x16, x16, #0xb8
+  B 0xfffffe000b31e2a8  add      x16, x16, #0x738
+
+[REPLACE] A 52..55 (3) B 52..59 (7)
+  A 0xfffffe000b2c8120  ldr      x9, [x1]
+  A 0xfffffe000b2c8124  ldr      w9, [x9, #0x20]
+  A 0xfffffe000b2c8128  cmp      w9, #1
+  B 0xfffffe000b31e304  ldp      x11, x19, [x1]
+  B 0xfffffe000b31e308  ldp      w10, w9, [x1, #0x10]
+  B 0xfffffe000b31e30c  ldr      x12, [x21, #8]
+  B 0xfffffe000b31e310  and      x12, x12, #IMM
+  B 0xfffffe000b31e314  str      x12, [x21, #8]
+  B 0xfffffe000b31e318  ldr      w11, [x11, #0x20]
+  B 0xfffffe000b31e31c  cmp      w11, #1
+
+[REPLACE] A 56..58 (2) B 60..62 (2)
+  A 0xfffffe000b2c8130  ldr      x9, [x21, #0x10]
+  A 0xfffffe000b2c8134  cmp      x9, #1
+  B 0xfffffe000b31e324  ldr      x11, [x21, #0x10]
+  B 0xfffffe000b31e328  cmp      x11, #1
+
+[REPLACE] A 59..61 (2) B 63..64 (1)
+  A 0xfffffe000b2c813c  ldr      w9, [x1, #0x10]
+  A 0xfffffe000b2c8140  cmp      w9, #0x26c
+  B 0xfffffe000b31e330  cmp      w10, #0x26c
+
+[DELETE] A 62..63 (1) B 65..65 (0)
+  A 0xfffffe000b2c8148  ldr      w9, [x1, #0x14]
+
+[DELETE] A 65..66 (1) B 67..67 (0)
+  A 0xfffffe000b2c8154  ldr      x19, [x1, #8]
+
+[REPLACE] A 75..76 (1) B 76..77 (1)
+  A 0xfffffe000b2c817c  ldr      q0, [x8, #0x20]
+  B 0xfffffe000b31e364  ldr      q0, [x8, #0x30]
+
+[REPLACE] A 95..98 (3) B 96..103 (7)
+  A 0xfffffe000b2c81cc  ldr      x8, [x1]
+  A 0xfffffe000b2c81d0  ldr      w8, [x8, #0x20]
+  A 0xfffffe000b2c81d4  cmp      w8, #1
+  B 0xfffffe000b31e3b4  ldr      x10, [x1]
+  B 0xfffffe000b31e3b8  ldp      w8, w9, [x1, #0x10]
+  B 0xfffffe000b31e3bc  ldr      x11, [x21, #8]
+  B 0xfffffe000b31e3c0  and      x11, x11, #IMM
+  B 0xfffffe000b31e3c4  str      x11, [x21, #8]
+  B 0xfffffe000b31e3c8  ldr      w10, [x10, #0x20]
+  B 0xfffffe000b31e3cc  cmp      w10, #1
+
+[DELETE] A 99..100 (1) B 104..104 (0)
+  A 0xfffffe000b2c81dc  ldp      w9, w8, [x1, #0x10]
+
+[REPLACE] A 102..103 (1) B 106..107 (1)
+  A 0xfffffe000b2c81e8  .byte    0x28, 0x6d, 0xc8, 0x1a
+  B 0xfffffe000b31e3dc  .byte    0x08, 0x6d, 0xc9, 0x1a
+
+[REPLACE] A 110..113 (3) B 114..121 (7)
+  A 0xfffffe000b2c8208  ldr      x8, [x1]
+  A 0xfffffe000b2c820c  ldr      w8, [x8, #0x20]
+  A 0xfffffe000b2c8210  cmp      w8, #2
+  B 0xfffffe000b31e3fc  ldp      x11, x9, [x1]
+  B 0xfffffe000b31e400  ldp      w10, w8, [x1, #0x10]
+  B 0xfffffe000b31e404  ldr      x12, [x21, #8]
+  B 0xfffffe000b31e408  and      x12, x12, #IMM
+  B 0xfffffe000b31e40c  str      x12, [x21, #8]
+  B 0xfffffe000b31e410  ldr      w11, [x11, #0x20]
+  B 0xfffffe000b31e414  cmp      w11, #2
+
+[REPLACE] A 114..116 (2) B 122..124 (2)
+  A 0xfffffe000b2c8218  ldr      x8, [x21, #0x10]
+  A 0xfffffe000b2c821c  cmp      x8, #2
+  B 0xfffffe000b31e41c  ldr      x11, [x21, #0x10]
+  B 0xfffffe000b31e420  cmp      x11, #2
+
+[REPLACE] A 117..119 (2) B 125..126 (1)
+  A 0xfffffe000b2c8224  ldr      w8, [x1, #0x10]
+  A 0xfffffe000b2c8228  cmp      w8, #0x104
+  B 0xfffffe000b31e428  cmp      w10, #0x104
+
+[REPLACE] A 120..122 (2) B 127..128 (1)
+  A 0xfffffe000b2c8230  ldr      x9, [x1, #8]
+  A 0xfffffe000b2c8234  ldr      w8, [x21, #0xb8]
+  B 0xfffffe000b31e430  ldr      w10, [x21, #0xb8]
+
+[REPLACE] A 123..125 (2) B 129..130 (1)
+  A 0xfffffe000b2c823c  ldr      w9, [x1, #0x14]
+  A 0xfffffe000b2c8240  cmp      w9, #0x3c
+  B 0xfffffe000b31e438  cmp      w8, #0x3c
+
+[REPLACE] A 126..127 (1) B 131..132 (1)
+  A 0xfffffe000b2c8248  .byte    0x13, 0x41, 0xcc, 0x11
+  B 0xfffffe000b31e440  .byte    0x53, 0x41, 0xcc, 0x11
+
+[REPLACE] A 138..139 (1) B 143..144 (1)
+  A 0xfffffe000b2c8278  add      x8, x8, #0xa48
+  B 0xfffffe000b31e470  add      x8, x8, #0xb88
