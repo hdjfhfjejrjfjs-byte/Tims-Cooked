@@ -1,0 +1,22 @@
+fffffe000b2e5390  cbz      x8, #0xfffffe000b2e53d8
+fffffe000b2e5394  ldr      x8, [x8, #0x28]
+fffffe000b2e5398  cbz      x8, #0xfffffe000b2e53d8
+fffffe000b2e539c  ldr      x0, [x8]
+fffffe000b2e53a0  cbz      x0, #0xfffffe000b2e53d8
+fffffe000b2e53a4  mov      x1, x21
+fffffe000b2e53a8  mov      x2, x24
+fffffe000b2e53ac  mov      x4, x22
+fffffe000b2e53b0  mov      x6, x20
+fffffe000b2e53b4  ldp      x29, x30, [sp, #0x60]
+fffffe000b2e53b8  ldp      x20, x19, [sp, #0x50]
+fffffe000b2e53bc  ldp      x22, x21, [sp, #0x40]
+fffffe000b2e53c0  ldp      x24, x23, [sp, #0x30]
+fffffe000b2e53c4  ldp      x26, x25, [sp, #0x20]
+fffffe000b2e53c8  ldp      x28, x27, [sp, #0x10]
+fffffe000b2e53cc  add      sp, sp, #0x70
+fffffe000b2e53d0  autibsp  
+fffffe000b2e53d4  b        #0xfffffe000b3a5fd0
+fffffe000b2e53d8  ldr      x16, [x21]
+fffffe000b2e53dc  mov      x17, x21
+fffffe000b2e53e0  movk     x17, #0xcda1, lsl #48
+fffffe000b2e53e4  autda    x16, x17

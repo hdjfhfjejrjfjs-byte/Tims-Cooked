@@ -1,0 +1,50 @@
+fffffe000b3af440  add      w8, w10, #1
+fffffe000b3af444  add      x1, x9, w8, uxtw #3
+fffffe000b3af448  bl       #0xfffffe000b43f0d0
+fffffe000b3af44c  ldr      x1, [x19, #8]
+fffffe000b3af450  str      xzr, [x19, #8]
+fffffe000b3af454  adrp     x0, #0xfffffe0007f08000
+fffffe000b3af458  add      x0, x0, #0xf58
+fffffe000b3af45c  bl       #0xfffffe000abce90c
+fffffe000b3af460  mov      x8, #-1
+fffffe000b3af464  str      x8, [x19]
+fffffe000b3af468  mov      x0, x19
+fffffe000b3af46c  ldp      x29, x30, [sp, #0x20]
+fffffe000b3af470  ldp      x20, x19, [sp, #0x10]
+fffffe000b3af474  ldp      x22, x21, [sp], #0x30
+fffffe000b3af478  retab    
+fffffe000b3af47c  mov      x1, x20
+fffffe000b3af480  mov      w2, #0
+fffffe000b3af484  bl       #0xfffffe000abd33bc
+fffffe000b3af488  b        #0xfffffe000b3af2f0
+fffffe000b3af48c  mov      x1, x20
+fffffe000b3af490  bl       #0xfffffe000abd3fa0
+fffffe000b3af494  cbnz     x21, #0xfffffe000b3af370
+fffffe000b3af498  b        #0xfffffe000b3af3f0
+fffffe000b3af49c  mov      x1, x20
+fffffe000b3af4a0  bl       #0xfffffe000abd3fa0
+fffffe000b3af4a4  b        #0xfffffe000b3af3f0
+fffffe000b3af4a8  pacibsp  
+fffffe000b3af4ac  stp      x29, x30, [sp, #-0x10]!
+fffffe000b3af4b0  mov      x29, sp
+fffffe000b3af4b4  adrp     x0, #0xfffffe000b7b2000
+fffffe000b3af4b8  add      x0, x0, #0x8e8
+fffffe000b3af4bc  adrp     x1, #0xfffffe00070c8000
+fffffe000b3af4c0  add      x1, x1, #0xc3c
+fffffe000b3af4c4  adrp     x2, #0xfffffe000b7b2000
+fffffe000b3af4c8  add      x2, x2, #0xe18
+fffffe000b3af4cc  mov      w3, #0x88
+fffffe000b3af4d0  bl       #0xfffffe000b265500
+fffffe000b3af4d4  adrp     x16, #0xfffffe0007ef2000
+fffffe000b3af4d8  add      x16, x16, #0x808
+fffffe000b3af4dc  add      x16, x16, #0x10
+fffffe000b3af4e0  mov      x17, x0
+fffffe000b3af4e4  movk     x17, #0xcda1, lsl #48
+fffffe000b3af4e8  pacda    x16, x17
+fffffe000b3af4ec  str      x16, [x0]
+fffffe000b3af4f0  ldp      x29, x30, [sp], #0x10
+fffffe000b3af4f4  retab    
+fffffe000b3af4f8  pacibsp  
+fffffe000b3af4fc  stp      x29, x30, [sp, #-0x10]!
+fffffe000b3af500  mov      x29, sp
+fffffe000b3af504  adrp     x1, #0xfffffe00070c8000

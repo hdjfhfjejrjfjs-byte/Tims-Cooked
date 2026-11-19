@@ -1,0 +1,60 @@
+fffffe000b3aefd4  pacibsp  
+fffffe000b3aefd8  stp      x29, x30, [sp, #-0x10]!
+fffffe000b3aefdc  mov      x29, sp
+fffffe000b3aefe0  adrp     x8, #0xfffffe0007f0c000
+fffffe000b3aefe4  ldr      w8, [x8, #0x844]
+fffffe000b3aefe8  and      w8, w8, #0xfffff8
+fffffe000b3aefec  cmp      w8, #0x88
+fffffe000b3aeff0  b.hs     #0xfffffe000b3af014
+fffffe000b3aeff4  adrp     x0, #0xfffffe0007eb5000
+fffffe000b3aeff8  add      x0, x0, #0xb28
+fffffe000b3aeffc  mov      w1, #0x88
+fffffe000b3af000  mov      w2, #0x1004
+fffffe000b3af004  movk     w2, #4, lsl #16
+fffffe000b3af008  mov      x3, #0
+fffffe000b3af00c  bl       #0xfffffe000abcdeb8
+fffffe000b3af010  b        #0xfffffe000b3af024
+fffffe000b3af014  adrp     x0, #0xfffffe0007f0c000
+fffffe000b3af018  add      x0, x0, #0x818
+fffffe000b3af01c  mov      w1, #4
+fffffe000b3af020  bl       #0xfffffe000abce3f8
+fffffe000b3af024  adrp     x8, #0xfffffe000b7b2000
+fffffe000b3af028  add      x8, x8, #0x498
+fffffe000b3af02c  mov      w9, #0x88
+fffffe000b3af030  ldadd    x9, x8, [x8]
+fffffe000b3af034  mov      w8, #1
+fffffe000b3af038  str      w8, [x0, #8]
+fffffe000b3af03c  adrp     x16, #0xfffffe0007ef2000
+fffffe000b3af040  add      x16, x16, #0x2b0
+fffffe000b3af044  add      x16, x16, #0x10
+fffffe000b3af048  mov      x17, x0
+fffffe000b3af04c  movk     x17, #0xcda1, lsl #48
+fffffe000b3af050  pacda    x16, x17
+fffffe000b3af054  str      x16, [x0]
+fffffe000b3af058  adrp     x9, #0xfffffe000b7b2000
+fffffe000b3af05c  add      x9, x9, #0x8e8
+fffffe000b3af060  add      x10, x9, #0x24
+fffffe000b3af064  ldadd    w8, w10, [x10]
+fffffe000b3af068  cbnz     w10, #0xfffffe000b3af074
+fffffe000b3af06c  ldr      x9, [x9, #0x10]
+fffffe000b3af070  cbnz     x9, #0xfffffe000b3af060
+fffffe000b3af074  ldp      x29, x30, [sp], #0x10
+fffffe000b3af078  retab    
+fffffe000b3af07c  pacibsp  
+fffffe000b3af080  stp      x22, x21, [sp, #-0x30]!
+fffffe000b3af084  stp      x20, x19, [sp, #0x10]
+fffffe000b3af088  stp      x29, x30, [sp, #0x20]
+fffffe000b3af08c  add      x29, sp, #0x20
+fffffe000b3af090  mov      x19, x0
+fffffe000b3af094  mov      x8, #0
+fffffe000b3af098  adrp     x16, #0xfffffe0007eb2000
+fffffe000b3af09c  add      x16, x16, #0x9e8
+fffffe000b3af0a0  add      x16, x16, #0x10
+fffffe000b3af0a4  mov      x17, x0
+fffffe000b3af0a8  movk     x17, #0xcda1, lsl #48
+fffffe000b3af0ac  pacda    x16, x17
+fffffe000b3af0b0  str      x16, [x0]
+fffffe000b3af0b4  ldr      x9, [x0, #8]
+fffffe000b3af0b8  ldr      x21, [x9, #8]
+fffffe000b3af0bc  adrp     x22, #0xfffffe000b7b0000
+fffffe000b3af0c0  ldr      x0, [x22, #0x158]

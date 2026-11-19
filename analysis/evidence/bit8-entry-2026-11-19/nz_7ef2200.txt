@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "G:\iOS 27.0.1\iOS\tools\kz-static-diff\kz_nzrange.py", line 60, in <module>
+    main(sys.argv)
+    ~~~~^^^^^^^^^^
+  File "G:\iOS 27.0.1\iOS\tools\kz-static-diff\kz_nzrange.py", line 39, in main
+    o0, o1 = v2o(b, start), v2o(b, end)
+                            ~~~^^^^^^^^
+  File "G:\iOS 27.0.1\iOS\tools\opencode-temp\kc_member.py", line 63, in v2o
+    raise KeyError(hex(va))
+KeyError: '0x280'

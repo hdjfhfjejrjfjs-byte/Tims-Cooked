@@ -1,0 +1,30 @@
+fffffe000b2f41d0  blraa    x8, x16
+fffffe000b2f41d4  adrp     x22, #0xfffffe0007ec7000
+fffffe000b2f41d8  cbz      x24, #0xfffffe000b2f4264
+fffffe000b2f41dc  cbz      x21, #0xfffffe000b2f4200
+fffffe000b2f41e0  ldr      x16, [x21]
+fffffe000b2f41e4  mov      x17, x21
+fffffe000b2f41e8  movk     x17, #0xcda1, lsl #48
+fffffe000b2f41ec  autda    x16, x17
+fffffe000b2f41f0  ldr      x8, [x16, #0x28]!
+fffffe000b2f41f4  mov      x0, x21
+fffffe000b2f41f8  movk     x16, #0x3a87, lsl #48
+fffffe000b2f41fc  blraa    x8, x16
+fffffe000b2f4200  ldrb     w8, [x22, #0x391]
+fffffe000b2f4204  tbnz     w8, #7, #0xfffffe000b2f421c
+fffffe000b2f4208  mov      x0, x24
+fffffe000b2f420c  mov      x1, x19
+fffffe000b2f4210  mov      x2, x20
+fffffe000b2f4214  bl       #0xfffffe000b3a3174
+fffffe000b2f4218  tbz      w0, #0, #0xfffffe000b2f42f4
+fffffe000b2f421c  ldrb     w8, [x24, #0x120]
+fffffe000b2f4220  tbnz     w8, #0, #0xfffffe000b2f424c
+fffffe000b2f4224  ldr      w8, [x24, #0x130]
+fffffe000b2f4228  cmp      w8, #3
+fffffe000b2f422c  b.eq     #0xfffffe000b2f424c
+fffffe000b2f4230  adrp     x8, #0xfffffe000b856000
+fffffe000b2f4234  ldr      x8, [x8, #0x6b0]
+fffffe000b2f4238  cmp      x19, x8
+fffffe000b2f423c  b.eq     #0xfffffe000b2f432c
+fffffe000b2f4240  ldr      x8, [x27, #0x6a8]
+fffffe000b2f4244  cmp      x19, x8

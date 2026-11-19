@@ -1,0 +1,12 @@
+fffffe000b3aef50  bti      c
+fffffe000b3aef54  adrp     x0, #0xfffffe000b7b2000
+fffffe000b3aef58  add      x0, x0, #0x8e8
+fffffe000b3aef5c  ret      
+fffffe000b3aef60  pacibsp  
+fffffe000b3aef64  stp      x29, x30, [sp, #-0x10]!
+fffffe000b3aef68  mov      x29, sp
+fffffe000b3aef6c  mov      x1, x0
+fffffe000b3aef70  mov      x8, #-1
+fffffe000b3aef74  str      x8, [x0]
+fffffe000b3aef78  adrp     x8, #0xfffffe0007f0c000
+fffffe000b3aef7c  ldr      w8, [x8, #0x844]
