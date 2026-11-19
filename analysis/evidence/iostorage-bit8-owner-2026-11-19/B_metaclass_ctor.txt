@@ -1,0 +1,24 @@
+0xfffffe000a355fa0  pacibsp    
+0xfffffe000a355fa4  stp        x29, x30, [sp, #-0x10]!
+0xfffffe000a355fa8  mov        x29, sp
+0xfffffe000a355fac  adrp       x0, #0xfffffe000b9f5000
+0xfffffe000a355fb0  add        x0, x0, #0xbd0
+0xfffffe000a355fb4  adrp       x1, #0xfffffe0007a23000
+0xfffffe000a355fb8  add        x1, x1, #0xcc2
+0xfffffe000a355fbc  adrp       x2, #0xfffffe000b9f5000
+0xfffffe000a355fc0  add        x2, x2, #0xc20
+0xfffffe000a355fc4  mov        w3, #0x118
+0xfffffe000a355fc8  bl         #0xfffffe000a36fb68
+0xfffffe000a355fcc  adrp       x16, #0xfffffe000838c000
+0xfffffe000a355fd0  add        x16, x16, #0xdf0
+0xfffffe000a355fd4  add        x16, x16, #0x10
+0xfffffe000a355fd8  mov        x17, x0
+0xfffffe000a355fdc  movk       x17, #0xcda1, lsl #48
+0xfffffe000a355fe0  pacda      x16, x17
+0xfffffe000a355fe4  str        x16, [x0]
+0xfffffe000a355fe8  ldp        x29, x30, [sp], #0x10
+0xfffffe000a355fec  retab      
+0xfffffe000a355ff0  bti        c
+0xfffffe000a355ff4  adrp       x0, #0xfffffe000b9f5000
+0xfffffe000a355ff8  add        x0, x0, #0xbd0
+0xfffffe000a355ffc  b          #0xfffffe000a36fb78

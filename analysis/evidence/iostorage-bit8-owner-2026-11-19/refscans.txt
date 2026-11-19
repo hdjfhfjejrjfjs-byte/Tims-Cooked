@@ -1,0 +1,66 @@
+## vtable-base refs 24A446
+24A446: 8 ADRP+ADD/LDR refs to 0xfffffe0008375f48
+   add at 0xfffffe000a305e90
+   add at 0xfffffe000a305f6c
+   add at 0xfffffe000a305fdc
+   ldr at 0xfffffe000a306428
+   ldr at 0xfffffe000a306dc0
+   ldr at 0xfffffe000a30713c
+   ldr at 0xfffffe000a3079a8
+   ldr at 0xfffffe000a307b50
+## vtable-base refs 24B119
+24B119: 8 ADRP+ADD/LDR refs to 0xfffffe000838c7f8
+   add at 0xfffffe000a354250
+   add at 0xfffffe000a35432c
+   add at 0xfffffe000a35439c
+   ldr at 0xfffffe000a3547e8
+   ldr at 0xfffffe000a355180
+   ldr at 0xfffffe000a3554fc
+   ldr at 0xfffffe000a355d68
+   ldr at 0xfffffe000a355f10
+## gMetaClass refs 24A446 0xb99cfc0
+24A446: 8 ADRP+ADD/LDR refs to 0xfffffe000b99cfc0
+   add at 0xfffffe000a305f24
+   add at 0xfffffe000a305f58
+   add at 0xfffffe000a305fc8
+   ldr at 0xfffffe000a306410
+   ldr at 0xfffffe000a306f58
+   ldr at 0xfffffe000a307b64
+   add at 0xfffffe000a307bf0
+   add at 0xfffffe000a307c38
+## gMetaClass refs 24B119 0xb9f5bd0
+24B119: 8 ADRP+ADD/LDR refs to 0xfffffe000b9f5bd0
+   add at 0xfffffe000a3542e4
+   add at 0xfffffe000a354318
+   add at 0xfffffe000a354388
+   ldr at 0xfffffe000a3547d0
+   ldr at 0xfffffe000a355318
+   ldr at 0xfffffe000a355f24
+   add at 0xfffffe000a355fb0
+   add at 0xfffffe000a355ff8
+## name-string refs 24A446
+24A446: 2 ADRP+ADD/LDR refs to 0xfffffe0007a166d2
+   add at 0xfffffe000a305e34
+   add at 0xfffffe000a307bf8
+## entitlement-string refs 24A446
+24A446: 1 ADRP+ADD/LDR refs to 0xfffffe0007a167bd
+   add at 0xfffffe000a30609c
+## driverkit strings, other families
+-- com.apple.iokit.IOHIDFamily
+0xfffffe00079afd4b [__TEXT] com.apple.developer.driverkit.family.hid.eventservice
+0xfffffe00079b0155 [__TEXT] com.apple.developer.driverkit.family.hid.device
+0xfffffe00079b20e0 [__TEXT] com.apple.developer.driverkit.transport.hid
+0xfffffe00079b2119 [__TEXT] com.apple.developer.driverkit.builtin
+-- com.apple.iokit.IOPCIFamily
+0xfffffe00079fae23 [__TEXT] com.apple.developer.driverkit.transport.pci
+0xfffffe00079faebd [__TEXT] com.apple.developer.driverkit.transport.pci.bridge
+0xfffffe00079fd0a1 [__TEXT] com.apple.developer.driverkit.builtin
+0xfffffe00079fe2e2 [__TEXT] [PCIe:%u %llu ns] %s: PCIDriverKit client, %s, crashed for device %s[%u:%u:%u], attempting to recover
+0xfffffe00079fe3a1 [__TEXT] [PCIe:%u %llu ns] %s: PCIDriverKit client %s does not have open session with device %s[%u:%u:%u], skipping recovery
+-- com.apple.iokit.IOSkywalkFamily
+0xfffffe0007a10e0d [__TEXT] com.apple.developer.driverkit.family.networking
+-- com.apple.iokit.IOUSBHostFamily
+0xfffffe0007ad7f71 [__TEXT] com.apple.developer.driverkit.transport.usb
+0xfffffe0007ad90d9 [__TEXT] com.apple.developer.driverkit.builtin
+-- com.apple.driver.AppleFirmwareKit
+0xfffffe00074240e7 [__TEXT] com.apple.developer.driverkit.transport.afk

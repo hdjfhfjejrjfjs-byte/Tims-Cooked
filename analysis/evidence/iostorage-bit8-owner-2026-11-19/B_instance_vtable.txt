@@ -1,0 +1,22 @@
+# 24B119 com.apple.iokit.IOStorageFamily table @ 0xfffffe000838c7d8 stride 0x8 (segment __DATA_CONST)
+# idx | entry VM | raw qword | decoded VA | segment
+  -4 | 0xfffffe000838c7b8 | 0x0010000003361198 | 0xfffffe000a365198 | __TEXT_EXEC
+  -3 | 0xfffffe000838c7c0 | 0x0010000003366cf8 | 0xfffffe000a36acf8 | __TEXT_EXEC
+  -2 | 0xfffffe000838c7c8 | 0x00100000033692e0 | 0xfffffe000a36d2e0 | __TEXT_EXEC
+  -1 | 0xfffffe000838c7d0 | 0x0010000003369774 | 0xfffffe000a36d774 | __TEXT_EXEC
+   0 | 0xfffffe000838c7d8 | 0x00100000049f1bd0 | ptr 0x100000049f1bd0 | -
+   1 | 0xfffffe000838c7e0 | 0x00300000049f1c20 | ptr 0x300000049f1c20 | -
+   2 | 0xfffffe000838c7e8 | 0x0000000000000000 | 0 | -
+   3 | 0xfffffe000838c7f0 | 0x0000000000000000 | 0 | -
+   4 | 0xfffffe000838c7f8 | 0x8011377103350274 | 0xfffffe000a354274 | __TEXT_EXEC
+   5 | 0xfffffe000838c800 | 0x801156b70335027c | 0xfffffe000a35427c | __TEXT_EXEC
+   6 | 0xfffffe000838c808 | 0x8011baa2042ba688 | ptr 0x8011baa2042ba688 | -
+   7 | 0xfffffe000838c810 | 0x80113607042ba67c | ptr 0x80113607042ba67c | -
+   8 | 0xfffffe000838c818 | 0x80112e4a042ba64c | ptr 0x80112e4a042ba64c | -
+   9 | 0xfffffe000838c820 | 0x80113a87042ba61c | ptr 0x80113a87042ba61c | -
+  10 | 0xfffffe000838c828 | 0x801189a9042ba494 | ptr 0x801189a9042ba494 | -
+  11 | 0xfffffe000838c830 | 0x8011fffc033502dc | 0xfffffe000a3542dc | __TEXT_EXEC
+  12 | 0xfffffe000838c838 | 0x8011fc74042b7330 | ptr 0x8011fc74042b7330 | -
+  13 | 0xfffffe000838c840 | 0x80115635042ba404 | ptr 0x80115635042ba404 | -
+  14 | 0xfffffe000838c848 | 0x8011be60042ba3d4 | ptr 0x8011be60042ba3d4 | -
+  15 | 0xfffffe000838c850 | 0x801132e5042ba27c | ptr 0x801132e5042ba27c | -

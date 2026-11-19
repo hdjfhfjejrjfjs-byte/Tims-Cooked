@@ -1,0 +1,72 @@
+0xfffffe000a30600c  pacibsp    
+0xfffffe000a306010  sub        sp, sp, #0x40
+0xfffffe000a306014  stp        x22, x21, [sp, #0x10]
+0xfffffe000a306018  stp        x20, x19, [sp, #0x20]
+0xfffffe000a30601c  stp        x29, x30, [sp, #0x30]
+0xfffffe000a306020  add        x29, sp, #0x30
+0xfffffe000a306024  mov        x20, x1
+0xfffffe000a306028  mov        x19, x0
+0xfffffe000a30602c  adrp       x21, #0xfffffe0007a16000
+0xfffffe000a306030  add        x21, x21, #0x74d
+0xfffffe000a306034  adrp       x8, #0xfffffe0007a16000
+0xfffffe000a306038  add        x8, x8, #0x748
+0xfffffe000a30603c  stp        x8, x21, [sp]
+0xfffffe000a306040  adrp       x0, #0xfffffe0007a16000
+0xfffffe000a306044  add        x0, x0, #0x72d
+0xfffffe000a306048  bl         #0xfffffe000a3216c4
+0xfffffe000a30604c  adrp       x8, #0xfffffe0008376000
+0xfffffe000a306050  add        x8, x8, #0xc68
+0xfffffe000a306054  ldr        x9, [x8, #0xb8]!
+0xfffffe000a306058  mov        x0, x19
+0xfffffe000a30605c  mov        x1, x20
+0xfffffe000a306060  mov        x17, x8
+0xfffffe000a306064  movk       x17, #0x43aa, lsl #48
+0xfffffe000a306068  blraa      x9, x17
+0xfffffe000a30606c  tbz        w0, #0, #0xfffffe000a3060e8
+0xfffffe000a306070  str        xzr, [x19, #0x90]
+0xfffffe000a306074  movi       v0.2d, #0000000000000000
+0xfffffe000a306078  stur       q0, [x19, #0xe8]
+0xfffffe000a30607c  stur       q0, [x19, #0xf8]
+0xfffffe000a306080  strb       wzr, [x19, #0x110]
+0xfffffe000a306084  mov        w8, #1
+0xfffffe000a306088  strb       w8, [x19, #0x113]
+0xfffffe000a30608c  ldr        x16, [x19]
+0xfffffe000a306090  adrp       x1, #0xfffffe0007a16000
+0xfffffe000a306094  add        x1, x1, #0x7a3
+0xfffffe000a306098  adrp       x2, #0xfffffe0007a16000
+0xfffffe000a30609c  add        x2, x2, #0x7bd
+0xfffffe000a3060a0  mov        x17, x19
+0xfffffe000a3060a4  movk       x17, #0xcda1, lsl #48
+0xfffffe000a3060a8  autda      x16, x17
+0xfffffe000a3060ac  ldr        x8, [x16, #0xd0]!
+0xfffffe000a3060b0  mov        x3, x16
+0xfffffe000a3060b4  mov        x16, x8
+0xfffffe000a3060b8  mov        x0, x19
+0xfffffe000a3060bc  ldp        x29, x30, [sp, #0x30]
+0xfffffe000a3060c0  ldp        x20, x19, [sp, #0x20]
+0xfffffe000a3060c4  ldp        x22, x21, [sp, #0x10]
+0xfffffe000a3060c8  add        sp, sp, #0x40
+0xfffffe000a3060cc  autibsp    
+0xfffffe000a3060d0  eor        x17, x30, x30, lsl #1
+0xfffffe000a3060d4  tbz        x17, #0x3e, #0xfffffe000a3060dc
+0xfffffe000a3060d8  brk        #0xc471
+0xfffffe000a3060dc  mov        x17, x3
+0xfffffe000a3060e0  movk       x17, #0x1814, lsl #48
+0xfffffe000a3060e4  braa       x16, x17
+0xfffffe000a3060e8  adrp       x8, #0xfffffe0007a16000
+0xfffffe000a3060ec  add        x8, x8, #0x79f
+0xfffffe000a3060f0  stp        x8, x21, [sp]
+0xfffffe000a3060f4  adrp       x0, #0xfffffe0007a16000
+0xfffffe000a3060f8  add        x0, x0, #0x789
+0xfffffe000a3060fc  bl         #0xfffffe000a3216c4
+0xfffffe000a306100  mov        w0, #0
+0xfffffe000a306104  ldp        x29, x30, [sp, #0x30]
+0xfffffe000a306108  ldp        x20, x19, [sp, #0x20]
+0xfffffe000a30610c  ldp        x22, x21, [sp, #0x10]
+0xfffffe000a306110  add        sp, sp, #0x40
+0xfffffe000a306114  retab      
+0xfffffe000a306118  bti        c
+0xfffffe000a30611c  pacibsp    
+0xfffffe000a306120  stp        x20, x19, [sp, #-0x20]!
+0xfffffe000a306124  stp        x29, x30, [sp, #0x10]
+0xfffffe000a306128  add        x29, sp, #0x10
