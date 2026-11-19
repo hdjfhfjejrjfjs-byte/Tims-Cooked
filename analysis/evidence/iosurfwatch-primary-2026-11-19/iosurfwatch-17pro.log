@@ -1,0 +1,59 @@
+[*] iosurfwatch start (watch a released region surface's pages under kernel churn)
+[*] iosurfwatch metal churn enabled: Apple A19 Pro GPU
+[*] iosurfhold start alloc=0x8000 iters=48 churn=48 rounds=4
+[*] iosurfhold r0 ctrl=1 id=0x7d base=0x102a2c000 alloc=0x8000 marker=0xc0de0000 entryKR=0 handle=0x7623
+[*] iosurfhold r0 alias1 kr=0 marker=0xc0de0000 same=YES (no user mapping remains)
+[*] iosurfhold r0 surface released; window open (control: spray fresh region surfaces)
+[*] iosurfhold r0 control spray kept=8 old_base_reused=YES idx=0
+[*] iosurfhold r0 watch it=0 extChurn=10
+[*] iosurfhold r0 watch it=0 worstMismatch=1 changedIters=1 mapFail=0 churnMade=36
+[*] iosurfhold r0 watch it=11 worstMismatch=1 changedIters=12 mapFail=0 churnMade=48
+[*] iosurfhold r0 watch it=12 extChurn=10
+[*] iosurfhold r0 watch it=23 worstMismatch=1 changedIters=24 mapFail=0 churnMade=48
+[*] iosurfhold r0 watch it=24 extChurn=10
+[*] iosurfhold r0 watch it=35 worstMismatch=1 changedIters=36 mapFail=0 churnMade=48
+[*] iosurfhold r0 watch it=36 extChurn=10
+[*] iosurfhold r0 watch it=47 worstMismatch=1 changedIters=48 mapFail=0 churnMade=48
+[*] iosurfhold r0 VERDICT ctrl=1 worstMismatch=1 firstOff=0x0 firstVal=0x5a5a0000 changedIters=48/48 mapFail=0
+[*] iosurfhold r1 ctrl=0 id=0x55 base=0x102a2c000 alloc=0x8000 marker=0xc0de0000 entryKR=0 handle=0x762b
+[*] iosurfhold r1 alias1 kr=0 marker=0xc0de0000 same=YES (no user mapping remains)
+[*] iosurfhold r1 surface released; window open
+[*] iosurfhold r1 watch it=0 extChurn=10
+[*] iosurfhold r1 watch it=0 worstMismatch=0 changedIters=0 mapFail=0 churnMade=36
+[*] iosurfhold r1 watch it=11 worstMismatch=0 changedIters=0 mapFail=0 churnMade=48
+[*] iosurfhold r1 watch it=12 extChurn=10
+[*] iosurfhold r1 watch it=23 worstMismatch=0 changedIters=0 mapFail=0 churnMade=48
+[*] iosurfhold r1 watch it=24 extChurn=10
+[*] iosurfhold r1 watch it=35 worstMismatch=0 changedIters=0 mapFail=0 churnMade=48
+[*] iosurfhold r1 watch it=36 extChurn=10
+[*] iosurfhold r1 watch it=47 worstMismatch=0 changedIters=0 mapFail=0 churnMade=48
+[*] iosurfhold r1 VERDICT ctrl=0 worstMismatch=0 firstOff=0x0 firstVal=0x0 changedIters=0/48 mapFail=0
+[*] iosurfhold r2 ctrl=0 id=0x55 base=0x10d768000 alloc=0x8000 marker=0xc0de0000 entryKR=0 handle=0x7633
+[*] iosurfhold r2 alias1 kr=0 marker=0xc0de0000 same=YES (no user mapping remains)
+[*] iosurfhold r2 surface released; window open
+[*] iosurfhold r2 watch it=0 extChurn=10
+[*] iosurfhold r2 watch it=0 worstMismatch=0 changedIters=0 mapFail=0 churnMade=36
+[*] iosurfhold r2 watch it=11 worstMismatch=0 changedIters=0 mapFail=0 churnMade=48
+[*] iosurfhold r2 watch it=12 extChurn=10
+[*] iosurfhold r2 watch it=23 worstMismatch=0 changedIters=0 mapFail=0 churnMade=48
+[*] iosurfhold r2 watch it=24 extChurn=10
+[*] iosurfhold r2 watch it=35 worstMismatch=0 changedIters=0 mapFail=0 churnMade=48
+[*] iosurfhold r2 watch it=36 extChurn=10
+[*] iosurfhold r2 watch it=47 worstMismatch=0 changedIters=0 mapFail=0 churnMade=48
+[*] iosurfhold r2 VERDICT ctrl=0 worstMismatch=0 firstOff=0x0 firstVal=0x0 changedIters=0/48 mapFail=0
+[*] iosurfhold r3 ctrl=0 id=0x55 base=0x10de00000 alloc=0x8000 marker=0xc0de0000 entryKR=0 handle=0x763b
+[*] iosurfhold r3 alias1 kr=0 marker=0xc0de0000 same=YES (no user mapping remains)
+[*] iosurfhold r3 surface released; window open
+[*] iosurfhold r3 watch it=0 extChurn=10
+[*] iosurfhold r3 watch it=0 worstMismatch=0 changedIters=0 mapFail=0 churnMade=36
+[*] iosurfhold r3 watch it=11 worstMismatch=0 changedIters=0 mapFail=0 churnMade=48
+[*] iosurfhold r3 watch it=12 extChurn=10
+[*] iosurfhold r3 watch it=23 worstMismatch=0 changedIters=0 mapFail=0 churnMade=48
+[*] iosurfhold r3 watch it=24 extChurn=10
+[*] iosurfhold r3 watch it=35 worstMismatch=0 changedIters=0 mapFail=0 churnMade=48
+[*] iosurfhold r3 watch it=36 extChurn=10
+[*] iosurfhold r3 watch it=47 worstMismatch=0 changedIters=0 mapFail=0 churnMade=48
+[*] iosurfhold r3 VERDICT ctrl=0 worstMismatch=0 firstOff=0x0 firstVal=0x0 changedIters=0/48 mapFail=0
+[*] iosurfhold done rounds=4 testWorstMismatch=0 -> no non-IOSurface reclaimer seen
+[*] iosurfwatch rc=0 controlWorst=1 testWorst=0
+=== iosurfwatch done ===
