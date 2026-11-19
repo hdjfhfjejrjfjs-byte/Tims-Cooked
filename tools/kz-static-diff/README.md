@@ -28,6 +28,10 @@ python kz_nzrange.py 24B119 com.apple.kernel 0xfffffe0007f00c80 0xfffffe0007f012
 python kz_refs_func.py 24B119 0xfffffe0007f00d00 0xfffffe0007f01200
 python kz_iomethod_table.py 24A446 com.apple.iokit.IOSurface \
         --find 0xfffffe000a3498f4 --count 60   # dump an IOExternalMethodDispatch2022 table
+python kz_slot_table.py 24A446 com.apple.iokit.IOStorageFamily \
+        0xfffffe0008375fa8 12 --back 4          # decode a plain arm64e auth-slot array
+python kz_mask_sites.py 24B119 com.apple.iokit.IOStorageFamily   # mask sites + containing fn
+python kz_mask_vas.py 24B119 com.apple.iokit.IOStorageFamily --ctx 4   # exact site VA + context
 ```
 
 Builds are `24A446` (iOS 27.0.1, target) and `24B119` (iOS 27.2). Requires
@@ -145,4 +149,17 @@ in the callee is **downstream** of that class, not inside it.
     Cross-check the decoded `IOExternalMethodArguments` offsets against a known
     thunk before trusting them: `scalarInput` +0x20, `structureInput` +0x30,
     `structureOutput` +0x58, `asyncReference` +0x10 on arm64.
+19. **A whole-member `difflib` shape diff counts mispaired duplicates as real
+    edits.** `kz_shape_diff.py` aligns two builds' full function lists by
+    instruction *shape*; members full of copy-paste thunks match each body
+    against a duplicate rather than its true counterpart. Measured:
+    `IOSkywalkFamily` 108 "real edits" here vs **16** from
+    `kz_newfunc_align.py` + `kz_pair_shape_check.py`; `IOStorageFamily` 18 vs
+    **2**. Do not rank members with it; cross-check any count with the two-stage
+    pipeline first.
+20. **An `and ...,#<mask>` census is a site count, not an idiom identity.**
+    `com.apple.filesystems.apfs` carries 9 `and ...,#0xfffffffffffffeff` sites in
+    *both* 24A446 and 24B119, scattered across unrelated functions and objects.
+    Only a repeated identical inserted statement, absent from every counterpart
+    (`kz_mask_vas.py`), marks a deliberate change.
 
