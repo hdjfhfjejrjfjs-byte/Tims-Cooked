@@ -26,6 +26,8 @@ the PC Python; use `kz_calls.py` / `kz_chainfind.py` / `annot.py` instead.
 ```
 python kz_nzrange.py 24B119 com.apple.kernel 0xfffffe0007f00c80 0xfffffe0007f01200
 python kz_refs_func.py 24B119 0xfffffe0007f00d00 0xfffffe0007f01200
+python kz_iomethod_table.py 24A446 com.apple.iokit.IOSurface \
+        --find 0xfffffe000a3498f4 --count 60   # dump an IOExternalMethodDispatch2022 table
 ```
 
 Builds are `24A446` (iOS 27.0.1, target) and `24B119` (iOS 27.2). Requires
@@ -132,4 +134,15 @@ in the callee is **downstream** of that class, not inside it.
 15. **`func_of`/`kc_fstarts.load_build` VAs must be full 64-bit.** Passing a bare
     `0xb3fc5cc` instead of `0xfffffe000b3fc5cc` silently reports "no start",
     which reads as "this address is not a function" rather than "wrong argument".
+16. **A kext external-method table is `IOExternalMethodDispatch2022`, stride
+    `0x28` — not the older `0x18`.** iOS 27 appends `uint8_t allowAsync` and
+    `const char *checkEntitlement`; reading with the old stride lands mid-entry
+    and invents selectors that look plausible.
+17. **Auth-jump-table entries store a file offset, not an address.** An entry
+    qword is `(pac_signature << 32) | file_offset_of_target`. Comparing the low
+    48 bits against VAs returns zero slots and reads as "unreferenced"; decode
+    with `va = __TEXT_EXEC_vm + (lo - __TEXT_EXEC_fo)` (`kz_iomethod_table.py`).
+    Cross-check the decoded `IOExternalMethodArguments` offsets against a known
+    thunk before trusting them: `scalarInput` +0x20, `structureInput` +0x30,
+    `structureOutput` +0x58, `asyncReference` +0x10 on arm64.
 
