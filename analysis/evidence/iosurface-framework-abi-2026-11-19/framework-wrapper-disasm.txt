@@ -1,0 +1,194 @@
+==== _IOSurfaceClientSetSurfaceNotify 0x1c284a6e8
+  0x1c284a6e8: pacibsp	
+  0x1c284a6ec: sub	sp, sp, #0xb0
+  0x1c284a6f0: stp	x20, x19, [sp, #0x90]
+  0x1c284a6f4: stp	x29, x30, [sp, #0xa0]
+  0x1c284a6f8: add	x29, sp, #0xa0
+  0x1c284a6fc: mov	x19, x0
+  0x1c284a700: adrp	x8, #0x1e016a000
+  0x1c284a704: ldr	x8, [x8, #0xf28]
+  0x1c284a708: ldr	x8, [x8]
+  0x1c284a70c: stur	x8, [x29, #-0x18]
+  0x1c284a710: movi	v0.2d, #0000000000000000
+  0x1c284a714: stp	q0, q0, [sp, #0x60]
+  0x1c284a718: stp	q0, q0, [sp, #0x40]
+  0x1c284a71c: stp	x2, xzr, [sp, #0x30]
+  0x1c284a720: str	x1, [sp, #0x28]
+  0x1c284a724: stp	x1, x2, [sp, #0x48]
+  0x1c284a728: mov	w0, #0
+  0x1c284a72c: bl	#0x1c28458c4
+  0x1c284a730: movi	v0.2d, #0000000000000000
+  0x1c284a734: stur	q0, [sp, #0x18]
+  0x1c284a738: stur	q0, [sp, #8]
+  0x1c284a73c: mov	w8, #0x18
+  0x1c284a740: str	x8, [sp]
+  0x1c284a744: add	x3, sp, #0x40
+  0x1c284a748: add	x7, sp, #0x28
+  0x1c284a74c: mov	w1, #0x11
+  0x1c284a750: mov	x2, x19
+  0x1c284a754: mov	w4, #3
+  0x1c284a758: mov	x5, #0
+  0x1c284a75c: mov	w6, #0
+  0x1c284a760: bl	#0x1c811c2b0
+  0x1c284a764: ldur	x8, [x29, #-0x18]
+  0x1c284a768: adrp	x9, #0x1e016a000
+  0x1c284a76c: ldr	x9, [x9, #0xf28]
+  0x1c284a770: ldr	x9, [x9]
+  0x1c284a774: cmp	x9, x8
+  0x1c284a778: b.ne	#0x1c284a78c
+  0x1c284a77c: ldp	x29, x30, [sp, #0xa0]
+  0x1c284a780: ldp	x20, x19, [sp, #0x90]
+  0x1c284a784: add	sp, sp, #0xb0
+  0x1c284a788: retab	
+==== _IOSurfaceClientRemoveSurfaceNotify 0x1c2851390
+  0x1c2851390: pacibsp	
+  0x1c2851394: sub	sp, sp, #0x40
+  0x1c2851398: stp	x29, x30, [sp, #0x30]
+  0x1c285139c: add	x29, sp, #0x30
+  0x1c28513a0: adrp	x8, #0x1e016a000
+  0x1c28513a4: ldr	x8, [x8, #0xf28]
+  0x1c28513a8: ldr	x8, [x8]
+  0x1c28513ac: stur	x8, [x29, #-8]
+  0x1c28513b0: stp	xzr, x0, [sp, #0x10]
+  0x1c28513b4: str	xzr, [sp, #0x20]
+  0x1c28513b8: mov	w0, #0
+  0x1c28513bc: bl	#0x1c28458c4
+  0x1c28513c0: stp	xzr, xzr, [sp]
+  0x1c28513c4: add	x4, sp, #0x10
+  0x1c28513c8: mov	w1, #0x12
+  0x1c28513cc: mov	x2, #0
+  0x1c28513d0: mov	w3, #0
+  0x1c28513d4: mov	w5, #0x18
+  0x1c28513d8: mov	x6, #0
+  0x1c28513dc: mov	x7, #0
+  0x1c28513e0: bl	#0x1c810a5e0
+  0x1c28513e4: ldur	x8, [x29, #-8]
+  0x1c28513e8: adrp	x9, #0x1e016a000
+  0x1c28513ec: ldr	x9, [x9, #0xf28]
+  0x1c28513f0: ldr	x9, [x9]
+  0x1c28513f4: cmp	x9, x8
+  0x1c28513f8: b.ne	#0x1c2851408
+  0x1c28513fc: ldp	x29, x30, [sp, #0x30]
+  0x1c2851400: add	sp, sp, #0x40
+  0x1c2851404: retab	
+==== __ioSurfaceConnectInternal 0x1c28458c4
+  0x1c28458c4: pacibsp	
+  0x1c28458c8: sub	sp, sp, #0x40
+  0x1c28458cc: stp	x29, x30, [sp, #0x30]
+  0x1c28458d0: add	x29, sp, #0x30
+  0x1c28458d4: adrp	x8, #0x1e016a000
+  0x1c28458d8: ldr	x8, [x8, #0xf28]
+  0x1c28458dc: ldr	x8, [x8]
+  0x1c28458e0: stur	x8, [x29, #-8]
+  0x1c28458e4: mov	x8, sp
+  0x1c28458e8: adrp	x16, #0x1e016a000
+  0x1c28458ec: ldr	x16, [x16, #0xf10]
+  0x1c28458f0: mov	x17, x8
+  0x1c28458f4: movk	x17, #0x6ae1, lsl #48
+  0x1c28458f8: pacda	x16, x17
+  0x1c28458fc: str	x16, [sp]
+  0x1c2845900: adrp	x9, #0x1c2859000
+  0x1c2845904: ldr	d0, [x9, #0x678]
+  0x1c2845908: str	d0, [sp, #8]
+  0x1c284590c: add	x8, x8, #0x10
+  0x1c2845910: adrp	x16, #0x1c2848000
+  0x1c2845914: add	x16, x16, #0x614
+  0x1c2845918: pacia	x16, x8
+  0x1c284591c: adrp	x8, #0x1e176a000
+  0x1c2845920: add	x8, x8, #0x830
+  0x1c2845924: stp	x16, x8, [sp, #0x10]
+  0x1c2845928: strb	w0, [sp, #0x20]
+  0x1c284592c: adrp	x8, #0x1e7070000
+  0x1c2845930: ldr	x8, [x8, #0xf40]
+  0x1c2845934: cmn	x8, #1
+  0x1c2845938: b.ne	#0x1c2845968
+  0x1c284593c: adrp	x8, #0x1e7070000
+  0x1c2845940: ldr	w0, [x8, #0xf68]
+  0x1c2845944: ldur	x8, [x29, #-8]
+  0x1c2845948: adrp	x9, #0x1e016a000
+  0x1c284594c: ldr	x9, [x9, #0xf28]
+  0x1c2845950: ldr	x9, [x9]
+  0x1c2845954: cmp	x9, x8
+  0x1c2845958: b.ne	#0x1c284597c
+  0x1c284595c: ldp	x29, x30, [sp, #0x30]
+  0x1c2845960: add	sp, sp, #0x40
+  0x1c2845964: retab	
+==== __ioSurfaceConnect 0x1c284a970
+  0x1c284a970: mov	w0, #0
+  0x1c284a974: b	#0x1c28458c4
+  0x1c284a978: pacibsp	
+  0x1c284a97c: sub	sp, sp, #0xa0
+  0x1c284a980: stp	x20, x19, [sp, #0x80]
+  0x1c284a984: stp	x29, x30, [sp, #0x90]
+  0x1c284a988: add	x29, sp, #0x90
+  0x1c284a98c: adrp	x8, #0x1e016a000
+  0x1c284a990: ldr	x8, [x8, #0xf28]
+  0x1c284a994: ldr	x8, [x8]
+  0x1c284a998: stur	x8, [x29, #-0x18]
+  0x1c284a99c: movi	v0.2d, #0000000000000000
+  0x1c284a9a0: stp	q0, q0, [sp, #0x30]
+  0x1c284a9a4: stp	q0, q0, [sp, #0x50]
+  0x1c284a9a8: adrp	x16, #0x1c284e000
+  0x1c284a9ac: add	x16, x16, #0xd1c
+  0x1c284a9b0: paciza	x16
+  0x1c284a9b4: stp	x16, x0, [sp, #0x38]
+  0x1c284a9b8: mov	x0, x1
+  0x1c284a9bc: bl	#0x1c811c300
+  0x1c284a9c0: cbz	w0, #0x1c284aa20
+  0x1c284a9c4: mov	x19, x0
+  0x1c284a9c8: bl	#0x1c284a970
+  0x1c284a9cc: str	xzr, [sp, #0x20]
+  0x1c284a9d0: add	x3, sp, #0x30
+  0x1c284a9d4: movi	v0.2d, #0000000000000000
+  0x1c284a9d8: stp	q0, q0, [sp]
+  0x1c284a9dc: mov	w1, #0x28
+  0x1c284a9e0: mov	x2, x19
+  0x1c284a9e4: mov	w4, #3
+  0x1c284a9e8: mov	x5, #0
+  0x1c284a9ec: mov	w6, #0
+  0x1c284a9f0: mov	x7, #0
+  0x1c284a9f4: bl	#0x1c811c2b0
+  0x1c284a9f8: ldur	x8, [x29, #-0x18]
+  0x1c284a9fc: adrp	x9, #0x1e016a000
+  0x1c284aa00: ldr	x9, [x9, #0xf28]
+  0x1c284aa04: ldr	x9, [x9]
+  0x1c284aa08: cmp	x9, x8
+  0x1c284aa0c: b.ne	#0x1c284aa24
+  0x1c284aa10: ldp	x29, x30, [sp, #0x90]
+  0x1c284aa14: ldp	x20, x19, [sp, #0x80]
+  0x1c284aa18: add	sp, sp, #0xa0
+  0x1c284aa1c: retab	
+==== _iosCacheGet 0x1c28452a0
+  0x1c28452a0: pacibsp	
+  0x1c28452a4: stp	x22, x21, [sp, #-0x30]!
+  0x1c28452a8: stp	x20, x19, [sp, #0x10]
+  0x1c28452ac: stp	x29, x30, [sp, #0x20]
+  0x1c28452b0: add	x29, sp, #0x20
+  0x1c28452b4: adrp	x21, #0x1e7070000
+  0x1c28452b8: ldr	x8, [x21, #0xf58]
+  0x1c28452bc: cbz	x8, #0x1c28452fc
+  0x1c28452c0: mov	x20, x0
+  0x1c28452c4: bl	#0x1c810b070
+  0x1c28452c8: mov	x19, x0
+  0x1c28452cc: ldr	x21, [x21, #0xf58]
+  0x1c28452d0: adrp	x8, #0x1e00f3000
+  0x1c28452d4: ldr	x0, [x8, #0x968]
+  0x1c28452d8: mov	w2, w20
+  0x1c28452dc: bl	#0x1c8026ad0
+  0x1c28452e0: mov	x2, x0
+  0x1c28452e4: mov	x0, x21
+  0x1c28452e8: bl	#0x1c8001fe0
+  0x1c28452ec: cbz	x0, #0x1c2845304
+  0x1c28452f0: bl	#0x1c800f420
+  0x1c28452f4: mov	x20, x0
+  0x1c28452f8: b	#0x1c2845308
+  0x1c28452fc: mov	x20, #0
+  0x1c2845300: b	#0x1c2845310
+  0x1c2845304: mov	x20, #0
+  0x1c2845308: mov	x0, x19
+  0x1c284530c: bl	#0x1c810b060
+  0x1c2845310: mov	x0, x20
+  0x1c2845314: ldp	x29, x30, [sp, #0x20]
+  0x1c2845318: ldp	x20, x19, [sp, #0x10]
+  0x1c284531c: ldp	x22, x21, [sp], #0x30
+  0x1c2845320: retab	

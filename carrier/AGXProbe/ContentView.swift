@@ -216,6 +216,9 @@ final class ReachViewModel: ObservableObject {
         if args.contains("--iosurfreclaim") { Task.detached { await self.runIOSurfReclaimMode() }; return }
         if args.contains("--iosurfwatch") { Task.detached { await self.runIOSurfWatchMode() }; return }
         if args.contains("--sockfield") { Task.detached { await self.runSockFieldMode() }; return }
+        // Raw-selector IOSurface notify lifetime probe. `--ionotifyrace` adds the
+        // bounded close/register race; run that only on the secondary device.
+        if args.contains("--ionotify") { Task.detached { await self.runIONotifyMode() }; return }
         if args.contains("--opencand") { Task.detached { XPCProbe.shared.bench99Bit8Clients() }; return }
         if args.contains("--hidsel") { Task.detached { XPCProbe.shared.bench100HIDSel() }; return }
         if args.contains("--sockuaf") { Task.detached { await self.runSocketUafMode() }; return }
@@ -1098,6 +1101,23 @@ func runFuzzMode() async {
         }
         emitBg(String(format: "[*] iosurfwatch rc=%d controlWorst=%d testWorst=%d", rc, ctrl, worst))
         emitBg("=== iosurfwatch done ===")
+    }
+
+    // ---- IOSurface notify lifetime probe (private connection) ----------------
+    //
+    // `--ionotify` drives selector 0x11/0x12 directly on an app-opened
+    // IOSurfaceRootUserClient, so the notifier client is owned by this process
+    // and can be closed.  P1 validates the ABI, P2 measures whether closing the
+    // client unlinks its registration node.  Add `--ionotifyrace` for the
+    // bounded close/register race plus a public-API notify-walk trigger; that
+    // variant is for the secondary device only.
+
+    nonisolated func runIONotifyMode() {
+        emitBg("[*] ionotify start (private-connection notify lifetime probe)")
+        let race = ProcessInfo.processInfo.arguments.contains("--ionotifyrace")
+        var rounds: Int32 = race ? 32 : 0
+        run_ionotify_probe(rounds)
+        emitBg("=== ionotify done (race=\(race ? "yes" : "no")) ===")
     }
 
     // ---- AVE / AppleAVE2 HEVC parameter-set encoder probe ------------------

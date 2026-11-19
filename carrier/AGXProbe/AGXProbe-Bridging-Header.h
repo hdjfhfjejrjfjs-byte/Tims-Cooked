@@ -7,6 +7,8 @@ int ane_probe(int trigger);
 void run_decmpfs_leak(const char *base_dir);
 void log_from_c(const char* msg);
 void run_iosurface_notify_probe(void);
+// Private-connection notify lifetime probe (IOSurfaceRaceProbe.c).
+void run_ionotify_probe(int race_rounds);
 
 // Cross-zone OOL reclaim spray for the socket-UAF harness (SockUafSpray.c).
 #include <stddef.h>
