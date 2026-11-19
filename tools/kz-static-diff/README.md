@@ -32,6 +32,8 @@ python kz_slot_table.py 24A446 com.apple.iokit.IOStorageFamily \
         0xfffffe0008375fa8 12 --back 4          # decode a plain arm64e auth-slot array
 python kz_mask_sites.py 24B119 com.apple.iokit.IOStorageFamily   # mask sites + containing fn
 python kz_mask_vas.py 24B119 com.apple.iokit.IOStorageFamily --ctx 4   # exact site VA + context
+python kz_member_strrefs.py 24A446 IOSurface 0xfffffe0007a1fa08  # member-scoped string-ref scan
+python kz_adrp_disp.py 24A446 0xfffffe000b7b2000 0x910           # exact adrp+disp census
 ```
 
 Builds are `24A446` (iOS 27.0.1, target) and `24B119` (iOS 27.2). Requires
@@ -162,4 +164,18 @@ in the callee is **downstream** of that class, not inside it.
     *both* 24A446 and 24B119, scattered across unrelated functions and objects.
     Only a repeated identical inserted statement, absent from every counterpart
     (`kz_mask_vas.py`), marks a deliberate change.
+21. **`kz_adrp_ref_np.py`'s "ldr at <va>" hits are displacement matches, not
+    proven references.** It reports a hit whenever it holds *some* page value for
+    the base register and the displacement lines up; when the base register was
+    loaded from memory (not the ADRP destination) the target is invented.
+    Measured on 24A446 for global `0xfffffe000b7b2910`: 7 reported sites, only
+    **4** real (`kz_adrp_disp.py 24A446 0xfffffe000b7b2000 0x910`); the extras
+    were `0xb213420`, `0xb23b00c` and one more. Confirm any single consumer with
+    an exact ADRP→LDR/ADD back-scan before drawing a reachability conclusion.
+22. **A property key literal can be interned once and read via a global, so no
+    code site references the string.** `IOServiceDEXTEntitlements` occurs 7× in
+    24A446 (once per member blob, plus the kernel's interner); the only code ref
+    to the kernel copy builds an OSSymbol in `0xfffffe000b2ffb28` and stores it at
+    `0xfffffe000b7b2910`. Grep for the literal therefore finds declarations, not
+    readers — follow the interned global instead.
 

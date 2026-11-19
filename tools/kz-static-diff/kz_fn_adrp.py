@@ -63,7 +63,13 @@ def main(argv):
     hits = []
     for ins in MD.disasm(blob, va):
         m = ins.mnemonic
-        ops = ins.operands
+        try:
+            ops = ins.operands
+        except capstone.CsError:
+            # SKIPDATA pseudo-instruction: no operands. Without this guard the
+            # whole pass dies mid-function and reads as "this function has no
+            # references".
+            continue
         if m == "adrp":
             # capstone already resolves the ADRP page address into .imm
             pages[ops[0].reg] = u(ops[1].imm)
