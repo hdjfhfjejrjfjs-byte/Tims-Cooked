@@ -1,35 +1,39 @@
 #!/usr/bin/env python3
-"""Exact census of `adrp <page>` followed by `ldr/add #disp` on that register.
+"""Exact census of `adrp <page>` + `ldr/add #disp` sites that materialise an address.
 
 Why this exists (2026-11-19): `kz_adrp_ref_np.py` reports a hit for every
-`ldr xT,[xN,#d]` whose displacement equals `target & 0xFFF` **when the scanner
-happens to hold a page value for xN** -- but xN is frequently a pointer loaded
-from memory, not the ADRP destination, so the reported address is invented.
-Measured false positives on 24A446 for global 0xfffffe000b7b2910: three sites
-(`0xb213420`, `0xb23b00c`, plus one more) that a strict back-scan shows never
-materialise that address; only four sites do.
+`ldr xT,[xN,#d]` whose displacement matches the low bits of the target **when the
+scanner holds any page value for xN** -- but xN is frequently a pointer loaded
+from memory, not the ADRP destination, so the target is invented. Measured on
+24A446 for global `0xfffffe000b7b2910`: the heuristic listed seven sites and
+several were not real references.
 
-This tool decodes arm64 ADRP by hand (the encoding is fixed-width, so a linear
-word sweep cannot desynchronise on literal pools the way capstone can) and then
-looks forward a bounded window for an LDR (unsigned immediate) or ADD (immediate)
-that consumes exactly that register with the requested displacement.
+This tool disassembles with capstone (`skipdata=True`), tracks ADRP page values
+per register, and **drops the entry whenever capstone reports that register as
+written** (`regs_access`), so an ADRP page cannot leak into an unrelated later
+load. It then reports every LDR (unsigned immediate) or ADD (immediate) that
+consumes the tracked register with the requested displacement.
 
 Usage:
     python kz_adrp_disp.py <build> <adrp_page_hex> <disp_hex>
     python kz_adrp_disp.py 24A446 0xfffffe000b7b2000 0x910
 
-Numpy-free; needs tools/opencode-temp/kc_fstarts.py.
+Numpy-free; needs capstone and tools/opencode-temp/kc_fstarts.py.
 """
-import struct
 import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve()
 ROOT = HERE.parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "opencode-temp"))
+sys.path.insert(0, str(ROOT / "tools" / "pylibs"))
+
+import capstone  # noqa: E402
+from capstone import CS_ARCH_ARM64, CS_MODE_LITTLE_ENDIAN  # noqa: E402
+from capstone.arm64 import ARM64_OP_REG, ARM64_OP_IMM, ARM64_OP_MEM  # noqa: E402
 from kc_fstarts import load_build  # noqa: E402
 
-WINDOW = 16  # instructions scanned forward from the ADRP
+MASK = (1 << 64) - 1
 
 
 def exec_segments(b):
@@ -42,38 +46,53 @@ def main(argv):
     if len(argv) < 4:
         raise SystemExit(__doc__)
     build = argv[1]
-    page = int(argv[2], 16) & ((1 << 64) - 1)
+    page = int(argv[2], 16) & MASK
     disp = int(argv[3], 16)
     b = load_build(build)
     d = b["data"]
+    md = capstone.Cs(CS_ARCH_ARM64, CS_MODE_LITTLE_ENDIAN)
+    md.detail = True
+    md.skipdata = True
     hits = []
     for nm, vm, fo, fsz in exec_segments(b):
-        i, end = fo, fo + fsz
-        while i < end - 4:
-            w = struct.unpack_from("<I", d, i)[0]
-            if (w & 0x9F000000) == 0x90000000:  # ADRP
-                rd = w & 0x1F
-                immlo = (w >> 29) & 3
-                immhi = (w >> 5) & 0x7FFFF
-                imm = (immhi << 2) | immlo
-                if imm & (1 << 20):
-                    imm -= (1 << 21)
-                tgt = ((vm + (i - fo)) & ~0xFFF) + (imm << 12)
-                if (tgt & ((1 << 64) - 1)) == page:
-                    for j in range(i + 4, min(i + 4 + WINDOW * 4, end - 4), 4):
-                        w2 = struct.unpack_from("<I", d, j)[0]
-                        if (w2 & 0xFFC00000) == 0xF9400000:  # LDR Xt,[Xn,#imm]
-                            rn = (w2 >> 5) & 0x1F
-                            if rn == rd and (((w2 >> 10) & 0xFFF) * 8) == disp:
-                                hits.append((vm + (j - fo), nm, "ldr"))
-                        elif (w2 & 0xFF800000) == 0x91000000:  # ADD Xd,Xn,#imm
-                            rn = (w2 >> 5) & 0x1F
-                            if rn == rd and ((w2 >> 10) & 0xFFF) == disp:
-                                hits.append((vm + (j - fo), nm, "add"))
-            i += 4
+        pages = {}
+        for ins in md.disasm(d[fo:fo + fsz], vm):
+            try:
+                ops = ins.operands
+            except capstone.CsError:
+                # SKIPDATA pseudo-instruction: keep tracked pages so a literal
+                # pool inside a function cannot hide later references
+                continue
+            m = ins.mnemonic
+            # compute from the pre-instruction state first (an instruction may
+            # read and write the same register, e.g. `add xD, xD, #imm`)
+            tgt = None
+            newent = None
+            if m == "adrp" and len(ops) >= 2 and ops[1].type == ARM64_OP_IMM:
+                newent = (ins.reg_name(ops[0].reg), ops[1].imm & MASK)
+            elif m == "add" and len(ops) >= 3 and ops[1].type == ARM64_OP_REG \
+                    and ops[2].type == ARM64_OP_IMM:
+                base = pages.get(ins.reg_name(ops[1].reg))
+                if base is not None:
+                    tgt = (base + ops[2].imm) & MASK
+                    newent = (ins.reg_name(ops[0].reg), tgt)
+            elif m in ("ldr", "ldur") and len(ops) >= 2 and ops[1].type == ARM64_OP_MEM:
+                base = pages.get(ins.reg_name(ops[1].mem.base))
+                if base is not None:
+                    tgt = (base + ops[1].mem.disp) & MASK
+            if tgt is not None and tgt == page + disp:
+                hits.append((ins.address, nm, m))
+            try:
+                _, written = ins.regs_access()
+            except (capstone.CsError, ValueError):
+                written = ()
+            for r in written:
+                pages.pop(md.reg_name(r), None)
+            if newent is not None:
+                pages[newent[0]] = newent[1]
     print(f"{build}: adrp->{page:#x} + {disp:#x}: {len(hits)} exact sites")
-    for va, nm, kind in hits:
-        print(f"   {va:#x} {nm} ({kind})")
+    for va, nm, m in hits:
+        print(f"   {va:#x} {nm} ({m})")
 
 
 if __name__ == "__main__":

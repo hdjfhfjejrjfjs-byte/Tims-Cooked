@@ -99,18 +99,25 @@ def main(argv):
             try:
                 ops = ins.operands
             except capstone.CsError:
-                page.clear()
+                # SKIPDATA pseudo-instruction: no operands. Keep the tracked
+                # pages -- clearing them here would silently drop references
+                # that appear after a literal pool inside the same function.
                 continue
+            # compute the target from the pre-instruction state first: an
+            # instruction may both read and write the same register
+            # (`add xD, xD, #imm`), so invalidating before the lookup would
+            # erase a legitimate source.
+            tgt = None
+            newent = None
             if m == "adrp":
                 if len(ops) >= 2:
-                    page[ins.reg_name(ops[0].reg)] = ops[1].imm & MASK
-                continue
-            tgt = None
-            if m == "add" and len(ops) >= 3 and ops[1].type == capstone.arm64.ARM64_OP_REG \
+                    newent = (ins.reg_name(ops[0].reg), ops[1].imm & MASK)
+            elif m == "add" and len(ops) >= 3 and ops[1].type == capstone.arm64.ARM64_OP_REG \
                     and ops[2].type == capstone.arm64.ARM64_OP_IMM:
                 base = page.get(ins.reg_name(ops[1].reg))
                 if base is not None:
                     tgt = (base + ops[2].imm) & MASK
+                    newent = (ins.reg_name(ops[0].reg), tgt)
             elif m in ("ldr", "ldur") and len(ops) >= 2 and ops[1].type == capstone.arm64.ARM64_OP_MEM:
                 base = page.get(ins.reg_name(ops[1].mem.base))
                 if base is not None:
@@ -118,6 +125,17 @@ def main(argv):
             if tgt is not None and tgt in targets:
                 f = bisect_func(starts, ins.address)
                 print(f"  {m} @{ins.address:#x} seg={nm} -> {tgt:#x} in func {f}")
+            # now drop every register this instruction writes, then re-apply
+            # the value it produces (an ADRP/ADD destination still holds its
+            # fresh page/target afterwards)
+            try:
+                _, written = ins.regs_access()
+            except (capstone.CsError, ValueError):
+                written = ()
+            for r in written:
+                page.pop(md.reg_name(r), None)
+            if newent is not None:
+                page[newent[0]] = newent[1]
 
 
 if __name__ == "__main__":

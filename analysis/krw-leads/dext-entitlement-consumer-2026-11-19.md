@@ -61,13 +61,15 @@ located".
 
 ## 2. Exact consumers — and a scanner false-positive corrected
 
-A strict word-level back-scan (`kz_adrp_disp.py`: decode every `ADRP`, then look
-forward for an `LDR`/`ADD` that consumes that register with displacement
-`0x910`) finds **exactly four** sites that materialise `0xfffffe000b7b2910`:
+A strict register-tracking scan (`kz_adrp_disp.py`: decode every `ADRP`, track
+its page value per register, drop the entry when capstone reports that register
+written, then report an `LDR`/`ADD` consuming it with displacement `0x910`)
+finds **exactly five** sites that materialise `0xfffffe000b7b2910`:
 
 | site | containing function | size |
 |---|---|---|
 | `0xfffffe000b3a31a4` | `0xfffffe000b3a3174` | `0x190` |
+| `0xfffffe000b3a31f0` | `0xfffffe000b3a3174` | `0x190` |
 | `0xfffffe000b3a6758` | `0xfffffe000b3a5fd0` | `0x928` |
 | `0xfffffe000b3aeed4` | `0xfffffe000b3aedcc` | `0x184` |
 | `0xfffffe000b3aef04` | `0xfffffe000b3aedcc` | `0x184` |
@@ -87,11 +89,23 @@ All three functions sit in the `0xb3axxxx` DriverKit/dext cluster:
   (`dext_c3.s`).
 
 **Corrected:** `kz_adrp_ref_np.py 24A446 0xfffffe000b7b2910` reports **seven**
-sites, three of which (`0xb213420`, `0xb23b00c`, and one further) do **not**
-materialise that address — in those instructions the base register is a value
-loaded from memory, not the ADRP destination, so the tool invents the target.
-The four sites above are the real ones. Recorded as a pitfall; `kz_adrp_disp.py`
-is the strict replacement.
+sites, two of which (`0xb213420`, `0xb23b00c`) do **not** materialise that
+address — in those instructions the base register is a value loaded from memory,
+not the ADRP destination, so the tool invents the target. The five sites above
+are the real ones. Recorded as a pitfall; `kz_adrp_disp.py` is the strict
+replacement.
+
+Both scanners had to be built carefully; two opposite failure modes were hit and
+are encoded in the tools' comments:
+
+* invalidating a written register **before** computing the target erases the
+  source of a legitimate `add xD, xD, #imm` (the read and the write are the same
+  register) and reports zero sites;
+* invalidating **after** without re-applying the fresh value erases the ADRP's own
+  destination and also reports zero.
+
+The working order is: compute from the pre-instruction state, then drop every
+written register, then re-apply the one value the instruction produces.
 
 ## 3. Reachability — still unresolved, but bounded to the dext cluster
 

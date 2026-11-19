@@ -169,9 +169,14 @@ in the callee is **downstream** of that class, not inside it.
     the base register and the displacement lines up; when the base register was
     loaded from memory (not the ADRP destination) the target is invented.
     Measured on 24A446 for global `0xfffffe000b7b2910`: 7 reported sites, only
-    **4** real (`kz_adrp_disp.py 24A446 0xfffffe000b7b2000 0x910`); the extras
-    were `0xb213420`, `0xb23b00c` and one more. Confirm any single consumer with
-    an exact ADRP→LDR/ADD back-scan before drawing a reachability conclusion.
+    **5** real (`kz_adrp_disp.py 24A446 0xfffffe000b7b2000 0x910`); the extras
+    were `0xb213420` and `0xb23b00c`. Confirm any single consumer with an exact
+    ADRP→LDR/ADD back-scan before drawing a reachability conclusion.
+    Corollary for writing such a scanner: compute the target from the
+    *pre-instruction* register state, then drop every written register, then
+    re-apply the one value the instruction produces — the other two orders each
+    report zero sites (they erase either an `add xD,xD,#imm` source or the
+    ADRP's own destination).
 22. **A property key literal can be interned once and read via a global, so no
     code site references the string.** `IOServiceDEXTEntitlements` occurs 7× in
     24A446 (once per member blob, plus the kernel's interner); the only code ref
