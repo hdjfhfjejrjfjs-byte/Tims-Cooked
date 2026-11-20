@@ -1,0 +1,28 @@
+24A446: target 0xfffffe000b343530 fileoff 0x433f530; 1 low32==0x433f530 slots
+
+--- slot file 0xeb8d48 va=0xfffffe0007ebcd48 seg=__DATA_CONST
+   [  0] 0xfffffe0007ebcc90 -> 0xfffffe000b343fb4 FUNC
+   [  1] 0xfffffe0007ebcc98 -> 0xfffffe000b343ea8 FUNC
+   [  2] 0xfffffe0007ebcca0 -> 0xfffffe000b268584 FUNC
+   [  3] 0xfffffe0007ebcca8 -> 0xfffffe000b268578 FUNC
+   [  4] 0xfffffe0007ebccb0 -> 0xfffffe000b268548 FUNC
+   [  5] 0xfffffe0007ebccb8 -> 0xfffffe000b268518 FUNC
+   [  6] 0xfffffe0007ebccc0 -> 0xfffffe000b268390 FUNC
+   [  7] 0xfffffe0007ebccc8 -> 0xfffffe000b343e98 FUNC
+   [  8] 0xfffffe0007ebccd0 -> 0xfffffe000b26522c FUNC
+   [  9] 0xfffffe0007ebccd8 -> 0xfffffe000b268300 FUNC
+   [ 10] 0xfffffe0007ebcce0 -> 0xfffffe000b343e8c FUNC
+   [ 11] 0xfffffe0007ebcce8 -> 0xfffffe000b268178 FUNC
+   [ 12] 0xfffffe0007ebccf0 -> 0xfffffe000b2c9c9c FUNC
+   [ 13] 0xfffffe0007ebccf8 -> 0xfffffe000b26816c FUNC
+   [ 14] 0xfffffe0007ebcd00 -> 0xfffffe000b343ca4 FUNC
+   [ 15] 0xfffffe0007ebcd08 -> 0xfffffe000b343c98 FUNC
+   [ 16] 0xfffffe0007ebcd10 -> 0xfffffe000b343b74 FUNC
+   [ 17] 0xfffffe0007ebcd18 -> 0xfffffe000b343b68 FUNC
+   [ 18] 0xfffffe0007ebcd20 -> 0xfffffe000b343b28 FUNC
+   [ 19] 0xfffffe0007ebcd28 -> 0xfffffe000b343b1c FUNC
+   [ 20] 0xfffffe0007ebcd30 -> 0xfffffe000b343b10 FUNC
+   [ 21] 0xfffffe0007ebcd38 -> 0xfffffe000b3439d0 FUNC
+   [ 22] 0xfffffe0007ebcd40 -> 0xfffffe000b3438c4 FUNC
+   [ 23] 0xfffffe0007ebcd48 -> 0xfffffe000b343530 FUNC   <=== TARGET
+   table start 0xfffffe0007ebcc90  target index 23

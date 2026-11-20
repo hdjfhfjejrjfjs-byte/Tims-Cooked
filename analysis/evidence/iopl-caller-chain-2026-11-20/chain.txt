@@ -1,0 +1,4 @@
+24A446: chain entries=24643 resolving to function starts=7930
+  0xfffffe000b3530cc 0xfffffe000b3530cc: 0 indirect slot(s)
+  0xfffffe000b3486a4 0xfffffe000b3486a4: 0 indirect slot(s)
+  0xfffffe000ac80474 0xfffffe000ac80474: 0 indirect slot(s)

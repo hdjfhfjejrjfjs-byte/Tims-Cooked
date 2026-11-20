@@ -1,0 +1,10 @@
+24A446: 3 direct ['b,bl,blraa'] -> 0xfffffe000ac80474
+  com.apple.kernel: 3
+      0xfffffe000b343824 in 0xfffffe000b343530 sz=0x394
+      0xfffffe000b3459b0 in 0xfffffe000b34568c sz=0x520
+      0xfffffe000b348c68 in 0xfffffe000b3486a4 sz=0xa44
+24A446: 0 direct ['b,bl,blraa'] -> 0xfffffe000b343530
+24A446: 1 direct ['b,bl,blraa'] -> 0xfffffe000b34568c
+  com.apple.kernel: 1
+      0xfffffe000b3530e8 in 0xfffffe000b3530cc sz=0xa8
+24A446: 0 direct ['b,bl,blraa'] -> 0xfffffe000b3530cc
