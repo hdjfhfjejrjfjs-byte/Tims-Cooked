@@ -1,0 +1,45 @@
+# Ingress census + delta scans for the BSD socket-family flow-control functions
+# build 24A446 (target) vs 24B119 (27.2)
+
+## kz_blw_scan (word-level BL/B/BLRAA, every fileset member)
+-- fg_insertuipc 24A446 0xfffffe000b181118
+24A446: 0 direct ['b,bl,blraa'] -> 0xfffffe000b181118
+-- fg_insertuipc 24B119 0xfffffe000b1d6f1c
+24B119: 0 direct ['b,bl,blraa'] -> 0xfffffe000b1d6f1c
+-- fg_removeuipc 24A446 0xfffffe000b185334
+24A446: 0 direct ['b,bl,blraa'] -> 0xfffffe000b185334
+-- fg_removeuipc 24B119 0xfffffe000b1db1cc
+24B119: 0 direct ['b,bl,blraa'] -> 0xfffffe000b1db1cc
+
+## controls for the same scanner
+24A446: 671 direct ['b,bl,blraa'] -> 0xfffffe000b15d0c8
+  com.apple.kernel: 671
+      0xfffffe000ae0a3a4 in 0xfffffe000ae09f3c sz=0x540
+24A446: 313 direct ['bl'] -> 0xfffffe000ac42a30
+  com.apple.kernel: 313
+      0xfffffe000ab5e3d8 in 0xfffffe000ab5e2b8 sz=0x2a0
+
+## kz_adrp_ref_np (ADRP+ADD/LDR materialisation, kernel member)
+24A446: 0 ADRP+ADD/LDR refs to 0xfffffe000b181118
+24A446: 0 ADRP+ADD/LDR refs to 0xfffffe000b185334
+
+## all-member arm64e pointer-slot raw scan (low32 == VA - __TEXT_vmaddr)
+build=24A446 members=301 kernel__TEXT=0xfffffe000700c000
+
+target 0xfffffe000b181118 : 0 hits
+
+target 0xfffffe000b185334 : 0 hits
+-- control: known IOStorageFamily slot target
+build=24A446 members=301 kernel__TEXT=0xfffffe000700c000
+
+target 0xfffffe000a3273c4 : 1 hits
+    ('slot32', 'com.apple.iokit.IOStorageFamily', '__DATA_CONST', 18446741874824142760)
+
+## kz_chainfind chainrefs (kernel-member chained fixups, format 8)
+24A446: chain entries=24643 resolving to function starts=7930
+  0xfffffe000b181118 0xfffffe000b181118: 0 indirect slot(s)
+  0xfffffe000b185334 0xfffffe000b185334: 0 indirect slot(s)
+-- control target with known slots
+24A446: chain entries=24643 resolving to function starts=7930
+  0xfffffe000b26522c 0xfffffe000b26522c: 118 indirect slot(s)
+      __DATA_CONST slot 0xfffffe0007eb80b0 raw 0x8011fc740426122c owner_func None

@@ -34,7 +34,15 @@ python kz_mask_sites.py 24B119 com.apple.iokit.IOStorageFamily   # mask sites + 
 python kz_mask_vas.py 24B119 com.apple.iokit.IOStorageFamily --ctx 4   # exact site VA + context
 python kz_member_strrefs.py 24A446 IOSurface 0xfffffe0007a1fa08  # member-scoped string-ref scan
 python kz_adrp_disp.py 24A446 0xfffffe000b7b2000 0x910           # exact adrp+disp census
+python allmember_slot_scan.py 24A446 0xfffffe000a3273c4           # whole-fileset arm64e slot scan
 ```
+
+**Always scope a pointer-slot scan to every fileset member.** `kz_ptr_slots.py` /
+`kz_rawslot.py` take one member, and `kc_fstarts.load_build` returns only
+`com.apple.kernel`; a scan built on either reports zero for a reference held in another
+member's data. `allmember_slot_scan.py` walks all `LC_FILESET_ENTRY` segments; validate
+it with `24A446 0xfffffe000a3273c4`, which must report the
+`com.apple.iokit.IOStorageFamily` `__DATA_CONST` slot at `0xfffffe0008375fa8`.
 
 Builds are `24A446` (iOS 27.0.1, target) and `24B119` (iOS 27.2). Requires
 `tools/pylibs/capstone` and `tools/opencode-temp/kc_fstarts.py` (both already in-repo).
