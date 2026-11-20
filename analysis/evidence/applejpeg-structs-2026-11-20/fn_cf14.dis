@@ -1,0 +1,96 @@
+; 24A446 com.apple.driver.AppleJPEGDriver fn 0xfffffe000900cf14 sz 0x17c starts=(18446741874837344020, 18446741874837344400)
+fffffe000900cf14  bti      c
+fffffe000900cf18  pacibsp  
+fffffe000900cf1c  stp      x24, x23, [sp, #-0x40]!
+fffffe000900cf20  stp      x22, x21, [sp, #0x10]
+fffffe000900cf24  stp      x20, x19, [sp, #0x20]
+fffffe000900cf28  stp      x29, x30, [sp, #0x30]
+fffffe000900cf2c  add      x29, sp, #0x30
+fffffe000900cf30  mov      x20, x1
+fffffe000900cf34  mov      x19, x0
+fffffe000900cf38  ldp      x9, x8, [x0]
+fffffe000900cf3c  sub      x22, x8, x9
+fffffe000900cf40  asr      x21, x22, #2
+fffffe000900cf44  cmp      x1, x22, asr #2
+fffffe000900cf48  b.ls     #0xfffffe000900d03c
+fffffe000900cf4c  ldr      x10, [x19, #0x10]
+fffffe000900cf50  sub      x9, x10, x9
+fffffe000900cf54  cmp      x20, x9, asr #2
+fffffe000900cf58  b.ls     #0xfffffe000900d050
+fffffe000900cf5c  asr      x8, x9, #1
+fffffe000900cf60  cmp      x8, x20
+fffffe000900cf64  csel     x8, x8, x20, hi
+fffffe000900cf68  mov      x10, #0x7ffffffffffffffc
+fffffe000900cf6c  cmp      x9, x10
+fffffe000900cf70  mov      x9, #0x3fffffffffffffff
+fffffe000900cf74  csel     x23, x8, x9, lo
+fffffe000900cf78  lsr      x8, x23, #0x3e
+fffffe000900cf7c  cbnz     x8, #0xfffffe000900d08c
+fffffe000900cf80  lsl      x0, x23, #2
+fffffe000900cf84  bl       #0xfffffe0009030018
+fffffe000900cf88  cmp      x22, w22, sxtw
+fffffe000900cf8c  add      x8, x0, w22, sxtw
+fffffe000900cf90  add      x16, x0, x22
+fffffe000900cf94  movk     x16, #0x2bad, lsl #48
+fffffe000900cf98  csel     x8, x8, x16, eq
+fffffe000900cf9c  sub      x9, x20, x21
+fffffe000900cfa0  add      x22, x8, x9, lsl #2
+fffffe000900cfa4  eor      x16, x8, x22
+fffffe000900cfa8  tst      x16, #-0x40000000000000
+fffffe000900cfac  b.eq     #0xfffffe000900cfb4
+fffffe000900cfb0  movk     x22, #0xc8a2, lsl #48
+fffffe000900cfb4  mov      x9, x8
+fffffe000900cfb8  str      wzr, [x9], #4
+fffffe000900cfbc  cmp      x9, x22
+fffffe000900cfc0  b.ne     #0xfffffe000900cfb8
+fffffe000900cfc4  add      x24, x0, x23, lsl #2
+fffffe000900cfc8  eor      x16, x0, x24
+fffffe000900cfcc  tst      x16, #-0x40000000000000
+fffffe000900cfd0  b.eq     #0xfffffe000900cfd8
+fffffe000900cfd4  movk     x24, #0xc8a2, lsl #48
+fffffe000900cfd8  ldp      x20, x9, [x19]
+fffffe000900cfdc  sub      x2, x9, x20
+fffffe000900cfe0  neg      x9, x2, lsr #2
+fffffe000900cfe4  lsl      x9, x9, #2
+fffffe000900cfe8  cmp      x9, w9, sxtw
+fffffe000900cfec  add      x21, x8, w9, sxtw
+fffffe000900cff0  add      x16, x8, x9
+fffffe000900cff4  movk     x16, #0x2bad, lsl #48
+fffffe000900cff8  csel     x21, x21, x16, eq
+fffffe000900cffc  mov      x0, x21
+fffffe000900d000  mov      x1, x20
+fffffe000900d004  bl       #0xfffffe00090300b8
+fffffe000900d008  stp      x21, x22, [x19]
+fffffe000900d00c  str      x24, [x19, #0x10]
+fffffe000900d010  cbz      x20, #0xfffffe000900d078
+fffffe000900d014  mov      x0, x20
+fffffe000900d018  ldp      x29, x30, [sp, #0x30]
+fffffe000900d01c  ldp      x20, x19, [sp, #0x20]
+fffffe000900d020  ldp      x22, x21, [sp, #0x10]
+fffffe000900d024  ldp      x24, x23, [sp], #0x40
+fffffe000900d028  autibsp  
+fffffe000900d02c  eor      x16, x30, x30, lsl #1
+fffffe000900d030  tbz      x16, #0x3e, #0xfffffe000900d038
+fffffe000900d034  brk      #0xc471
+fffffe000900d038  b        #0xfffffe0009030008
+fffffe000900d03c  cmp      x20, x21
+fffffe000900d040  b.hs     #0xfffffe000900d078
+fffffe000900d044  add      x8, x9, x20, lsl #2
+fffffe000900d048  str      x8, [x19, #8]
+fffffe000900d04c  b        #0xfffffe000900d078
+fffffe000900d050  sub      x10, x20, x21
+fffffe000900d054  add      x9, x8, x10, lsl #2
+fffffe000900d058  eor      x16, x8, x9
+fffffe000900d05c  tst      x16, #-0x40000000000000
+fffffe000900d060  b.eq     #0xfffffe000900d068
+fffffe000900d064  movk     x9, #0xc8a2, lsl #48
+fffffe000900d068  str      wzr, [x8], #4
+fffffe000900d06c  cmp      x8, x9
+fffffe000900d070  b.ne     #0xfffffe000900d068
+fffffe000900d074  str      x9, [x19, #8]
+fffffe000900d078  ldp      x29, x30, [sp, #0x30]
+fffffe000900d07c  ldp      x20, x19, [sp, #0x20]
+fffffe000900d080  ldp      x22, x21, [sp, #0x10]
+fffffe000900d084  ldp      x24, x23, [sp], #0x40
+fffffe000900d088  retab    
+fffffe000900d08c  brk      #0x800

@@ -83,6 +83,11 @@ half):
 * `[req+0x4a4]` (from `+0x80`) is compared to the result of `0x902feb8` in
   `decodeHWRequestSetup`; the reject path logs
   `"startOfRawBitStream %u >= sourceSurface allocSize %llu"`.
+* The destination for the `struct+0x84` copy is not a fixed buffer: helper
+  `0x900cf14(req+0x4d8, len>>2)` grows the vector (allocate, zero-fill,
+  memmove) so that `cap - begin` covers the requested element count. The
+  subsequent `cmp cap-begin, len; b.ge / brk #0x800` is therefore defensive,
+  not a reachable panic. (`fn_cf14.dis`.)
 * `[req+0x4b8..0x4c4]` and `[req+0x4ac/0x4b0]` (from `+0x5c…0x6c`, `+0x54/0x58`)
   are checked twice: inline in `decodeRequestValidation` (`>>16` must be zero;
   `0x4bc` must be `< 0x1000`) and again in the helper `0x902eae0`
