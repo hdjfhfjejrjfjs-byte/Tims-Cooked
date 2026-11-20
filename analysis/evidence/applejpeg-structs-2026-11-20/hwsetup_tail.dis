@@ -1,0 +1,41 @@
+; 24A446 com.apple.driver.AppleJPEGDriver fn 0xfffffe000902f1f0 sz 0xa0 starts=(18446741874837482632, 18446741874837484184)
+fffffe000902f1f0  mov      w1, #1
+fffffe000902f1f4  bl       #0xfffffe000902ff58
+fffffe000902f1f8  str      w0, [x19, #0x194]
+fffffe000902f1fc  str      xzr, [x19, #0x198]
+fffffe000902f200  str      wzr, [x19, #0x1a0]
+fffffe000902f204  ldr      x0, [x19, #0x2c0]
+fffffe000902f208  bl       #0xfffffe000902fe68
+fffffe000902f20c  str      w0, [x19, #0x1a4]
+fffffe000902f210  movi     v0.2s, #1
+fffffe000902f214  str      d0, [x19, #0x1a8]
+fffffe000902f218  ldr      w8, [x19, #0x45c]
+fffffe000902f21c  str      w8, [x19, #0x1b0]
+fffffe000902f220  mov      x1, x20
+fffffe000902f224  bl       #0xfffffe000902dd78
+fffffe000902f228  mov      w20, #0
+fffffe000902f22c  ldr      w8, [x19, #0x498]
+fffffe000902f230  cmp      w8, #0
+fffffe000902f234  cset     w8, ne
+fffffe000902f238  strb     w8, [x19, #0x286]
+fffffe000902f23c  ldr      w8, [x19, #0x49c]
+fffffe000902f240  cmp      w8, #0
+fffffe000902f244  cset     w8, ne
+fffffe000902f248  strb     w8, [x19, #0x287]
+fffffe000902f24c  ldr      w8, [x19, #0x4a8]
+fffffe000902f250  str      w8, [x19, #0x288]
+fffffe000902f254  ldr      w8, [x19, #0x4b4]
+fffffe000902f258  cmp      w8, #0
+fffffe000902f25c  cset     w8, ne
+fffffe000902f260  strb     w8, [x19, #0x285]
+fffffe000902f264  ldr      d0, [x22, #0x220]
+fffffe000902f268  ldr      d1, [x19, #0x4b8]
+fffffe000902f26c  mov      v0.d[1], v1.d[0]
+fffffe000902f270  str      q0, [x22]
+fffffe000902f274  ldr      d0, [x19, #0x4c0]
+fffffe000902f278  str      d0, [x22, #0x10]
+fffffe000902f27c  mov      x0, x20
+fffffe000902f280  ldp      x29, x30, [sp, #0x60]
+fffffe000902f284  ldp      x20, x19, [sp, #0x50]
+fffffe000902f288  ldp      x22, x21, [sp, #0x40]
+fffffe000902f28c  ldp      x24, x23, [sp, #0x30]

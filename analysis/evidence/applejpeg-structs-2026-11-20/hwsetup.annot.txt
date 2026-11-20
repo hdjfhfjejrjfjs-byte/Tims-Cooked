@@ -1,0 +1,74 @@
+; 24A446 com.apple.driver.AppleJPEGDriver fn 0xfffffe000902ec88 sz 0x900
+; starts: 0xfffffe000902ec88..0xfffffe000902f298
+0xfffffe000902ecd8  bl       -> 0xfffffe000902ff18 __TEXT_EXEC
+0xfffffe000902ece4  add      -> 0xfffffe000753d9c8 [STRING] "v444"
+0xfffffe000902ed14  b        -> 0xfffffe000902ed34 __TEXT_EXEC
+0xfffffe000902ed44  add      -> 0xfffffe000753e014 [__TEXT] 
+0xfffffe000902ed60  add      -> 0xfffffe000753e020 [__TEXT] 
+0xfffffe000902edcc  b        -> 0xfffffe000902eddc __TEXT_EXEC
+0xfffffe000902ee1c  b        -> 0xfffffe000902ee84 __TEXT_EXEC
+0xfffffe000902ee3c  add      -> 0xfffffe00075305ea [STRING] "IOReturn RequestHandling::decodeHWRequestSetup(JpegRequest *)"
+0xfffffe000902ee50  add      -> 0xfffffe000752d470 [__TEXT] 
+0xfffffe000902ee60  add      -> 0xfffffe000753a0bd [STRING] "AppleJPEGDriver: %s: unknown pixeformat 0x%x (%c%c%c%c)"
+0xfffffe000902ee68  bl       -> 0xfffffe0009030038 __TEXT_EXEC
+0xfffffe000902ee6c  b        -> 0xfffffe000902f27c __TEXT_EXEC
+0xfffffe000902eeb0  bl       -> 0xfffffe000902feb8 __TEXT_EXEC
+0xfffffe000902eed0  bl       -> 0xfffffe000902feb8 __TEXT_EXEC
+0xfffffe000902eef8  bl       -> 0xfffffe000902ff58 __TEXT_EXEC
+0xfffffe000902ef14  bl       -> 0xfffffe000902ffa8 __TEXT_EXEC
+0xfffffe000902ef24  bl       -> 0xfffffe000902ff78 __TEXT_EXEC
+0xfffffe000902ef3c  bl       -> 0xfffffe000902ff78 __TEXT_EXEC
+0xfffffe000902ef68  bl       -> 0xfffffe000902fef8 __TEXT_EXEC
+0xfffffe000902ef78  bl       -> 0xfffffe000902fef8 __TEXT_EXEC
+0xfffffe000902ef8c  bl       -> 0xfffffe000902fef8 __TEXT_EXEC
+0xfffffe000902efa0  bl       -> 0xfffffe000902ff28 __TEXT_EXEC
+0xfffffe000902efb0  bl       -> 0xfffffe000902ff28 __TEXT_EXEC
+0xfffffe000902efc4  bl       -> 0xfffffe000902ff28 __TEXT_EXEC
+0xfffffe000902efe4  bl       -> 0xfffffe000902ff58 __TEXT_EXEC
+0xfffffe000902f008  bl       -> 0xfffffe000902ffa8 __TEXT_EXEC
+0xfffffe000902f018  bl       -> 0xfffffe000902ff78 __TEXT_EXEC
+0xfffffe000902f030  bl       -> 0xfffffe000902ff78 __TEXT_EXEC
+0xfffffe000902f048  b        -> 0xfffffe000902f1ac __TEXT_EXEC
+0xfffffe000902f054  bl       -> 0xfffffe000902feb8 __TEXT_EXEC
+0xfffffe000902f060  add      -> 0xfffffe00075305ea [STRING] "IOReturn RequestHandling::decodeHWRequestSetup(JpegRequest *)"
+0xfffffe000902f06c  add      -> 0xfffffe000752d470 [__TEXT] 
+0xfffffe000902f07c  add      -> 0xfffffe000753a0f5 [STRING] "AppleJPEGDriver: ** %s: startOfRawBitStream %u >= sourceSurface allocSize %llu, rejecting
+"
+0xfffffe000902f084  bl       -> 0xfffffe0009030038 __TEXT_EXEC
+0xfffffe000902f094  b        -> 0xfffffe000902f27c __TEXT_EXEC
+0xfffffe000902f0a0  bl       -> 0xfffffe000902ffa8 __TEXT_EXEC
+0xfffffe000902f0b0  bl       -> 0xfffffe000902ff78 __TEXT_EXEC
+0xfffffe000902f0c8  bl       -> 0xfffffe000902ff58 __TEXT_EXEC
+0xfffffe000902f0ec  bl       -> 0xfffffe000902fef8 __TEXT_EXEC
+0xfffffe000902f0fc  bl       -> 0xfffffe000902fef8 __TEXT_EXEC
+0xfffffe000902f110  bl       -> 0xfffffe000902fef8 __TEXT_EXEC
+0xfffffe000902f124  bl       -> 0xfffffe000902ff28 __TEXT_EXEC
+0xfffffe000902f134  bl       -> 0xfffffe000902ff28 __TEXT_EXEC
+0xfffffe000902f148  bl       -> 0xfffffe000902ff28 __TEXT_EXEC
+0xfffffe000902f168  bl       -> 0xfffffe000902ffa8 __TEXT_EXEC
+0xfffffe000902f178  bl       -> 0xfffffe000902ff78 __TEXT_EXEC
+0xfffffe000902f194  bl       -> 0xfffffe000902ff58 __TEXT_EXEC
+0xfffffe000902f1a4  b        -> 0xfffffe000902f1ac __TEXT_EXEC
+0xfffffe000902f1cc  bl       -> 0xfffffe000902fec8 __TEXT_EXEC
+0xfffffe000902f1e4  bl       -> 0xfffffe000902ff58 __TEXT_EXEC
+0xfffffe000902f1f4  bl       -> 0xfffffe000902ff58 __TEXT_EXEC
+0xfffffe000902f208  bl       -> 0xfffffe000902fe68 __TEXT_EXEC
+0xfffffe000902f224  bl       -> 0xfffffe000902dd78 FUNC
+0xfffffe000902f2f0  bl       -> 0xfffffe000902ff18 __TEXT_EXEC
+0xfffffe000902f2fc  add      -> 0xfffffe000753d9c8 [STRING] "v444"
+0xfffffe000902f31c  add      -> 0xfffffe0007530010 [STRING] " *, uint32_t)"
+0xfffffe000902f32c  b        -> 0xfffffe000902f34c __TEXT_EXEC
+0xfffffe000902f35c  add      -> 0xfffffe000753e014 [__TEXT] 
+0xfffffe000902f378  add      -> 0xfffffe000753e020 [__TEXT] 
+0xfffffe000902f440  b        -> 0xfffffe000902f4a8 __TEXT_EXEC
+0xfffffe000902f458  add      -> 0xfffffe0007530628 [STRING] "IOReturn RequestHandling::encodeHWRequestSetup(JpegRequest *)"
+0xfffffe000902f46c  add      -> 0xfffffe000752d470 [__TEXT] 
+0xfffffe000902f47c  add      -> 0xfffffe000753a150 [STRING] "AppleJPEGDriver: %s: unknown pixeformat 0x%x (%c%c%c%c)"
+0xfffffe000902f484  bl       -> 0xfffffe0009030038 __TEXT_EXEC
+0xfffffe000902f490  b        -> 0xfffffe000902f9d0 __TEXT_EXEC
+0xfffffe000902f4e0  b        -> 0xfffffe000902f4e8 __TEXT_EXEC
+0xfffffe000902f4f4  bl       -> 0xfffffe000902e004 FUNC
+0xfffffe000902f52c  bl       -> 0xfffffe000902ff58 __TEXT_EXEC
+0xfffffe000902f548  bl       -> 0xfffffe000902ffa8 __TEXT_EXEC
+0xfffffe000902f558  bl       -> 0xfffffe000902ff78 __TEXT_EXEC
+0xfffffe000902f570  bl       -> 0xfffffe000902ff78 __TEXT_EXEC

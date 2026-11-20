@@ -1,0 +1,96 @@
+; 24A446 com.apple.driver.AppleJPEGDriver fn 0xfffffe000902e2ac sz 0x900
+; starts: 0xfffffe000902e2ac..0xfffffe000902e80c
+0xfffffe000902e338  add      -> 0xfffffe00075305a9 [STRING] "IOReturn RequestHandling::decodeRequestValidation(JpegRequest *)"
+0xfffffe000902e344  add      -> 0xfffffe000752d470 [__TEXT] 
+0xfffffe000902e354  add      -> 0xfffffe0007539ce4 [__TEXT] 
+0xfffffe000902e35c  bl       -> 0xfffffe0009030038 __TEXT_EXEC
+0xfffffe000902e410  b        -> 0xfffffe000902e418 __TEXT_EXEC
+0xfffffe000902e4a8  add      -> 0xfffffe000752d470 [__TEXT] 
+0xfffffe000902e4b8  add      -> 0xfffffe0007539deb [__TEXT] 
+0xfffffe000902e4c0  bl       -> 0xfffffe0009030038 __TEXT_EXEC
+0xfffffe000902e4c4  b        -> 0xfffffe000902e360 __TEXT_EXEC
+0xfffffe000902e4dc  add      -> 0xfffffe00075305a9 [STRING] "IOReturn RequestHandling::decodeRequestValidation(JpegRequest *)"
+0xfffffe000902e4e8  add      -> 0xfffffe000752d470 [__TEXT] 
+0xfffffe000902e4f8  add      -> 0xfffffe0007539d5f [__TEXT] 
+0xfffffe000902e500  bl       -> 0xfffffe0009030038 __TEXT_EXEC
+0xfffffe000902e504  b        -> 0xfffffe000902e360 __TEXT_EXEC
+0xfffffe000902e570  add      -> 0xfffffe00075305a9 [STRING] "IOReturn RequestHandling::decodeRequestValidation(JpegRequest *)"
+0xfffffe000902e57c  add      -> 0xfffffe000752d470 [__TEXT] 
+0xfffffe000902e58c  add      -> 0xfffffe0007539e6a [STRING] "AppleJPEGDriver: ** %s : input/output size too small. Bailing out. input jpeg file size %d, output buffer size %d,
+"
+0xfffffe000902e59c  bl       -> 0xfffffe0009030038 __TEXT_EXEC
+0xfffffe000902e5c4  add      -> 0xfffffe0007539ede [STRING] "AppleJPEGDriver: ** %s : pixelX %d, pixelY %d, decodeWidth %d, decodeHeight %d, xOffset %d, yOffset %d
+"
+0xfffffe000902e5dc  bl       -> 0xfffffe0009030038 __TEXT_EXEC
+0xfffffe000902e5e0  b        -> 0xfffffe000902e360 __TEXT_EXEC
+0xfffffe000902e5e8  bl       -> 0xfffffe000902feb8 __TEXT_EXEC
+0xfffffe000902e5f8  bl       -> 0xfffffe000902feb8 __TEXT_EXEC
+0xfffffe000902e608  add      -> 0xfffffe00075305a9 [STRING] "IOReturn RequestHandling::decodeRequestValidation(JpegRequest *)"
+0xfffffe000902e614  add      -> 0xfffffe000752d470 [__TEXT] 
+0xfffffe000902e624  add      -> 0xfffffe0007539f46 [STRING] "AppleJPEGDriver: %s : Input JPEG stream size %llu less than miniumum of %u bytes, bailing 
+"
+0xfffffe000902e62c  bl       -> 0xfffffe0009030038 __TEXT_EXEC
+0xfffffe000902e630  b        -> 0xfffffe000902e360 __TEXT_EXEC
+0xfffffe000902e654  bl       -> 0xfffffe000902eae0 FUNC
+0xfffffe000902e678  bl       -> 0xfffffe000902ff58 __TEXT_EXEC
+0xfffffe000902e688  bl       -> 0xfffffe000902ff28 __TEXT_EXEC
+0xfffffe000902e69c  add      -> 0xfffffe00075305a9 [STRING] "IOReturn RequestHandling::decodeRequestValidation(JpegRequest *)"
+0xfffffe000902e6a8  add      -> 0xfffffe000752d470 [__TEXT] 
+0xfffffe000902e6b8  add      -> 0xfffffe0007539fa2 [STRING] "AppleJPEGDriver: * %s : xOffset = %d, yOffset = %d, hdr_width=%d, hdr_height=%d, stride=%d, height=%d, failure %d
+"
+0xfffffe000902e6c0  bl       -> 0xfffffe0009030038 __TEXT_EXEC
+0xfffffe000902e6c4  b        -> 0xfffffe000902e360 __TEXT_EXEC
+0xfffffe000902e6cc  bl       -> 0xfffffe000902fee8 __TEXT_EXEC
+0xfffffe000902e6e4  bl       -> 0xfffffe000902fef8 __TEXT_EXEC
+0xfffffe000902e6f4  bl       -> 0xfffffe000902fef8 __TEXT_EXEC
+0xfffffe000902e708  bl       -> 0xfffffe000902ff28 __TEXT_EXEC
+0xfffffe000902e718  bl       -> 0xfffffe000902ff28 __TEXT_EXEC
+0xfffffe000902e744  bl       -> 0xfffffe000902ffa8 __TEXT_EXEC
+0xfffffe000902e758  bl       -> 0xfffffe000902ff78 __TEXT_EXEC
+0xfffffe000902e76c  bl       -> 0xfffffe000902fec8 __TEXT_EXEC
+0xfffffe000902e784  bl       -> 0xfffffe000902fee8 __TEXT_EXEC
+0xfffffe000902e794  b        -> 0xfffffe000902e360 __TEXT_EXEC
+0xfffffe000902e7a0  bl       -> 0xfffffe000902fec8 __TEXT_EXEC
+0xfffffe000902e7b0  bl       -> 0xfffffe000902fef8 __TEXT_EXEC
+0xfffffe000902e7c0  bl       -> 0xfffffe000902ff28 __TEXT_EXEC
+0xfffffe000902e7dc  add      -> 0xfffffe00075305a9 [STRING] "IOReturn RequestHandling::decodeRequestValidation(JpegRequest *)"
+0xfffffe000902e7ec  add      -> 0xfffffe000752d470 [__TEXT] 
+0xfffffe000902e7fc  add      -> 0xfffffe000753a015 [__TEXT] 
+0xfffffe000902e804  bl       -> 0xfffffe0009030038 __TEXT_EXEC
+0xfffffe000902e808  b        -> 0xfffffe000902e360 __TEXT_EXEC
+0xfffffe000902e838  bl       -> 0xfffffe000902ffe8 __TEXT_EXEC
+0xfffffe000902e848  bl       -> 0xfffffe000902ffe8 __TEXT_EXEC
+0xfffffe000902e860  bl       -> 0xfffffe000902fef8 __TEXT_EXEC
+0xfffffe000902e870  bl       -> 0xfffffe000902fff8 __TEXT_EXEC
+0xfffffe000902e880  bl       -> 0xfffffe000902fff8 __TEXT_EXEC
+0xfffffe000902e898  bl       -> 0xfffffe000902ff28 __TEXT_EXEC
+0xfffffe000902e8b0  bl       -> 0xfffffe000902ffe8 __TEXT_EXEC
+0xfffffe000902e8bc  bl       -> 0xfffffe000902fff8 __TEXT_EXEC
+0xfffffe000902e8d4  add      -> 0xfffffe0007530568 [STRING] "IOReturn RequestHandling::encodeRequestValidation(JpegRequest *)"
+0xfffffe000902e8e0  add      -> 0xfffffe000752d470 [__TEXT] 
+0xfffffe000902e8f0  add      -> 0xfffffe0007539b90 [__TEXT] 
+0xfffffe000902e8f8  bl       -> 0xfffffe0009030038 __TEXT_EXEC
+0xfffffe000902e948  add      -> 0xfffffe0007530568 [STRING] "IOReturn RequestHandling::encodeRequestValidation(JpegRequest *)"
+0xfffffe000902e954  add      -> 0xfffffe000752d470 [__TEXT] 
+0xfffffe000902e964  add      -> 0xfffffe0007539c1d [STRING] "AppleJPEGDriver: ** %s : xOffset %u / yOffset %u / pixelsX %u / pixelsY %u out of range
+"
+0xfffffe000902e96c  bl       -> 0xfffffe0009030038 __TEXT_EXEC
+0xfffffe000902e970  b        -> 0xfffffe000902e8fc __TEXT_EXEC
+0xfffffe000902e9a8  bl       -> 0xfffffe000902ea2c FUNC
+0xfffffe000902e9d4  bl       -> 0xfffffe000902ff58 __TEXT_EXEC
+0xfffffe000902e9e4  bl       -> 0xfffffe000902ff28 __TEXT_EXEC
+0xfffffe000902e9f8  add      -> 0xfffffe0007530568 [STRING] "IOReturn RequestHandling::encodeRequestValidation(JpegRequest *)"
+0xfffffe000902ea04  add      -> 0xfffffe000752d470 [__TEXT] 
+0xfffffe000902ea14  add      -> 0xfffffe0007539c76 [STRING] "AppleJPEGDriver: * %s : xOffset = %d, yOffset = %d, pixelsX=%d, pixelsY=%d, stride=%d, height=%d, failure %d
+"
+0xfffffe000902ea1c  bl       -> 0xfffffe0009030038 __TEXT_EXEC
+0xfffffe000902ea20  b        -> 0xfffffe000902e8fc __TEXT_EXEC
+0xfffffe000902ea28  b        -> 0xfffffe000902e8fc __TEXT_EXEC
+0xfffffe000902ea68  bl       -> 0xfffffe000902ff18 __TEXT_EXEC
+0xfffffe000902ea7c  bl       -> 0xfffffe000902ff18 __TEXT_EXEC
+0xfffffe000902ea9c  bl       -> 0xfffffe000902ff58 __TEXT_EXEC
+0xfffffe000902eabc  bl       -> 0xfffffe000902ff28 __TEXT_EXEC
+0xfffffe000902eb40  b        -> 0xfffffe000902ec5c __TEXT_EXEC
+0xfffffe000902eb60  bl       -> 0xfffffe000902ff18 __TEXT_EXEC
+0xfffffe000902eb74  bl       -> 0xfffffe000902ff18 __TEXT_EXEC
+0xfffffe000902eba0  bl       -> 0xfffffe000902ff58 __TEXT_EXEC

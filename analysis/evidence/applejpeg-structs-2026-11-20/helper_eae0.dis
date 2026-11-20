@@ -1,0 +1,142 @@
+; 24A446 com.apple.driver.AppleJPEGDriver fn 0xfffffe000902eae0 sz 0x234 starts=(18446741874837482208, 18446741874837482612)
+fffffe000902eae0  bti      c
+fffffe000902eae4  pacibsp  
+fffffe000902eae8  stp      x24, x23, [sp, #-0x40]!
+fffffe000902eaec  stp      x22, x21, [sp, #0x10]
+fffffe000902eaf0  stp      x20, x19, [sp, #0x20]
+fffffe000902eaf4  stp      x29, x30, [sp, #0x30]
+fffffe000902eaf8  add      x29, sp, #0x30
+fffffe000902eafc  mov      x19, x1
+fffffe000902eb00  ldr      w8, [x1, #0x4b4]
+fffffe000902eb04  cbz      w8, #0xfffffe000902eb44
+fffffe000902eb08  ldr      w8, [x19, #0x4c0]
+fffffe000902eb0c  ldr      w9, [x19, #0x4b8]
+fffffe000902eb10  add      w8, w9, w8
+fffffe000902eb14  ldr      w9, [x19, #0x4ac]
+fffffe000902eb18  cmp      w8, w9
+fffffe000902eb1c  mov      w8, #0xa
+fffffe000902eb20  csel     w8, w8, wzr, hi
+fffffe000902eb24  ldr      w9, [x19, #0x4c4]
+fffffe000902eb28  ldr      w10, [x19, #0x4bc]
+fffffe000902eb2c  add      w9, w10, w9
+fffffe000902eb30  ldr      w10, [x19, #0x4b0]
+fffffe000902eb34  cmp      w9, w10
+fffffe000902eb38  mov      w9, #0xb
+fffffe000902eb3c  csel     w20, w9, w8, hi
+fffffe000902eb40  b        #0xfffffe000902ec5c
+fffffe000902eb44  mov      x20, x3
+fffffe000902eb48  mov      x21, x2
+fffffe000902eb4c  mov      w23, #0x3066
+fffffe000902eb50  movk     w23, #0x3432, lsl #16
+fffffe000902eb54  ldrb     w8, [x19, #0x450]
+fffffe000902eb58  and      w22, w8, #1
+fffffe000902eb5c  ldr      x0, [x19, #0x2c0]
+fffffe000902eb60  bl       #0xfffffe000902ff18
+fffffe000902eb64  orr      w8, w23, #0x10
+fffffe000902eb68  cmp      w0, w8
+fffffe000902eb6c  b.eq     #0xfffffe000902eb80
+fffffe000902eb70  ldr      x0, [x19, #0x2c0]
+fffffe000902eb74  bl       #0xfffffe000902ff18
+fffffe000902eb78  cmp      w0, w23
+fffffe000902eb7c  b.ne     #0xfffffe000902ebb0
+fffffe000902eb80  ldr      w8, [x19, #0x454]
+fffffe000902eb84  tst      w8, #1
+fffffe000902eb88  mov      w8, #3
+fffffe000902eb8c  csel     w22, w22, w8, eq
+fffffe000902eb90  ldr      w8, [x19, #0x450]
+fffffe000902eb94  add      w23, w8, w21
+fffffe000902eb98  ldr      x0, [x19, #0x2c0]
+fffffe000902eb9c  mov      w1, #0
+fffffe000902eba0  bl       #0xfffffe000902ff58
+fffffe000902eba4  cmp      w23, w0
+fffffe000902eba8  mov      w8, #4
+fffffe000902ebac  csel     w22, w8, w22, hi
+fffffe000902ebb0  mov      w23, #0x7666
+fffffe000902ebb4  movk     w23, #0x7975, lsl #16
+fffffe000902ebb8  ldr      x0, [x19, #0x2c0]
+fffffe000902ebbc  bl       #0xfffffe000902ff18
+fffffe000902ebc0  add      w8, w23, #0xd
+fffffe000902ebc4  cmp      w0, w8
+fffffe000902ebc8  b.eq     #0xfffffe000902ebf4
+fffffe000902ebcc  ldr      x0, [x19, #0x2c0]
+fffffe000902ebd0  bl       #0xfffffe000902ff18
+fffffe000902ebd4  cmp      w0, w23
+fffffe000902ebd8  b.eq     #0xfffffe000902ebf4
+fffffe000902ebdc  ldr      x0, [x19, #0x2c0]
+fffffe000902ebe0  bl       #0xfffffe000902ff18
+fffffe000902ebe4  mov      w8, #0x7579
+fffffe000902ebe8  movk     w8, #0x3276, lsl #16
+fffffe000902ebec  cmp      w0, w8
+fffffe000902ebf0  b.ne     #0xfffffe000902ec14
+fffffe000902ebf4  ldr      w8, [x19, #0x450]
+fffffe000902ebf8  add      w21, w8, w21
+fffffe000902ebfc  ldr      x0, [x19, #0x2c0]
+fffffe000902ec00  mov      w1, #0
+fffffe000902ec04  bl       #0xfffffe000902ff58
+fffffe000902ec08  cmp      w0, w21, lsl #1
+fffffe000902ec0c  mov      w8, #5
+fffffe000902ec10  csel     w22, w8, w22, lo
+fffffe000902ec14  ldr      w8, [x19, #0x454]
+fffffe000902ec18  add      w20, w8, w20
+fffffe000902ec1c  ldr      x0, [x19, #0x2c0]
+fffffe000902ec20  mov      w1, #0
+fffffe000902ec24  bl       #0xfffffe000902ff28
+fffffe000902ec28  cmp      w20, w0
+fffffe000902ec2c  mov      w8, #6
+fffffe000902ec30  csel     w20, w8, w22, hi
+fffffe000902ec34  ldr      x0, [x19, #0x2c0]
+fffffe000902ec38  mov      w1, #0
+fffffe000902ec3c  bl       #0xfffffe000902ff58
+fffffe000902ec40  tst      w0, #0xff
+fffffe000902ec44  b.eq     #0xfffffe000902ec5c
+fffffe000902ec48  ldr      x0, [x19, #0x2c0]
+fffffe000902ec4c  bl       #0xfffffe000902fe68
+fffffe000902ec50  cmp      w0, #0
+fffffe000902ec54  mov      w8, #9
+fffffe000902ec58  csel     w20, w8, w20, ne
+fffffe000902ec5c  mov      x0, x20
+fffffe000902ec60  ldp      x29, x30, [sp, #0x30]
+fffffe000902ec64  ldp      x20, x19, [sp, #0x20]
+fffffe000902ec68  ldp      x22, x21, [sp, #0x10]
+fffffe000902ec6c  ldp      x24, x23, [sp], #0x40
+fffffe000902ec70  retab    
+fffffe000902ec74  bti      c
+fffffe000902ec78  ldr      w8, [x1, #0x2a8]
+fffffe000902ec7c  cbz      w8, #0xfffffe000902ec84
+fffffe000902ec80  b        #0xfffffe000902f298
+fffffe000902ec84  b        #0xfffffe000902ec88
+fffffe000902ec88  bti      c
+fffffe000902ec8c  pacibsp  
+fffffe000902ec90  sub      sp, sp, #0x70
+fffffe000902ec94  stp      x24, x23, [sp, #0x30]
+fffffe000902ec98  stp      x22, x21, [sp, #0x40]
+fffffe000902ec9c  stp      x20, x19, [sp, #0x50]
+fffffe000902eca0  stp      x29, x30, [sp, #0x60]
+fffffe000902eca4  add      x29, sp, #0x60
+fffffe000902eca8  mov      x19, x1
+fffffe000902ecac  mov      x21, x0
+fffffe000902ecb0  ldr      w8, [x1, #0x46c]
+fffffe000902ecb4  mov      x20, x1
+fffffe000902ecb8  str      w8, [x20, #0x78]!
+fffffe000902ecbc  add      x22, x20, #0x214
+fffffe000902ecc0  ldr      w8, [x20, #0x4c0]
+fffffe000902ecc4  str      w8, [x20, #0x10]
+fffffe000902ecc8  adrp     x8, #0xfffffe000753d000
+fffffe000902eccc  ldr      q0, [x8, #0x990]
+fffffe000902ecd0  stur     q0, [x20, #0xc8]
+fffffe000902ecd4  ldr      x0, [x20, #0x248]
+fffffe000902ecd8  bl       #0xfffffe000902ff18
+fffffe000902ecdc  mov      x9, #0
+fffffe000902ece0  adrp     x10, #0xfffffe000753d000
+fffffe000902ece4  add      x10, x10, #0x9c8
+fffffe000902ece8  mov      w12, #0x64
+fffffe000902ecec  mov      x11, x10
+fffffe000902ecf0  lsl      x8, x9, #4
+fffffe000902ecf4  ldr      w8, [x10, x8]
+fffffe000902ecf8  cmp      w0, w8
+fffffe000902ecfc  b.eq     #0xfffffe000902ed18
+fffffe000902ed00  add      x9, x9, #1
+fffffe000902ed04  add      x11, x11, #0x10
+fffffe000902ed08  subs     x12, x12, #1
+fffffe000902ed0c  b.ne     #0xfffffe000902ecf0
+fffffe000902ed10  ldr      w9, [x19, #0x1b4]

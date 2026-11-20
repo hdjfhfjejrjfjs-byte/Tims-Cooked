@@ -1,0 +1,178 @@
+; 24A446 com.apple.driver.AppleJPEGDriver fn 0xfffffe000900bdf0 sz 0x2c4 starts=(18446741874837339632, 18446741874837340420)
+fffffe000900bdf0  bti      c
+fffffe000900bdf4  pacibsp  
+fffffe000900bdf8  sub      sp, sp, #0x80
+fffffe000900bdfc  stp      x28, x27, [sp, #0x20]
+fffffe000900be00  stp      x26, x25, [sp, #0x30]
+fffffe000900be04  stp      x24, x23, [sp, #0x40]
+fffffe000900be08  stp      x22, x21, [sp, #0x50]
+fffffe000900be0c  stp      x20, x19, [sp, #0x60]
+fffffe000900be10  stp      x29, x30, [sp, #0x70]
+fffffe000900be14  add      x29, sp, #0x70
+fffffe000900be18  mov      x20, x2
+fffffe000900be1c  mov      w23, #0x2bc
+fffffe000900be20  movk     w23, #0xe000, lsl #16
+fffffe000900be24  cbz      x1, #0xfffffe000900bf50
+fffffe000900be28  mov      x25, x4
+fffffe000900be2c  mov      x24, x3
+fffffe000900be30  mov      x19, x1
+fffffe000900be34  mov      x22, x0
+fffffe000900be38  mov      w26, #0x448
+fffffe000900be3c  movk     w26, #0x2bc7, lsl #16
+fffffe000900be40  ldr      w2, [x1, #0x48]
+fffffe000900be44  ldr      x8, [x1, #0x30]
+fffffe000900be48  cmp      x8, #0
+fffffe000900be4c  cset     w3, ne
+fffffe000900be50  ldr      w8, [x1, #0x14]
+fffffe000900be54  ldrh     w9, [x1, #0x18]
+fffffe000900be58  orr      w4, w9, w8, lsl #16
+fffffe000900be5c  mov      w0, #0x448
+fffffe000900be60  movk     w0, #0x2bc7, lsl #16
+fffffe000900be64  mov      x1, #0
+fffffe000900be68  mov      x5, #0
+fffffe000900be6c  bl       #0xfffffe0009030098
+fffffe000900be70  adrp     x0, #0xfffffe00080e0000
+fffffe000900be74  add      x0, x0, #0xa68
+fffffe000900be78  bl       #0xfffffe000902fb48
+fffffe000900be7c  cbz      x0, #0xfffffe000900bf84
+fffffe000900be80  mov      x21, x0
+fffffe000900be84  add      x28, x0, #0x428
+fffffe000900be88  mov      w27, #0x805
+fffffe000900be8c  movk     w27, #0x6c7, lsl #16
+fffffe000900be90  bl       #0xfffffe000900b96c
+fffffe000900be94  ldr      w2, [x19, #0x48]
+fffffe000900be98  mov      w0, #0x805
+fffffe000900be9c  movk     w0, #0x6c7, lsl #16
+fffffe000900bea0  mov      x1, #0
+fffffe000900bea4  mov      x3, #0
+fffffe000900bea8  mov      x4, #0
+fffffe000900beac  mov      x5, #0
+fffffe000900beb0  bl       #0xfffffe0009030098
+fffffe000900beb4  stp      x25, x24, [x21]
+fffffe000900beb8  ldr      q0, [x19, #0x30]
+fffffe000900bebc  str      q0, [x21, #0x10]
+fffffe000900bec0  ldr      x8, [x19, #0x40]
+fffffe000900bec4  str      x8, [x21, #0x20]
+fffffe000900bec8  ldp      w8, w9, [x19]
+fffffe000900becc  str      w8, [x21, #0x2ac]
+fffffe000900bed0  ldp      w8, w10, [x19, #8]
+fffffe000900bed4  str      w8, [x21, #0x2b0]
+fffffe000900bed8  ldrb     w8, [x19, #0x20]
+fffffe000900bedc  and      w11, w8, #1
+fffffe000900bee0  strb     w11, [x21, #0x310]
+fffffe000900bee4  ubfx     w11, w8, #1, #1
+fffffe000900bee8  strb     w11, [x21, #0x312]
+fffffe000900beec  ubfx     w8, w8, #2, #1
+fffffe000900bef0  strb     w8, [x21, #0x314]
+fffffe000900bef4  str      wzr, [x21, #0x2a8]
+fffffe000900bef8  str      w9, [x21, #0x420]
+fffffe000900befc  str      w10, [x21, #0x424]
+fffffe000900bf00  ldur     d0, [x19, #0x4c]
+fffffe000900bf04  stur     d0, [x28, #0x54]
+fffffe000900bf08  ldur     d0, [x19, #0x24]
+fffffe000900bf0c  str      d0, [x21, #0x450]
+fffffe000900bf10  ldr      w8, [x19, #0x48]
+fffffe000900bf14  str      w8, [x21, #0x538]
+fffffe000900bf18  ldur     d0, [x19, #0x14]
+fffffe000900bf1c  mov      v0.d[1], v0.d[0]
+fffffe000900bf20  str      q0, [x28]
+fffffe000900bf24  ldr      w8, [x19, #0x2c]
+fffffe000900bf28  cmp      w8, #1
+fffffe000900bf2c  b.le     #0xfffffe000900bf8c
+fffffe000900bf30  cmp      w8, #4
+fffffe000900bf34  b.eq     #0xfffffe000900bfa0
+fffffe000900bf38  cmp      w8, #3
+fffffe000900bf3c  b.eq     #0xfffffe000900bfb4
+fffffe000900bf40  cmp      w8, #2
+fffffe000900bf44  b.ne     #0xfffffe000900bfd0
+fffffe000900bf48  stp      wzr, wzr, [x28, #0x1c]
+fffffe000900bf4c  b        #0xfffffe000900c008
+fffffe000900bf50  stp      xzr, x20, [sp, #8]
+fffffe000900bf54  adrp     x8, #0xfffffe000752e000
+fffffe000900bf58  add      x8, x8, #0x3b7
+fffffe000900bf5c  str      x8, [sp]
+fffffe000900bf60  adrp     x0, #0xfffffe000752d000
+fffffe000900bf64  add      x0, x0, #0x470
+fffffe000900bf68  adrp     x1, #0xfffffe00080e1000
+fffffe000900bf6c  ldr      x1, [x1, #0x848]
+fffffe000900bf70  adrp     x3, #0xfffffe0007533000
+fffffe000900bf74  add      x3, x3, #0x112
+fffffe000900bf78  mov      w2, #0
+fffffe000900bf7c  bl       #0xfffffe0009030038
+fffffe000900bf80  b        #0xfffffe000900c0e0
+fffffe000900bf84  add      w23, w23, #1
+fffffe000900bf88  b        #0xfffffe000900c0b4
+fffffe000900bf8c  cbz      w8, #0xfffffe000900bfc0
+fffffe000900bf90  cmp      w8, #1
+fffffe000900bf94  b.ne     #0xfffffe000900bfd0
+fffffe000900bf98  movi     v0.2s, #1
+fffffe000900bf9c  b        #0xfffffe000900bfc8
+fffffe000900bfa0  add      x8, x21, #0x444
+fffffe000900bfa4  mov      x9, #4
+fffffe000900bfa8  movk     x9, #3, lsl #32
+fffffe000900bfac  str      x9, [x8]
+fffffe000900bfb0  b        #0xfffffe000900c008
+fffffe000900bfb4  adrp     x8, #0xfffffe000753a000
+fffffe000900bfb8  ldr      d0, [x8, #0x9e8]
+fffffe000900bfbc  b        #0xfffffe000900bfc8
+fffffe000900bfc0  adrp     x8, #0xfffffe000753a000
+fffffe000900bfc4  ldr      d0, [x8, #0x9f0]
+fffffe000900bfc8  stur     d0, [x28, #0x1c]
+fffffe000900bfcc  b        #0xfffffe000900c008
+fffffe000900bfd0  adrp     x9, #0xfffffe000753a000
+fffffe000900bfd4  ldr      d0, [x9, #0x9f0]
+fffffe000900bfd8  stur     d0, [x28, #0x1c]
+fffffe000900bfdc  adrp     x9, #0xfffffe000752e000
+fffffe000900bfe0  add      x9, x9, #0x927
+fffffe000900bfe4  stp      x9, x8, [sp]
+fffffe000900bfe8  adrp     x0, #0xfffffe000752d000
+fffffe000900bfec  add      x0, x0, #0x470
+fffffe000900bff0  adrp     x1, #0xfffffe00080e1000
+fffffe000900bff4  ldr      x1, [x1, #0x848]
+fffffe000900bff8  adrp     x3, #0xfffffe0007533000
+fffffe000900bffc  add      x3, x3, #0xd4c
+fffffe000900c000  mov      w2, #0
+fffffe000900c004  bl       #0xfffffe0009030038
+fffffe000900c008  ldr      x0, [x22, #0xb8]
+fffffe000900c00c  ldr      x16, [x0]
+fffffe000900c010  mov      x17, x0
+fffffe000900c014  movk     x17, #0xcda1, lsl #48
+fffffe000900c018  autda    x16, x17
+fffffe000900c01c  ldr      x9, [x16, #0xe8]!
+fffffe000900c020  mov      x8, x16
+fffffe000900c024  adrp     x16, #0xfffffe000900c000
+fffffe000900c028  add      x16, x16, #0x1cc
+fffffe000900c02c  mov      x17, #0xbd41
+fffffe000900c030  pacia    x16, x17
+fffffe000900c034  mov      x1, x16
+fffffe000900c038  mov      x2, x21
+fffffe000900c03c  mov      x3, #0
+fffffe000900c040  mov      x4, #0
+fffffe000900c044  mov      x5, #0
+fffffe000900c048  mov      x17, x8
+fffffe000900c04c  movk     x17, #0xf9ff, lsl #48
+fffffe000900c050  blraa    x9, x17
+fffffe000900c054  mov      x23, x0
+fffffe000900c058  ldr      x8, [x19, #0x30]
+fffffe000900c05c  cbz      x8, #0xfffffe000900c070
+fffffe000900c060  cbz      w23, #0xfffffe000900c0b4
+fffffe000900c064  adrp     x0, #0xfffffe00080e0000
+fffffe000900c068  add      x0, x0, #0xae8
+fffffe000900c06c  b        #0xfffffe000900c08c
+fffffe000900c070  cbz      x20, #0xfffffe000900c084
+fffffe000900c074  ldur     d0, [x28, #0x54]
+fffffe000900c078  stur     d0, [x20, #0x4c]
+fffffe000900c07c  ldr      w8, [x21, #0x484]
+fffffe000900c080  str      w8, [x20, #0x54]
+fffffe000900c084  adrp     x0, #0xfffffe00080e0000
+fffffe000900c088  add      x0, x0, #0xaa8
+fffffe000900c08c  ldr      w20, [x21, #0x46c]
+fffffe000900c090  mov      x1, x21
+fffffe000900c094  bl       #0xfffffe000902faf8
+fffffe000900c098  ldr      w2, [x19, #0x48]
+fffffe000900c09c  add      w0, w27, #0x3d
+fffffe000900c0a0  mov      x1, x20
+fffffe000900c0a4  mov      x3, #0
+fffffe000900c0a8  mov      x4, #0
+fffffe000900c0ac  mov      x5, #0
+fffffe000900c0b0  bl       #0xfffffe0009030098

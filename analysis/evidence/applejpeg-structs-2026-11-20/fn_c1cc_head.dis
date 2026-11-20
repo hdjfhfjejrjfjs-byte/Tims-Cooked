@@ -1,0 +1,25 @@
+; 24A446 com.apple.driver.AppleJPEGDriver fn 0xfffffe000900c1cc sz 0x60 starts=(18446741874837340620, 18446741874837342452)
+fffffe000900c1cc  bti      c
+fffffe000900c1d0  pacibsp  
+fffffe000900c1d4  sub      sp, sp, #0x70
+fffffe000900c1d8  stp      x28, x27, [sp, #0x10]
+fffffe000900c1dc  stp      x26, x25, [sp, #0x20]
+fffffe000900c1e0  stp      x24, x23, [sp, #0x30]
+fffffe000900c1e4  stp      x22, x21, [sp, #0x40]
+fffffe000900c1e8  stp      x20, x19, [sp, #0x50]
+fffffe000900c1ec  stp      x29, x30, [sp, #0x60]
+fffffe000900c1f0  add      x29, sp, #0x60
+fffffe000900c1f4  mov      x19, x1
+fffffe000900c1f8  mov      x20, x0
+fffffe000900c1fc  mov      w21, #0x2c0
+fffffe000900c200  movk     w21, #0xe000, lsl #16
+fffffe000900c204  ldr      x23, [x1, #0x10]
+fffffe000900c208  ldrb     w8, [x0, #0xca]
+fffffe000900c20c  adrp     x24, #0xfffffe000752e000
+fffffe000900c210  add      x24, x24, #0x77c
+fffffe000900c214  tbnz     w8, #0, #0xfffffe000900c228
+fffffe000900c218  mov      w25, #0
+fffffe000900c21c  mov      w8, #0x23
+fffffe000900c220  orr      w21, w21, w8
+fffffe000900c224  b        #0xfffffe000900c668
+fffffe000900c228  ldrb     w8, [x19, #0x310]
