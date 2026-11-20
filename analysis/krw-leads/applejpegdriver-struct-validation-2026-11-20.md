@@ -107,17 +107,32 @@ over-approximates, so a within-bounds answer is meaningful):
 No start body reads or writes past its declared `structureInputSize`. Raw:
 `maxoffsets.txt`.
 
-## 5. Unresolved: who calls the shared validator?
+## 5. The shared validator appears unreferenced (correction to §3)
 
 Both validation thunks (`0x902e298` → `decodeRequestValidation`, and
 `0x902ec74` → `decodeHWRequestSetup`/`encodeHWRequestSetup`) are referenced
 exactly once each, from `0xfffffe000900c1cc` (size `0x728`), which also reads
-`req+0x538` in five places. `kz_blw_scan.py` finds **zero** direct `BL`/`B`/
-`BLRAA` sites to `0x900c1cc` anywhere in the image, and a raw qword scan for
-the member's fixup encoding (`VA = 0xfffffe0007004000 + low32`) finds no data
-reference either. It is therefore reached by an encoding this project's scans
-do not cover (or is dead code). Recorded as unresolved; it does not change the
-field map above, which was read directly out of the start bodies.
+`req+0x538` in five places.
+
+`0x900c1cc` itself has **no reference of any kind found**:
+
+* `kz_blw_scan.py 24A446 0xfffffe000900c1cc bl,b,blraa` → **0 sites** across
+  every fileset member;
+* a raw qword scan of the whole kernelcache for both the plain VA
+  (`0xfffffe000900c1cc`) and the member's chained-fixup form
+  (`VA = 0xfffffe0007004000 + low32`) → **0 occurrences**;
+* `kz_ref_sites.py` (ADRP+ADD / ADRP+LDR that materialise the exact VA) inside
+  the member → no exact match.
+
+So either `0x900c1cc` is dead code, or it is entered through a computed address
+this project's scans do not cover. **Consequence for §3:** the checks attributed
+to `decodeRequestValidation` / `decodeHWRequestSetup` / `0x902eae0` may never run
+on the reachable path. The bounds that *are* in the reachable path are the ones
+inside the start bodies themselves: the `0xc03` / `0xf7f` caps on `[struct+0x7c]`,
+the destination-capacity check with its `brk #0x800`, and the fixed-size copies.
+Those alone already keep every access inside the declared structure size, so
+§4's conclusion is unchanged; but "validated by the request-validation chain" is
+**not established** and should not be repeated without resolving this.
 
 A second, unrelated scan artefact is noted for the record: `kz_blw_scan.py`
 reported a site in `com.apple.security.AppleImage4` at `0xfffffe0007519494`
@@ -127,10 +142,13 @@ not a cross-kext call.
 ## 6. Verdict and next step
 
 * **Proven:** the reachable selectors are exactly 1–7; the three input-struct
-  generations are copied into `JpegRequest` field by field as tabulated; every
-  field that is used as a length, count or origin is bounded either inline in
-  the start body or in the shared validation chain; and no start body accesses
-  memory outside its declared `structureInputSize`.
+  generations are copied into `JpegRequest` field by field as tabulated; the
+  inline bounds in each start body cover the one length field
+  (`[struct+0x7c]`), and no start body accesses memory outside its declared
+  `structureInputSize`.
+* **Not established:** that the shared request-validation chain
+  (`decodeRequestValidation` / `decodeHWRequestSetup` / `0x902eae0`) actually
+  executes — its only caller `0x900c1cc` has no reference found (§5).
 * **Not found:** an unvalidated length/offset, a read past the supplied
   structure, or a field that reaches a memory operation unchecked. This is a
   **bounded negative** for the struct-shape hypothesis in
