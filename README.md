@@ -10,9 +10,9 @@ Start with the relevant notes under [`analysis/`](analysis/) and distinguish con
 
 ## Latest research update — 2026-11-20
 
-Static analysis has connected a Mach-VM-read-like request path to a VM copy/fault candidate on iOS 27.0.1 (build 24A446), but the exact API identity, ordinary-app reachability, and runtime guard conditions remain unverified. No confirmed vulnerability, controlled kernel corruption, kernel read/write primitive, or semi-untethered jailbreak has been demonstrated; no new CoW device trigger was run for this checkpoint.
+Static work on iOS 27.0.1 (build 24A446) has completed an enumeration of kernel writers of the virtual-memory object “pager ready” flag bit. Two candidate producers are identified and characterised: the pager-association routine behind the freezer/pageout chain, which sets the bit only when the object’s internal flag is set, and a memory-object attribute handler reached from the system pager initialisers. Four previously unclassified candidate stores were shown to belong to VFS, network-interface, packet-buffer and Skywalk networking state rather than virtual-memory objects, so they do not affect the guarded fault predicate. Earlier the same day, static analysis connected a Mach-VM-read-like request path to a VM copy/fault candidate. Neither result is a confirmed vulnerability, controlled corruption, kernel read/write primitive, or jailbreak. No new CoW device trigger was run, and device work remains blocked because no authorised Mac currently enumerates a device.
 
-See the [dated research note](research-updates/2026-11-20.md) and the [GitHub checkpoint release](https://github.com/ramonburf/Tims-Cooked/releases/tag/research-2026-11-20). That release includes the unchanged, sanitized v0.6 IPA (SHA-256 `dd7a4680155fd738d5b279bf0da3e8debf385a0cf44d8636a0c35a3e1039ce50`); no new app build is claimed.
+See the [dated research note](research-updates/2026-11-20.md) and the [GitHub checkpoint release](https://github.com/ramonburf/Tims-Cooked/releases/tag/research-2026-11-20-b). That release includes the unchanged, sanitized v0.6 IPA (SHA-256 `dd7a4680155fd738d5b279bf0da3e8debf385a0cf44d8636a0c35a3e1039ce50`); no new app build is claimed.
 
 ## Safety
 
