@@ -14,6 +14,8 @@ Static work on iOS 27.0.1 (build 24A446) has completed an enumeration of kernel 
 
 See the [dated research note](research-updates/2026-11-20.md) and the [GitHub checkpoint release](https://github.com/ramonburf/Tims-Cooked/releases/tag/research-2026-11-20-b). That release includes the unchanged, sanitized v0.6 IPA (SHA-256 `dd7a4680155fd738d5b279bf0da3e8debf385a0cf44d8636a0c35a3e1039ce50`); no new app build is claimed.
 
+A later static pass re-verified, with an independently written strict address-reference scanner, which kernel functions read the interned DriverKit entitlement keys, and named the single kernel reader of the generic `IOUserClientEntitlements` key (an indirectly entered routine whose enforcement role and owning subsystem are not established). This closes the earlier open question about those readers with exact addresses instead of an inference; it does not reopen any candidate path and no device work was possible.
+
 ## Safety
 
 - Test only on devices you own or are authorized to assess.
