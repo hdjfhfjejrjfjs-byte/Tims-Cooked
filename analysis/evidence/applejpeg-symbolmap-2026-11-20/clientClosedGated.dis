@@ -1,0 +1,47 @@
+# member=com.apple.driver.AppleJPEGDriver seg=['__TEXT', '__TEXT_EXEC', '__DATA', '__DATA_CONST', '__LINKEDIT']
+# containing start = 0xfffffe0009009858  next = 0xfffffe000900990c  delta = 0x0
+0xfffffe0009009858  bti      c
+0xfffffe000900985c  pacibsp  
+0xfffffe0009009860  sub      sp, sp, #0x40
+0xfffffe0009009864  stp      x20, x19, [sp, #0x20]
+0xfffffe0009009868  stp      x29, x30, [sp, #0x30]
+0xfffffe000900986c  add      x29, sp, #0x30
+0xfffffe0009009870  mov      x20, x1
+0xfffffe0009009874  mov      x19, x0
+0xfffffe0009009878  cbz      x1, #0xfffffe00090098c8
+0xfffffe000900987c  mov      x0, x20
+0xfffffe0009009880  bl       #0xfffffe000902fea8
+0xfffffe0009009884  tbnz     w0, #0, #0xfffffe00090098bc
+0xfffffe0009009888  mov      x0, x19
+0xfffffe000900988c  bl       #0xfffffe000900990c
+0xfffffe0009009890  ldr      x16, [x20]
+0xfffffe0009009894  mov      x17, x20
+0xfffffe0009009898  movk     x17, #0xcda1, lsl #48
+0xfffffe000900989c  autda    x16, x17
+0xfffffe00090098a0  mov      x17, #0x2f0
+0xfffffe00090098a4  add      x16, x16, x17
+0xfffffe00090098a8  ldr      x8, [x16]
+0xfffffe00090098ac  mov      x0, x20
+0xfffffe00090098b0  mov      w1, #0
+0xfffffe00090098b4  movk     x16, #0x5ec5, lsl #48
+0xfffffe00090098b8  blraa    x8, x16
+0xfffffe00090098bc  ldr      x8, [x19, #0x128]
+0xfffffe00090098c0  add      x8, x8, #1
+0xfffffe00090098c4  str      x8, [x19, #0x128]
+0xfffffe00090098c8  ldr      x8, [x20, #0x100]
+0xfffffe00090098cc  stp      x8, x20, [sp, #0x10]
+0xfffffe00090098d0  adrp     x8, #0xfffffe000752e000
+0xfffffe00090098d4  add      x8, x8, #0x13f
+0xfffffe00090098d8  stp      x8, x19, [sp]
+0xfffffe00090098dc  adrp     x0, #0xfffffe000752d000
+0xfffffe00090098e0  add      x0, x0, #0x470
+0xfffffe00090098e4  adrp     x1, #0xfffffe00080e1000
+0xfffffe00090098e8  ldr      x1, [x1, #0x848]
+0xfffffe00090098ec  adrp     x3, #0xfffffe0007532000
+0xfffffe00090098f0  add      x3, x3, #0x9cc
+0xfffffe00090098f4  mov      w2, #0
+0xfffffe00090098f8  bl       #0xfffffe0009030038
+0xfffffe00090098fc  ldp      x29, x30, [sp, #0x30]
+0xfffffe0009009900  ldp      x20, x19, [sp, #0x20]
+0xfffffe0009009904  add      sp, sp, #0x40
+0xfffffe0009009908  retab    

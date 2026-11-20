@@ -1,0 +1,96 @@
+members A=301 B=301
+
+# count-equal members with size diffs (index-paired, UNVERIFIED):
+  com.apple.iokit.IOSCSIArchitectureModelFamily        n=734   diffs=226  bytes=37784
+  com.apple.iokit.IOSkywalkFamily                      n=2166  diffs=98   bytes=524
+  com.apple.driver.FairPlayIOKit                       n=479   diffs=70   bytes=281812
+  com.apple.iokit.IOUSBHostFamily                      n=1977  diffs=56   bytes=488
+  com.apple.driver.AppleUSBEthernetHost                n=109   diffs=31   bytes=2192
+  com.apple.iokit.IOBiometricFamily                    n=509   diffs=28   bytes=608
+  com.apple.driver.AppleARMPlatform                    n=2238  diffs=17   bytes=344
+  com.apple.iokit.IOPCIFamily                          n=723   diffs=17   bytes=104
+  com.apple.iokit.IOStorageFamily                      n=563   diffs=17   bytes=108
+  com.apple.driver.AppleCentauriManager                n=641   diffs=16   bytes=64
+  com.apple.driver.AppleFirmwareKit                    n=2640  diffs=13   bytes=52
+  com.apple.driver.DiskImages.UDIFDiskImage            n=191   diffs=10   bytes=496
+  com.apple.iokit.IOMobileGraphicsFamily-DCP           n=800   diffs=9    bytes=560
+  com.apple.driver.AppleMultitouchDriver               n=546   diffs=8    bytes=592
+  com.apple.driver.AppleH16CameraInterface             n=1822  diffs=6    bytes=388
+  com.apple.driver.AppleInputDeviceSupport             n=878   diffs=6    bytes=384
+  com.apple.driver.AppleDiagnosticDataAccessReadOnly   n=36    diffs=5    bytes=1624
+  com.apple.iokit.IOUSBDeviceFamily                    n=739   diffs=5    bytes=92
+  com.apple.driver.AppleDiskImages2                    n=400   diffs=4    bytes=220
+  com.apple.driver.AppleT8130TypeCPhy                  n=131   diffs=4    bytes=1032
+  com.apple.driver.AppleAVD                            n=2328  diffs=3    bytes=176
+  com.apple.driver.AppleT8150MCC                       n=569   diffs=3    bytes=292
+  com.apple.driver.AppleTypeCPhy                       n=253   diffs=3    bytes=1260
+  com.apple.driver.IODARTFamily                        n=385   diffs=3    bytes=68
+  com.apple.iokit.IOReportFamily                       n=69    diffs=3    bytes=24
+  com.apple.kec.Compression                            n=41    diffs=3    bytes=24
+  com.apple.driver.AppleBasebandM20                    n=844   diffs=2    bytes=16
+  com.apple.driver.IOPHaptics                          n=92    diffs=2    bytes=376
+  com.apple.driver.usb.cdc.ncm                         n=355   diffs=2    bytes=240
+  com.apple.iokit.IOMobileGraphicsFamily               n=1156  diffs=2    bytes=12
+  com.apple.iokit.IOSurface                            n=1330  diffs=2    bytes=24
+  com.apple.kext.CoreTrust                             n=139   diffs=2    bytes=16
+  com.apple.driver.AppleActuatorDriver                 n=214   diffs=1    bytes=324
+  com.apple.driver.AppleHPM                            n=1654  diffs=1    bytes=32
+  com.apple.driver.AppleMobileFileIntegrity            n=917   diffs=1    bytes=100
+  com.apple.driver.ApplePhoneBTM                       n=1114  diffs=1    bytes=160
+  com.apple.driver.AppleSEPManager                     n=2544  diffs=1    bytes=28
+  com.apple.driver.AppleSMCWirelessCharger             n=212   diffs=1    bytes=36
+  com.apple.driver.AppleSPU                            n=2330  diffs=1    bytes=24
+  com.apple.driver.AppleStockholmControl               n=240   diffs=1    bytes=20
+  com.apple.driver.AppleT8103TypeCPhy                  n=162   diffs=1    bytes=12
+  com.apple.driver.AppleThunderboltUSBType2UpAdapter   n=58    diffs=1    bytes=24
+  com.apple.driver.AppleUSBDeviceMux                   n=98    diffs=1    bytes=4
+  com.apple.driver.AppleUSBXDCIARM                     n=465   diffs=1    bytes=64
+  com.apple.driver.corecapture                         n=880   diffs=1    bytes=156
+  com.apple.driver.usb.AppleUSBXHCI                    n=839   diffs=1    bytes=40
+  com.apple.driver.usb.IOUSBHostHIDDevice              n=86    diffs=1    bytes=112
+
+# members with differing function counts:
+  com.apple.AGXG18P                                    A=3421 B=3442
+  com.apple.AppleFSCompression.AppleFSCompressionTypeZlib A=67 B=66
+  com.apple.EXBrightKext                               A=585 B=599
+  com.apple.driver.ASIOKit                             A=98 B=97
+  com.apple.driver.AppleAVE2                           A=2995 B=2998
+  com.apple.driver.AppleCS42L79Audio                   A=382 B=381
+  com.apple.driver.AppleDCP                            A=205 B=215
+  com.apple.driver.AppleDisplayCrossbar                A=2263 B=2346
+  com.apple.driver.AppleH16ANEInterface                A=4959 B=5100
+  com.apple.driver.AppleIDV                            A=187 B=177
+  com.apple.driver.AppleM2ScalerCSCDriver              A=10262 B=10276
+  com.apple.driver.AppleMobileDispH18P-DCP             A=1460 B=1484
+  com.apple.driver.ApplePMGR                           A=2866 B=2872
+  com.apple.driver.ApplePPMCPMS                        A=2170 B=2185
+  com.apple.driver.ApplePearlSEPDriver                 A=751 B=755
+  com.apple.driver.AppleProcessorTrace                 A=1314 B=1317
+  com.apple.driver.AppleSARService                     A=1866 B=1876
+  com.apple.driver.AppleSEPCredentialManager           A=1021 B=1022
+  com.apple.driver.AppleSEPKeyStore                    A=1058 B=1060
+  com.apple.driver.AppleSmartBatteryManagerEmbedded    A=695 B=696
+  com.apple.driver.AppleT8110DART                      A=162 B=165
+  com.apple.driver.AppleT8150                          A=441 B=444
+  com.apple.driver.AppleT8150CLPC                      A=1420 B=1422
+  com.apple.driver.AppleT8150PMGR                      A=309 B=310
+  com.apple.driver.AppleUSBDeviceNCM                   A=226 B=222
+  com.apple.driver.DCPAVFamilyProxy                    A=891 B=892
+  com.apple.driver.IOAudioCodecs                       A=401 B=402
+  com.apple.driver.RTBuddy                             A=2426 B=2456
+  com.apple.driver.SecureRTBuddyProxy                  A=300 B=318
+  com.apple.driver.usb.networking                      A=152 B=150
+  com.apple.filesystems.apfs                           A=2396 B=2399
+  com.apple.filesystems.lifs                           A=460 B=463
+  com.apple.filesystems.tmpfs                          A=153 B=154
+  com.apple.iokit.IOAVFamily                           A=3446 B=3448
+  com.apple.iokit.IODisplayPortFamily                  A=2623 B=2624
+  com.apple.iokit.IOGPUFamily                          A=2002 B=2004
+  com.apple.iokit.IOHIDFamily                          A=2808 B=2809
+  com.apple.iokit.IONVMeFamily                         A=3589 B=3556
+  com.apple.iokit.IOTimeSyncFamily                     A=1488 B=1474
+  com.apple.iokit.IOUserEthernet                       A=166 B=167
+  com.apple.kec.corecrypto                             A=1948 B=1955
+  com.apple.kernel                                     A=21793 B=21843
+  com.apple.plugin.IOgPTPPlugin                        A=1641 B=1619
+  com.apple.security.sandbox                           A=659 B=658

@@ -184,3 +184,19 @@ in the callee is **downstream** of that class, not inside it.
     `0xfffffe000b7b2910`. Grep for the literal therefore finds declarations, not
     readers — follow the interned global instead.
 
+## Recovering names and fields without a symtab
+
+* `kz_sigmap.py <build> <member> <strings-file>` — Apple kexts embed one
+  signature string per virtual method ("virtual IOReturn Foo::bar(...)") and
+  each method logs its own, so resolving ADRP+ADD/LDR references to those
+  strings yields a symbol -> address map for a stripped arm64e kext. The hit is
+  a *reference*: entries whose containing function differs from the named
+  function are caller-side and must be re-read.
+* `kz_offops.py <build> <member> <hex-offset>...` — every LDR/STR at a given
+  field offset with its containing `LC_FUNCTION_STARTS` entry, for "who reads or
+  writes this field" once the object type is known.
+* `kz_memcensus.py` — index-paired function-size census across all members,
+  build A vs B. Cheap ranking only: misalignment after an added/removed
+  function inflates it, so verify any candidate with `kc_member_diff.py` /
+  `kz_pair_shape_check.py`.
+

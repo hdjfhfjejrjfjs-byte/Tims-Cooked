@@ -1,0 +1,5 @@
+# member=com.apple.kernel seg=['__TEXT', '__DATA_CONST', '__DATA_SPTM', '__TEXT_EXEC', '__TEXT_BOOT_EXEC', '__KLD', '__LASTDATA_CONST', '__LAST', '__KLDDATA', '__DATA', '__BOOTDATA', '__PRELINK_TEXT', '__PRELINK_INFO', '__PLK_TEXT_EXEC', '__PRELINK_DATA', '__PLK_DATA_CONST', '__PLK_LLVM_COV', '__PLK_LINKEDIT', '__LINKINFO', '__LINKEDIT']
+# containing start = 0xfffffe000b2f77cc  next = 0xfffffe000b2f77d8  delta = 0x0
+0xfffffe000b2f77cc  bti      c
+0xfffffe000b2f77d0  ldr      w0, [x0, #0x48]
+0xfffffe000b2f77d4  ret      
