@@ -1,6 +1,6 @@
 # Progress tracker
 
-Last updated: 2026-11-14.
+Last updated: 2026-11-20.
 
 Percentages mean "how far along that component is toward being a working part of the chain",
 not "probability it will work". 100 % means done and verified on hardware.
@@ -12,7 +12,7 @@ not "probability it will work". 100 % means done and verified on hardware.
 | 1 | Target acquisition | Firmware / kernelcache / dyld shared cache for build 24A446 (target) plus a 27.2 reference build | Complete | **100%** |
 | 2 | Reachability map | Sandbox-app reachability of AGX / IOHID / IOSurface / WebKit daemons / network socket families | Complete (AGX sweep, iokit enumeration, crash corpus, `--rawsock` both devices) | **96%** |
 | 3 | Vulnerability ID | Whole-kernelcache diff 27.0.1 → 27.2 (91 kexts, 542 changed kernel functions) mapped to CVEs | Complete | **90%** |
-| 4 | Kernel r/w primitive | **CVE-2026-112514 socket-buffer UAF** (CVSS 9.1, network-reachable, no entitlements) | **Race won on hardware**, and as of 2026-11-14 the freed slot can be forced into a `SOCK_DGRAM` object (`--sockmix`: 335 datagrams on the 13 Pro, 14 on the 17 Pro). Exact function diffing shows the whole BSD socket core is **semantically unchanged** in 27.2, so this is probably not the CVE-2026-112514 fix site; and `struct socket` is allocated through a view-based typed allocator, so cross-type reclaim is structurally blocked. Still not kR/W | **83%** |
+| 4 | Kernel r/w primitive | Socket UAF lead (CVE-2026-112514 mapping unverified) | **Unvalidated.** Historical peer-delivery/UDP events are ambiguous: `entered` increments before `sendmsg`, then the target fd closes before reclaimer allocation, so ordinary fd reuse can explain them. No UAF or kernel R/W established. | **5%** |
 | 4b | Kernel r/w primitive | IOSurface notify UAF family (CVE-2026-112517 / -112516 / -112477) | Identified; PAC / type-confusion constraints unresolved | **25%** |
 | 4c | Kernel r/w primitive | IOHIDFamily OOB r/w (CVE-2026-112507) | Patch confirmed in the diff; no sandbox-openable HID class found | **20%** |
 | 4d | Kernel r/w primitive | Other diff-derived kernel UAF candidates | Triage list produced; unconfirmed | **15%** |
@@ -24,10 +24,7 @@ not "probability it will work". 100 % means done and verified on hardware.
 | 6 | EL1 code exec past PAC/CTRR/SPTM (TXM trustcache) | Required after kernel r/w before any persistent code runs | Not started | **5%** |
 | 7 | Credential patch + rootless bootstrap (package manager) | Final stage | Not started | **5%** |
 
-**Overall: ~31%.** The race is won and the slot can now be forced into a foreign-protocol
-object; the gating item is stage 4 conversion — naming and then controlling one corrupted
-kernel field. Everything upstream of it (targets, reachability, bug identification, build
-pipeline) is essentially done; everything downstream (EL1, bootstrap) is untouched.
+**Overall: not re-scored.** The earlier ~31% included unsupported socket-race progress and is superseded by the fd-reuse correction. Target acquisition, reachability mapping, and the build pipeline are substantially complete, but no kernel read/write primitive is verified and downstream stages remain untouched.
 Per-path percentages are in `JAILBREAK-PATHS.md`.
 
 ## Confirmed 27.0.1 → 27.2 fix sites
@@ -38,8 +35,9 @@ Per-path percentages are in `JAILBREAK-PATHS.md`.
   (CVE-2026-112507).
 - `com.apple.kernel` — 542 changed functions; a cluster of new state-byte checks
   (`ldrb` + `tbz`/`tbnz`) are candidate UAF fixes for kernel CVEs not yet mapped.
-- The socket UAF (CVE-2026-112514) is *invisible* to a plain pair-diff: 27.2 de-inlined the
-  `sb*` helpers into 17 new functions, which is why an earlier pass missed it.
+- The CVE-2026-112514-to-socket-function mapping remains **unverified**. The target 24A446
+  `sbunlock` candidate already contains `so_usecount`/defunct-state checks; this does not
+  establish a 27.2-only fix or CVE linkage. See `research-updates/2026-11-20-socket-fd-reuse-erratum.md`.
 
 ## Build and deploy pipeline
 
@@ -58,8 +56,9 @@ substitute your own.
 
 ## Immediate next step
 
-The socket UAF remains blocked by type isolation; the mbuf checksum lead is closed as
-app-reachable work (raw sockets are denied); and `PF_ROUTE` is now characterised as a
+The socket lead is unvalidated because its historical peer-delivery oracle does not exclude
+ordinary fd reuse; do not spend device cycles on the old trigger until an fd-pinned control
+exists. The mbuf checksum lead is closed as app-reachable work (raw sockets are denied); and `PF_ROUTE` is now characterised as a
 **read-only** interface (`RTM_GET` works, `RTM_ADD`/`RTM_DELETE` return `EPERM`) — an
 information channel, not a primitive. Priorities:
 

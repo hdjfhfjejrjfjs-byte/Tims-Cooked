@@ -10,6 +10,8 @@ counts `.../counts.txt`.
 This closes the item left open in the last checkpoint ("remaining
 unverified-on-primary modes: `--iosurfwatch`, `--sockfield`") for `--sockfield`.
 
+> **Correction (2026-11-20):** The 11/12 logged UDP events are observations, not confirmed cross-type reclaim or UAF. The harness increments `entered` immediately before `sendmsg`, closes the target fd, then allocates reclaimers without an fd placeholder or numeric-fd check. Ordinary descriptor reuse can explain the events. The zero field-differential does not establish a negative on a reclaimed object because the scan did not identify which kernel object backed any descriptor. No new device run was made; see `../../research-updates/2026-11-20-socket-fd-reuse-erratum.md`. The historical “in flight at close” field is the count of `sendmsg` returns recorded before the snapshot, not a count proven to be in flight or past fd lookup.
+
 ## 1. Build and deploy
 
 The shared checkout does **not compile** at its current HEAD: `ViewController.swift`
@@ -33,9 +35,9 @@ identical between the repo and the build host; `IOSurfaceNotifyProbe.c` differed
 install app` returned 0 on both devices; both had been SpringBoard-locked in
 earlier runs and launched fine this time.
 
-## 2. Result — cross-type collision reproduces on both builds, still no field differential
+## 2. Historical result — UDP delivery events, object identity unresolved
 
-| device | iterations | cross-type hits | field-diff hits | peer hits |
+| device | iterations | UDP delivery events | field-diff hits | peer hits |
 |---|---|---|---|---|
 | 17 Pro (24A446, primary) | 3000 | **11** | **0** | 0 |
 | 13 Pro (secondary) | 3000 | **12** | **0** | 0 |
@@ -56,18 +58,15 @@ The per-iteration fingerprint control is healthy
 never-raced datagram sockets agree), so "0 field-diff" is a measured negative, not
 an unfired detector.
 
-## 3. What this proves, and what it does not
+## 3. What the historical observations show and do not show
 
-* **Proven:** the cross-type reclaim is real on 24A446 as well as on the secondary —
-  a freed TCP socket slot is taken by a `SOCK_DGRAM` object and stale in-flight
-  sender bytes are delivered through it as UDP datagrams (11 hits / 3000 iterations
-  on the target build). This was previously measured only on the secondary.
-* **Proven:** reading every API-visible field of the colliding datagram socket
-  (`SO_TYPE`, `SO_ERROR`, `SO_SNDBUF`, `SO_RCVBUF`, `TCP_CONNECTION_INFO`,
-  `getsockname`) after the collision shows **no difference** against fresh control
-  sockets. The collision therefore gives no *observable* kernel-field control —
-  which is what the earlier run concluded on the secondary and is now reproduced on
-  the target build.
+* **Observed:** the historical run logged 11 UDP delivery events on 17 Pro and 12 on 13 Pro,
+  and queried API-visible socket options on hammer descriptors; the compared option values
+  fell within the control ranges.
+* **Not proven:** that a freed TCP socket slot was taken by a UDP object, that a stale kernel
+  pointer was used, or that any queried descriptor backed a reclaimed object. The harness
+  leaves ordinary numeric fd reuse possible, so the delivery and zero-differential results do
+  not establish UAF or a negative on the reclaimed object's fields.
 * **Not established:** a crash-report diff. The Mac has no `pymobiledevice3`
   installed and the usbmux relay script is absent, so `.ips` sets could not be
   pulled this run. Device boot state read `booted` after the run and the console
@@ -75,12 +74,10 @@ an unfired detector.
 
 ## 4. Consequence for the lead ranking
 
-This is a bounded negative for path #1's *conversion* step, consistent with the
-standing structural blocker (view-based typed allocation for `struct socket`): the
-slot is reused inside the same allocation class, so no foreign field ever becomes
-readable/writable through the socket API. Conversion still requires a controlled
-reclaim above `kalloc_type`; **do not spend further device cycles on `--sockfield`
-variants without a new static signal.**
+This is not a validated negative for path #1's conversion step because the harness did not
+identify a reclaimed object. **Do not spend further device cycles on the old `--sockfield`
+variant without an fd-pinned design, an unguarded reuse control, and an independent object
+identity oracle.**
 
 ## Reproduction
 

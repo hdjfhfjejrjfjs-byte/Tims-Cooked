@@ -1,11 +1,13 @@
 # Socket UAF Deep Analysis — CVE-2026-112514
 ## iOS 27.0.1 (24A446) → 27.2 (24B119) | iPhone 16 Pro Max (A18 Pro)
 **Date:** 2026-11-09
-**Status:** BINARY DIFF COMPLETE — 17 new functions identified, race model confirmed
+**Status:** Historical binary-diff hypothesis; CVE/fix mapping and race model unverified
+
+> **Current status correction (2026-11-20):** This is an historical hypothesis, not a validated CVE/root-cause mapping or exploit report. Its 24A446 addresses and conclusions are for the stated iPhone 16 Pro Max/A18 image and must not be generalized to the iPhone 17 Pro target. On the target 24A446 image, the `sbunlock` candidate already contains usecount/defunct checks; the 27.2 fix mapping remains unverified. Separately, the carrier's historical peer-delivery evidence is confounded by numeric fd reuse because the sender counter increments before `sendmsg` and the target fd is not pinned. See `../../research-updates/2026-11-20-socket-fd-reuse-erratum.md`.
 
 ---
 
-## 1. Vulnerability Summary
+## 1. Original working hypothesis (not validated for the target)
 
 | Field | Value |
 |-------|-------|

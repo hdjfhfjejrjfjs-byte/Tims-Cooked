@@ -1,10 +1,12 @@
-# Cross-type socket collision — `--sockmix` reproduces TCP→UDP type confusion on both devices
+# Historical TCP→UDP delivery observations — UAF/reclaim not established
 
 Date: 2026-11-14
 Target: iPhone18,1 / t8150 / iOS 27.0.1 (build 24A446) — **17 Pro `<primary-device-udid>`**
 Secondary: iPhone14,2 / A16 / iOS 27.0 (build 24A5390f) — **13 Pro `<secondary-device-udid>`**
-Bug: CVE-2026-112514, socket-buffer use-after-free (`uipc_socket2.c`), live on 27.0/27.0.1, fixed in 27.2
+Bug attribution: CVE-2026-112514 / `uipc_socket2.c` and the proposed 27.2 fix mapping are unverified for this target.
 Evidence: `analysis/evidence/crosstype-2026-11-14/sockmix_13pro.log`, `…/sockmix_17pro.log`
+
+> **Correction (2026-11-20):** The 109/4 UDP delivery events are observations, not confirmed cross-type object reclaim or UAF hits. `entered` advances immediately before `sendmsg`; the harness closes the target fd and then allocates UDP sockets without an fd placeholder or numeric-fd check. A late syscall can resolve the reused descriptor to a new UDP socket and produce the same datagram. The `completed-at-close` value in the historical raw logs is the count of `sendmsg` returns recorded before the snapshot. The logs mislabeled it “in flight at close”; it does not prove which syscalls had looked up or pinned an fd.
 
 ## What was run
 
@@ -12,17 +14,14 @@ Evidence: `analysis/evidence/crosstype-2026-11-14/sockmix_13pro.log`, `…/sockm
 
 Two changes were made to the carrier for this run:
 
-1. **Datagram oracle.** A `SOCK_DGRAM` listener bound to `127.0.0.1:8090`, plus the ability to
-   drain it after each iteration. Nothing in the harness ever calls `send()` on a datagram
-   socket, so a datagram arriving there has exactly one possible origin: the kernel pushed
-   stale-sender bytes out through a reclaimed dgram socket. This is a *positive* detector —
-   one datagram names the collision instead of merely failing to rule one out.
-2. **Hammer ordering fix.** In the previous `--sockmix` code the 48-socket TCP spray ran
-   *before* the hammer, so fresh TCP sockets took every freed slot before the race window
-   opened. The hammer now runs first: while the six senders may still be inside `sendmsg`,
-   the harness allocates `socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)` in a tight loop and
-   `connect()`s each one to the oracle. Each iteration allocates up to 256 of them; the
-   freed slot is taken by whichever allocation lands first.
+1. A `SOCK_DGRAM` listener was used as an output observer. The harness did not explicitly call
+   `send()` on a datagram reclaimer, but the sender calls `sendmsg` on the target's numeric fd;
+   because that fd is closed before reclaimer allocation and is not pinned, a later fd lookup
+   can resolve to a newly allocated datagram socket. The listener therefore does not identify
+   the kernel object used by the sender.
+2. The hammer allocates UDP sockets after the target close. The pre-syscall `entered` counter
+   does not prove all senders have resolved the target fd or are executing with a retained
+   reference. No descriptor placeholder or fd-number check excludes ordinary reuse.
 
 The TCP side is kept as a control: 48 fresh TCP sockets are connected to the precision
 listener afterwards, and any byte they receive beyond the 144-byte contention baseline is
@@ -34,12 +33,14 @@ respring, no reboot.
 
 ## Results
 
-| Device | Iterations | Cross-type hits | Datagrams delivered | Bytes delivered |
+| Device | Iterations | UDP delivery events | Datagrams delivered | Bytes delivered |
 |---|---|---|---|---|
 | 13 Pro (27.0 / 24A5390f) | 2000 | **109** | 335 | 2,744,320 |
 | 17 Pro (27.0.1 / 24A446) | 2000 | **4** | 14 | 114,688 |
 
 ```
+These are preserved historical log labels, not validated UAF/reclaim outcomes.
+
 13 Pro: [!] ITER 5 precision/mix: *** CROSS-TYPE HIT: 5 datagram(s)/40960 byte(s) via a reclaimed dgram socket (hammer alloc=239, in flight at close 1/6) ***
 13 Pro: [!] ITER 12 precision/mix: *** CROSS-TYPE HIT: 6 datagram(s)/49152 byte(s) via a reclaimed dgram socket (hammer alloc=256, in flight at close 0/6) ***
 13 Pro: [+] sockmix: 109 cross-type datagram hit(s), 109 total stale-write hit(s) in 2000 iterations
@@ -51,20 +52,20 @@ respring, no reboot.
 
 ### Structure of the effect
 
-Every delivered byte count is an exact multiple of **8192**, and the number of datagrams
-per hit is an exact multiple of 8192-byte units:
+Every logged byte count is an exact multiple of **8192**, and the number of datagrams
+per event is an exact multiple of 8192-byte units:
 
 * 13 Pro histogram of datagrams per hit: `{1: 34, 2: 17, 3: 11, 4: 18, 5: 12, 6: 17}`
 * 17 Pro histogram: `{1: 2, 6: 2}`
 
-8192 bytes is exactly one sender buffer (`sendLen = 8192`). So each hit delivers **one whole
-attacker-chosen message per sender that was still in flight**, emitted as separate UDP
-datagrams. The sender buffer is filled with `0x41` bytes.
+8192 bytes is exactly one sender buffer (`sendLen = 8192`), filled with `0x41` bytes. This
+payload match is an observation compatible with both a stale-object hypothesis and ordinary
+fd reuse; it does not identify which file description `sendmsg` resolved.
 
-The control discriminates cleanly: on iterations where the collision fired, the TCP peers
-showed `tcpPeerBytes=144` — i.e. exactly the contention baseline and **nothing above it**.
-The stale data did *not* reach a TCP socket. On the remaining iterations the same baseline
-held, which is expected because those iterations did not fire.
+On iterations labeled as UDP events, the TCP peers showed `tcpPeerBytes=144`, exactly the
+contention baseline. This does not distinguish fd reuse from a stale-object hypothesis; it only
+records that the TCP peer oracle did not observe bytes above baseline on those iterations.
+The same baseline on other iterations does not identify which file description the sender used.
 
 Neither log contains any `odd errno`, `UAF PROBE`, corruption or panic line.
 
@@ -75,30 +76,24 @@ Crash reports were pulled from both devices after the runs (`devicectl device co
 report newer than 04:15 was produced** during the run windows. Both phones remained
 responsive throughout; no data was touched.
 
-## What this proves
+## What the observations do and do not prove
 
-1. **The freed `struct socket` slot can be taken by a different protocol subtype.**
-   Allocating `SOCK_DGRAM` sockets *during* the free/touch window reliably wins the slot
-   away from the sibling TCP allocations that took it in every earlier variant. The freed
-   object is reused within the same C type (`struct socket`) but by a different protocol
-   family instance.
-2. **The in-flight send path then operates on the foreign object.** Each stale sender's
-   complete 8192-byte buffer is transmitted as a UDP datagram — the TCP send path walked a
-   socket whose protocol state is UDP, and the UDP output routine emitted the attacker's
-   bytes.
-3. **The destination is attacker-chosen.** The datagram sockets are `connect()`ed by the
-   harness, so the same collision delivers attacker bytes to any address the process may
-   send to. Content is fully controlled (the sender buffer).
+The logs prove that UDP datagrams were observed during the historical run and that the app
+completed without a reported panic or reboot. They do **not** prove that a freed `struct
+socket` slot was allocated to a UDP object, that the sender used a stale kernel pointer, or
+that the result was a UAF. Ordinary fd-number reuse is an alternative explanation. The
+sender payload and reclaimer destination were configured by the harness, but that does not
+establish which file description the kernel resolved for a given `sendmsg`.
 
 ## What this does *not* prove
 
 * It is **not** kernel read/write. No kernel pointer, field offset or object contents were
   controlled; the only values under attacker control are the *payload* and the *destination*.
-* No kernel panic, no crash, no observable corruption of the reclaimed object. The collision
-  resolved harmlessly into a UDP send every time (143 hits across both devices).
-* The mechanism by which the data reaches the datagram socket (append to the reclaimed
-  socket's `so_snd` and subsequent protocol output) is inferred from behaviour, not read out
-  of the kernelcache. The exact corrupted field is not yet identified.
+* No kernel panic, no crash, or observable kernel corruption was reported; the app completed
+  normally. No reclaimed object was identified, and the 143 logged UDP events are not confirmed
+  collisions.
+* Whether the bytes reached the listener through a stale socket object or a reused file
+  descriptor is unresolved; no corrupted kernel field was identified.
 
 ## How this relates to the earlier cross-zone conclusion
 
@@ -107,23 +102,16 @@ out for this approach": the OOL `mach_msg` spray ran **after** the close, so it 
 slots too late, and socket-exhaustion page pressure is capped by `RLIMIT_NOFILE`. That
 conclusion stands for its own technique.
 
-`--sockmix` wins because it changes two things at once: the hammer runs **inside** the
-free/touch window rather than after it, and the competing object is allocated by the same
-process in the same zone, so no cross-zone page pressure is needed at all. The prior
-`--sockmix` implementation never worked because the TCP spray preceded the hammer and
-consumed the slot before the window opened.
+The earlier report described this as a cross-type reclaim, but source review shows the
+sequence does not rule out ordinary fd reuse. The prior cross-zone conclusion is unrelated to
+this ambiguity; neither result establishes a socket UAF.
 
 ## Next steps
 
-1. **Identify the corrupted field.** Diff the 27.0.1 vs 27.2 `sb*`/`sblock`/`sbunlock`
-   region (27.2 de-inlined these helpers into 17 new functions) to recover the exact field
-   the fix protects; that names what the stale writer touches on the reclaimed object.
-2. **Characterise the reclaimed dgram socket.** After a hit, query the hammer-created fds
-   (`SO_TYPE`, `SO_SNDBUF`, `SO_ERROR`, `SO_NWRITE`-equivalents) and look for the stale
-   bytes as socket state, so the collision becomes visible without relying on transmission.
-3. **Test the reverse direction.** Make the victim a datagram socket and hammer TCP
-   allocations, so `udp_send` runs on a TCP-owned object (`so_pcb` reinterpretation). This
-   is the more dangerous orientation and should be run on the secondary device only.
-4. **Decide whether the socket zone is typed.** If `struct socket` comes from a
-   `kalloc_type` zone, the collision ceiling is TCP↔UDP; if not, other small objects may
-   share the zone and the same hammer technique could force a genuinely foreign type.
+1. Implement a descriptor-pinned replacement with a pre-opened placeholder, keep it open
+   through sender completion, and log target/reclaimer fd numbers.
+2. Run an unguarded fd-reuse control separately and verify the event detectors distinguish it.
+3. Use distinct target and reclaimer peers and add an independent object-identity/corruption
+   oracle before interpreting any remaining delivery as UAF or reclaim.
+4. Do not run the reverse protocol orientation until that fd-safe design is reviewed and a
+   device/build host is available.

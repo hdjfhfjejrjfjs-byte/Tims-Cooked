@@ -1,48 +1,54 @@
-# Socket UAF — stale write confirmed on 27.0.1 (2026-11-13 ~13:20)
+# Historical socket peer-delivery observations — UAF not established (corrected 2026-11-20)
 
 Target: iPhone 17 Pro, iPhone18,1, iOS 27.0.1 (24A446). Carrier AGXProbe `--sockuaf`.
 
+> **Correction:** The 20 reported peer-delivery events below are not confirmed stale kernel writes. In the precision variant, `entered` is incremented immediately before `sendmsg`; it does not prove the kernel resolved the fd. The harness closes the target fd, then allocates connected reclaimer sockets without pinning the numeric descriptor. A late `sendmsg(fd)` can therefore use a newly allocated socket that reused that number and deliver ordinary peer bytes. The CVE mapping, UAF, and reclaimed-object interpretation are unverified; see `../research-updates/2026-11-20-socket-fd-reuse-erratum.md`.
+
 ## Result
 
-**20 confirmed stale kernel writes** into freshly reallocated sockets, starting at iteration 9
-and continuing every few iterations (9, 14, 19, 29, 34, 44 …). Payload 8 KiB / 16 KiB / 24 KiB.
-The run was stopped by an unrelated build replacement at 20 hits, not by a failure.
+The historical log reported 20 peer-delivery hits, starting at iteration 9 and continuing every
+few iterations (9, 14, 19, 29, 34, 44 …), with 8–24 KiB payloads. These are observed outputs,
+not confirmed stale kernel writes. The run was stopped by an unrelated build replacement at 20
+reported hits, not by a failure.
 
-Each hit means: a sender entered `sendmsg()` on socket A, `close(A)` completed and freed the
-`struct socket`, the slot was reallocated to a new socket B, and the in-flight syscall then
-wrote A's queued data into B. That is a kernel use-after-free **write**, not just a read.
+The historical interpretation was that a sender entered `sendmsg()` on socket A, `close(A)`
+freed its `struct socket`, and the in-flight syscall wrote into socket B. Source review does not
+establish that sequence: the counter is incremented before the syscall, and ordinary numeric fd
+reuse can produce the same peer output without a kernel use-after-free.
 
-## Why the oracle is decisive
+## Why the earlier oracle is not decisive
 
-The five hammer variants alone only produced ambiguous "odd errno" and `F_GETFD` probes: a
-sender can observe a freed fd through the fd table for many reasons. The precision variant (E)
-removes the ambiguity:
+The peer-delivery oracle detects bytes at a peer, but does not exclude ordinary fd-table reuse.
+The precision variant (E) has these relevant properties:
 
 1. Dedicated listener on `127.0.0.1:8089`; accepted peers are held and never read.
 2. Spray sockets are freshly created **and connected to that listener**, never sent on.
 3. Six senders park on a gate, then each fires exactly one 8 KiB `sendmsg` with 8 iovecs.
-4. The close is released only after all six senders have crossed into the syscall
-   (`st.entered == 6`), so no sender can still be doing an fd lookup.
-5. The freed slot is refilled immediately with 48 connected spray sockets.
-6. Any byte arriving at a spray peer can only have come from a stale sender.
+4. `st.entered` increments immediately before `sendmsg`; reaching six does not prove any
+   sender has completed fd lookup.
+5. The target is closed, then 48 connected spray sockets are allocated without an fd placeholder
+   or numeric-fd check.
+6. A sender whose syscall resolves after close can send through a new socket that reused the
+   same descriptor; peer bytes therefore do not prove a stale kernel pointer.
 
-`doneAtClose` in the log records how many senders were provably in flight at close (2–6/6 in
-the observed hits).
+`doneAtClose` is the count of `sendmsg` calls whose returns were recorded before the snapshot; it does not show fd-lookup timing. The historical label “sends in flight at close” is misleading/inverted: 4/6 means four returns were counted, not four operations proven in flight. An operation may also continue through a file reference acquired before `close`.
 
-## Harness fixes that made this reachable
+## Harness changes used in the historical run
 
 | Problem | Fix |
 |---|---|
 | Fatal SIGPIPE on iter 0 | `signal(SIGPIPE, SIG_IGN)` |
 | `0x8BADF00D` scene-create watchdog kill at 20 s (the old "SIGKILL after N iters") | whole loop moved off the MainActor into `Task.detached`, background logging via `emitBg` |
 | ~2.7 threads per iteration | six persistent sender threads + one closer, created once, spinning on a shared `Int32` word array |
-| Close landing after the senders already returned | gate + `entered` counter: close fires while all senders are in-kernel |
+| Close timing | gate plus a pre-`sendmsg` `entered` counter; this does not prove kernel fd lookup occurred before close |
 | Double-close of a reused fd number | CAS on `phase 2 → 3`, exactly one closer |
-| Weak detection | peer-delivery oracle (above); `F_GETFD` probe kept as a secondary signal |
+| Peer detection | peer-delivery signal; does not rule out ordinary numeric fd reuse |
 
 Run rate ~100–200 iterations/s, 145 M+ sends per run, fd count flat, footprint stable.
 
 ## Log signature
+
+The following is the historical log text; its word “confirmed” is not the current evidence assessment.
 
 ```
 [!] ITER 9 precision: *** STALE WRITE: 8192 byte(s) delivered into a reallocated socket (sends in flight at close: 4/6) ***
@@ -52,18 +58,13 @@ Run rate ~100–200 iterations/s, 145 M+ sends per run, fd count flat, footprint
 
 Full log on the Mac: `/tmp/appdata/reach.log`.
 
-## What this is and is not
+## Current status
 
-Is: a reliable, on-demand UAF write into a kernel `struct socket` sized slot in the socket zone.
-
-Is not yet: controlled kernel R/W. The reallocator is another socket, so the overwritten fields
-are socket fields with socket-shaped values. To escalate:
-
-1. Reclaim the freed slot with **attacker-influenced** data rather than a socket: cross-zone
-   page exhaustion → `mach_msg` OOL spray, or a socket whose overwritten fields are observable
-   (`so_proto`, `so_pcb`, `so_usecount`).
-2. Add a leak (KASLR slide + heap address of the overlapped object) to build a fake `so_proto`.
-3. Verify with a controlled field differential, then use the dangling socket as the R/W channel.
+Established: the historical run logged peer bytes after the race. Not established: that a
+kernel-held stale pointer was used, that the freed allocation was reclaimed by a particular
+object, or that any kernel field was corrupted. Do not use these events as a UAF primitive or
+as the starting point for kernel R/W conversion. First require an fd-pinned replacement/control
+that excludes numeric reuse, then an independent object-lifetime and corruption oracle.
 
 ## Notes
 

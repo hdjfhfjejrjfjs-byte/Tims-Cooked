@@ -63,9 +63,7 @@ so the path is not currently reachable. Readiness ~20 %.
 
 ## Sockets — CVE-2026-112514 (lead)
 
-See `HANDOFF.md` and `analysis/socket-uaf-stale-write-2026-11-13.md`. The race is won on
-hardware (20 confirmed stale kernel writes via a peer-delivery oracle); converting that into
-a controlled read/write primitive is the current focus.
+See the [2026-11-20 socket fd-reuse correction](../research-updates/2026-11-20-socket-fd-reuse-erratum.md). Historical peer-delivery and UDP observations are not confirmed UAF hits: the sender's `entered` counter advances before `sendmsg`, and the target descriptor is closed before reclaimer sockets are allocated, leaving ordinary fd reuse as an alternative explanation. No socket UAF, kernel write primitive, or CVE mapping is established; an fd-pinned control is required before further device work.
 
 ## What to do next
 
